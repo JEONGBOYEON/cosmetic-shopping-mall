@@ -64,5 +64,14 @@
 	<url-pattern>/board/*</url-pattern>
 </filter-mapping> -->
 
+<servlet>
+	<servlet-name>destinationServlet</servlet-name>
+	<servlet-class>com.destination.DestinationServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>destinationServlet</servlet-name>
+	<url-pattern>/destination/*</url-pattern>
+</servlet-mapping>
+
 
 </web-app>
