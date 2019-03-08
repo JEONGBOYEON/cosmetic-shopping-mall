@@ -85,8 +85,8 @@
 			<div class="inner_wrap">
 				<button type="button" class="btn_category">카테고리</button>
 				<ul class="gnb">
-					<li><a href="<%=cp %>/product/topTest.do">신상품</a></li>
-					<li><a href="">베스트</a></li>
+					<li><a href="<%=cp %>/product/listNew.do">신상품</a></li>
+					<li><a href="<%=cp %>/product/listBest.do">베스트</a></li>
 					<li><a href="">이벤트</a></li>
 					<li><a href="">쿠폰/혜택</a></li>
 					<li><a href="">채널에뛰드</a></li>

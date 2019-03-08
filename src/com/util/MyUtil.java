@@ -61,10 +61,10 @@ public class MyUtil {
 		//바로가기 페이지는 전체페이지수보다 커질수없음 
 		while(page<=totalPage && page<=(currentPageSetup+numPerBlock)){
 			if(page == currentPage){
-				sb.append("<font color=\"Fuchsia\">"+page+"</font>&nbsp;");
+				sb.append("<font color=\"Fuchsia\">&nbsp;&nbsp;"+page+"&nbsp;&nbsp;</font>&nbsp;");
 				//<font color="Fuchsia">9</font>&nbsp;
 			}else{
-				sb.append("<a href=\""+ listUrl + "pageNum=" + page+ "\">"+page+"</a>&nbsp;");
+				sb.append("<a href=\""+ listUrl + "pageNum=" + page+ "\">&nbsp;&nbsp;"+page+"&nbsp;&nbsp;</a>&nbsp;");
 				//<a href="list.jsp?pageNum=10">10</a>&nbsp;
 			}
 			page++;
