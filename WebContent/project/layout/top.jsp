@@ -62,7 +62,9 @@
 
 		<div class="inner_wrap">
 			<ul class="header_menu">
-				<li><a href="javascript:;" onclick="login()" class="log">로그인</a></li>
+				<li>
+				<a href="javascript:;" onclick="login()" class="log">로그인</a>
+				</li>
 				<li><a href="/kr/ko/customer/signup" class="join">회원가입</a></li>
 				<li><a href="/kr/ko/my/page/onlineOrderShipping" class="order">주문/배송조회
 					<span class="num" style="display: none;"></span>
