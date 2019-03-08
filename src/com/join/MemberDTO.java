@@ -1,5 +1,7 @@
 package com.join;
 
+import java.util.Date;
+
 
 public class MemberDTO {
 	
@@ -11,7 +13,6 @@ public class MemberDTO {
 	private String phone;
 	private int point;
 	private String userGrade;
-	
 	
 	public String getUserId() {
 		return userId;
@@ -37,6 +38,12 @@ public class MemberDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public String getPhone() {
 		return phone;
 	}
@@ -55,12 +62,9 @@ public class MemberDTO {
 	public void setUserGrade(String userGrade) {
 		this.userGrade = userGrade;
 	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+	
+	
+	
 	
 
 

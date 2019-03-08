@@ -49,6 +49,7 @@ public class MemberServlet extends HttpServlet {
 			url="/member/created.jsp";
 			forward(req,resp,url);
 		}else if(uri.indexOf("created_ok.do")!=-1){
+			
 			MemberDTO dto=new MemberDTO();
 			
 			dto.setUserId(req.getParameter("userId"));
@@ -89,7 +90,13 @@ public class MemberServlet extends HttpServlet {
 			CustomInfo info=new CustomInfo();
 			
 			info.setUserId(dto.getUserId());
+			info.setUserPwd(dto.getUserPwd());
 			info.setUserName(dto.getUserName());
+			info.setBirth(dto.getBirth());
+			info.setPhone(dto.getPhone());
+			info.setPoint(dto.getPoint());
+			info.setUserGrade(dto.getUserGrade());
+			info.setGender(dto.getGender());
 			
 			//session도 out.print처럼 jsp에는 그냥 사용가능한데
 			//java에서는 요청을 한뒤 써야한다.
