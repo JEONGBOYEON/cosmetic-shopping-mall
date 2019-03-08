@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.MemberDTO;
 import com.util.DBCPConn;
 import com.util.MyUtil;
 
@@ -55,8 +57,10 @@ public class DestinationServlet extends HttpServlet {
 			
 			DestinationDTO dto = new DestinationDTO();
 			
-			//dto.setUserId(req.getParameter("userId"));			
-			dto.setUserId("rin0724");
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			dto.setUserId(info.getUserId());			
 			dto.setDestNickname(req.getParameter("destNickname"));
 			dto.setDestName(req.getParameter("destName"));
 			dto.setZip(Integer.parseInt(req.getParameter("destZip")));
@@ -77,13 +81,16 @@ public class DestinationServlet extends HttpServlet {
 			
 			String destNickname = req.getParameter("destNickname");
 			
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
 			if(destNickname!=null){
 				destNickname = URLDecoder.decode(destNickname,"UTF-8");
 			}
 			
-			int totalDataCount = dao.getDataCount("rin0724");
-			DestinationDTO dto = dao.getReadData("rin0724", destNickname);
-			String destNicknameList[] = dao.selectDestNickname("rin0724",totalDataCount,destNickname);
+			int totalDataCount = dao.getDataCount(info.getUserId());
+			DestinationDTO dto = dao.getReadData(info.getUserId(), destNickname);
+			String destNicknameList[] = dao.selectDestNickname(info.getUserId(),totalDataCount,destNickname);
 			
 			req.setAttribute("dto", dto);
 			req.setAttribute("destNicknameList", destNicknameList);
@@ -97,8 +104,10 @@ public class DestinationServlet extends HttpServlet {
 			DestinationDTO dto = new DestinationDTO();
 			String ex_destNickname = req.getParameter("ex_destNickname");
 			
-			//dto.setUserId(req.getParameter("userId"));			
-			dto.setUserId("rin0724");
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			dto.setUserId(info.getUserId());			
 			dto.setDestNickname(req.getParameter("destNickname"));
 			dto.setDestName(req.getParameter("destName"));
 			dto.setZip(Integer.parseInt(req.getParameter("destZip")));
@@ -119,15 +128,14 @@ public class DestinationServlet extends HttpServlet {
 			
 			String destNickname = URLDecoder.decode(req.getParameter("destNickname"),"UTF-8");
 
-//			HttpSession session = req.getSession();
-//			CustomInfo info = (CustomInfo) session.getAttribute("customInfo");
-			//info.getUserId()
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
 			
 			//addrKey yes ¡æ no
 			dao.changeAddrkeyNo();
 			
 			//addrKey no ¡æ yes
-			dao.changeAddrkeyYes("rin0724", destNickname);
+			dao.changeAddrkeyYes(info.getUserId(), destNickname);
 			
 
 			url = cp + "/dest/list.do";
@@ -135,14 +143,13 @@ public class DestinationServlet extends HttpServlet {
 		}
 		
 		else if(uri.indexOf("list.do")!=-1){
-//			
-//			HttpSession session = req.getSession();
-//			
-//			CustomInfo info = (CustomInfo) session.getAttribute("customInfo");
-//			
-//			List<DestinationDTO> lists = dao.getList(info.getUserId());
-			List<DestinationDTO> lists = dao.getList("rin0724");
-			int totalDataCount = dao.getDataCount("rin0724");
+			
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			List<DestinationDTO> lists = dao.getList(info.getUserId());
+
+			int totalDataCount = dao.getDataCount(info.getUserId());
 	
 			req.setAttribute("lists", lists);
 			req.setAttribute("totalDataCount", totalDataCount);
@@ -153,13 +160,16 @@ public class DestinationServlet extends HttpServlet {
 		}
 		else if(uri.indexOf("deleted.do")!=-1){
 
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
 			String destNickname = URLDecoder.decode(req.getParameter("destNickname"),"UTF-8");
 			/*
 			if(destNickname!=null){
 				destNickname = URLDecoder.decode(destNickname,"UTF-8");
 			}
 			*/
-			dao.deleteData("rin0724", destNickname);
+			dao.deleteData(info.getUserId(), destNickname);
 			
 			url = cp + "/dest/list.do";
 			resp.sendRedirect(url);
