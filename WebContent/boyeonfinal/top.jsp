@@ -98,5 +98,3 @@
 
 		</header>
 	</div>
-</body>
-</html>
