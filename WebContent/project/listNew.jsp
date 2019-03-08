@@ -81,7 +81,21 @@
 
 							<tr height="51">
 								<td>
-								<font style="font-size: 20px; color:#1C1C1C;">${dto.price }원</font>
+									<table>
+										<tr>
+											<td width="230">
+												<font style="font-size: 20px; color:#1C1C1C; ">${dto.price }원</font>
+											</td>
+											<td>
+												<a href="../project/review.jsp">
+													<img alt="review" src="../project/image/review.PNG"/>&nbsp;&nbsp;&nbsp;
+												</a>
+												<a href="../project/basket.jsp">
+													<img alt="basket" src="../project/image/basket.PNG"/>
+												</a>
+											</td>										
+										</tr>
+									</table>
 								</td>
 							</tr>
 
