@@ -138,6 +138,7 @@ small{font-size: 12px; color:#999;}
 .w60p{width:60% !important;}
 .w65p{width:65% !important;}
 .w70p{width:70% !important;}
+.w74p{width:74% !important;}
 .w75p{width:75% !important;}
 .w80p{width:80% !important;}
 .w85p{width:85% !important;}
@@ -188,6 +189,7 @@ small{font-size: 12px; color:#999;}
 [class^="btn_"]:not(button):before{content:''; display: inline-block; width:0; height:105%; vertical-align: middle;}
 /* button : size */
 [class^="btn_"][class*="_lg"]{font-size:18px; min-width:160px; height:50px; padding:0 20px; font-weight:500;}
+[class^="btn_"][class*="_blg"]{font-size:18px; min-width:120px; height:40px; padding:0 20px; font-weight:500; border: 0; outline: 0}
 [class^="btn_"][class*="_lg"][class*="_big"]{min-width:270px;}
 [class^="btn_"][class*="_md"]{font-size:16px; min-width:140px; height:40px; padding:0 20px;}
 [class^="btn_"][class*="_md"][class*="_sm"]{font-size:16px; min-width:60px; height:40px; padding:0 20px;}
