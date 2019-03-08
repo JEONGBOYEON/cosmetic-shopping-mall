@@ -63,9 +63,25 @@
 		<div class="inner_wrap">
 			<ul class="header_menu">
 				<li>
-				<a href="javascript:;" onclick="login()" class="log">로그인</a>
+					<c:choose>
+						<c:when test="${empty sessionScope.customInfo.userId }">
+						<a href="<%=cp %>/member/login.do"  class="log">로그인</a>
+						</c:when>
+						<c:otherwise>
+						<a href="<%=cp %>/member/logout.do"  class="log">로그아웃</a>
+						</c:otherwise>
+					</c:choose>
 				</li>
-				<li><a href="/kr/ko/customer/signup" class="join">회원가입</a></li>
+				<li>
+				<c:choose>
+						<c:when test="${empty sessionScope.customInfo.userId }">
+						<a href="<%=cp %>/member/created.do" class="join">회원가입</a>
+						</c:when>
+						<c:otherwise>
+						<a href="<%=cp %>/member/mypage.do" class="join">마이페이지</a>
+						</c:otherwise>
+				</c:choose>
+				</li>
 				<li><a href="/kr/ko/my/page/onlineOrderShipping" class="order">주문/배송조회
 					<span class="num" style="display: none;"></span>
 					</a>
