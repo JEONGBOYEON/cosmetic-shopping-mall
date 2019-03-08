@@ -74,8 +74,8 @@
 				<li><a href="#none" class="history">히스토리</a></li>
 			</ul>
 			<h1 class="logo">
-				<a href="/kr/ko/main">
-					<img alt="ETUDEHOUSE" src="../image/img_logo.png">
+				<a href="../project/main.jsp">
+					<img alt="ETUDEHOUSE" src="../project/image/img_logo.png"/>
 				</a>
 			</h1>
 		</div>
@@ -85,7 +85,7 @@
 			<div class="inner_wrap">
 				<button type="button" class="btn_category">카테고리</button>
 				<ul class="gnb">
-					<li><a href="">신상품</a></li>
+					<li><a href="<%=cp %>/product/topTest.do">신상품</a></li>
 					<li><a href="">베스트</a></li>
 					<li><a href="">이벤트</a></li>
 					<li><a href="">쿠폰/혜택</a></li>
