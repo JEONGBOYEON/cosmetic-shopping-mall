@@ -9,7 +9,7 @@
 		<div class="prd_detail_info">
 			<div class="prd_detail_default">
 			
-				<div class="prd_info_wrap">
+				<div class="prd_img_wrap">
 					<div class="slide goods_slide ix-slide-max-apply">
 						<img style="width: 540px; height: 540px;" alt="${dto.originalName}" src="${imagePath }/${dto.saveFileName }">
 					</div>

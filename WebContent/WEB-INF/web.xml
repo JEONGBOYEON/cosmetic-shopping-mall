@@ -64,14 +64,64 @@
 	<url-pattern>/board/*</url-pattern>
 </filter-mapping> -->
 
+<!-- 배송지 추가 -->
 <servlet>
 	<servlet-name>destinationServlet</servlet-name>
 	<servlet-class>com.destination.DestinationServlet</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>destinationServlet</servlet-name>
-	<url-pattern>/destination/*</url-pattern>
+	<url-pattern>/dest/*</url-pattern>
 </servlet-mapping>
 
+<!-- 상품리스트 조회 -->
+ <servlet>
+	<servlet-name>Product</servlet-name>
+ 	<servlet-class>com.product.ProductServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>Product</servlet-name>
+ 	<url-pattern>/product/*</url-pattern>
+ </servlet-mapping>
+
+<!-- 상품상세조회 -->
+<servlet>
+	<servlet-name>productDetailServlet</servlet-name>
+	<servlet-class>com.productDetail.ProductDetailServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>productDetailServlet</servlet-name>
+	<url-pattern>/pr/*</url-pattern>
+</servlet-mapping>
+
+<!-- Servlet 회원가입 -->
+<servlet>
+ 	<servlet-name>memberServlet</servlet-name>
+  	<servlet-class>com.member.MemberServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+ 	<servlet-name>memberServlet</servlet-name>
+ 	<url-pattern>/member/*</url-pattern>
+</servlet-mapping>
+
+<!-- 주문 및 장바구니 -->
+<servlet>
+ 	<servlet-name>orderServlet</servlet-name>
+  	<servlet-class>com.order.OrderServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+ 	<servlet-name>orderServlet</servlet-name>
+ 	<url-pattern>/order/*</url-pattern>
+</servlet-mapping>
+
+<!-- 단골매장등록 -->
+<servlet>
+	<servlet-name>myShopList</servlet-name>
+	<servlet-class>com.myShop.MyShopServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>myShopList</servlet-name>
+	<url-pattern>/shop/*</url-pattern>
+</servlet-mapping>
 
 </web-app>
