@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../layout/top.jsp"  %>
-<%@ include file="../layout/mypage.jsp"  %>
+<%@ include file="../project/layout/top.jsp"  %>
+<%@ include file="../project/layout/mypage.jsp"  %>
 
 	<div class="page_title_area">
 		<!-- breadcrumb 미노출 페이지는 감춤 -->
@@ -156,8 +156,8 @@
 				src="/kr/ko/pc/ko/images/my/ico_ios.png" /></a>
 		</div>
 	</div>
-	
-<%@ include file="../layout/footer.jsp"  %>
+
+<%@ include file="../project/layout/footer.jsp"  %>
 
 
 

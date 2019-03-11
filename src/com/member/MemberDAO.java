@@ -83,6 +83,47 @@ public class MemberDAO {
 
 		return dto;
 	}
+	
+	//아이디 찾기(이름으로 한명의 회원찾기) 
+		public MemberDTO getReadName(String userName){
+			MemberDTO dto=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql;
+
+			try {
+				sql="select userId,userPwd,userName,to_char(birth,'YYYYMMDD') birth, phone,point,userGrade,gender ";
+				sql+="from member where userName=?";
+
+				pstmt=conn.prepareStatement(sql);
+
+				pstmt.setString(1, userName);
+
+				rs=pstmt.executeQuery();
+
+				if(rs.next()){
+					dto= new MemberDTO();
+
+					dto.setUserId(rs.getString("userId"));
+					dto.setUserPwd(rs.getString("userPwd"));
+					dto.setUserName(rs.getString("userName"));
+					dto.setBirth(rs.getString("birth"));
+					dto.setPhone(rs.getString("phone"));
+					dto.setPoint(rs.getInt("point"));
+					dto.setUserGrade(rs.getString("userGrade"));
+					dto.setGender(rs.getString("gender"));
+
+				}
+
+				rs.close();
+				pstmt.close();
+
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			return dto;
+		}
 
 	//수정
 	public int updateData(MemberDTO dto) {

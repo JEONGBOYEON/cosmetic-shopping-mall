@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../layout/top.jsp"  %>
+<%@ include file="../project/layout/top.jsp"  %>
 
 <script type="text/javascript">
 function sendIt(){
@@ -26,7 +26,7 @@ function sendIt(){
 	}
 	f.userPwd.value=str; 
 
-  	f.action="<%=cp%>/member/login_ok.do"; 
+  	f.action="<%=cp%>/join/login_ok.do"; 
 	f.submit();  
 
 }
@@ -80,11 +80,11 @@ function sendIt(){
 								</div>
 								<div class="clear">
 									<div class="check_wrap">
-										<input type="checkbodafx" id="save_id"><label
+										<input type="checkbox" id="save_id"><label
 											for="save_id">아이디 저장</label>
 									</div>
 									<div>
-										<a href="<%=cp %>/member/searchid.do">아이디 찾기</a> │ <a
+										<a href="/kr/ko/customer/find/find-id">아이디 찾기</a> │ <a
 											href="https://join-on.amorepacific.com/member/findPw.do?chCd=W&siteCd=EDK"
 											target="_blank">비밀번호 찾기</a>
 									</div>
@@ -111,7 +111,7 @@ function sendIt(){
 							아모레퍼시픽계열 모든 쇼핑몰을 하나의 아이디로 편리하게, <br>통합멤버십(뷰티포인트)적립 및 다양한
 							서비스와 혜택을 누리세요.
 						</p>
-						<a href="<%=cp%>/member/created.do"
+						<a href="<%=cp%>/join/created.do"
 							class="btn_md_bordered vertical">회원가입 </a>
 					</dd>
 				</dl>
@@ -133,7 +133,7 @@ function sendIt(){
 		</div>
 	</div>
 
-<%@ include file="../layout/footer.jsp"  %>
+<%@ include file="../project/layout/footer.jsp"  %>
 
 
 

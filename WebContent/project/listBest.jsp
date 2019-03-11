@@ -63,7 +63,7 @@
 						<table width="620" height="270px" >
 							<tr height="20">
 								<td rowspan="6" width="270" style="position: relative;">
-									<a href="<%=cp%>/product/detail.do"> 
+									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}"> 
 									<img style="background-color: #f5f5f5; width: 270px; height: 270px; margin-left : 20px; margin-right: 20px" alt="" src="${imagePath }/${dto.saveFileName}" />
 									</a>
 									<div style="position: absolute; top: 15px; left:33px; z-index: 2; font-size: 20pt; color: #000000; font-family: 'Arial';">

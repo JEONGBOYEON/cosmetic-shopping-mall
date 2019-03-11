@@ -118,43 +118,80 @@ public class MemberServlet extends HttpServlet {
 			
 			url=cp+"/project/main.jsp";
 			resp.sendRedirect(url);
-		}
-		/*else if(uri.indexOf("searchpw.do")!=-1){//비밀번호 찾기
+		}else if(uri.indexOf("searchid.do")!=-1){//아이디 찾기
 			
-			url="/member/searchpw.jsp";
+			url="/project/member/searchid.jsp";
 			forward(req, resp, url);
-		}else if(uri.indexOf("searchpw_ok.do")!=-1){//비밀번호 찾기_jsp
+		}else if(uri.indexOf("searchid_ok.do")!=-1){//아이디 찾기_jsp
 			
-			String userId=req.getParameter("userId");
-			String userTel=req.getParameter("userTel");
+			String userName=req.getParameter("userName");
+			String phone=req.getParameter("phone");
+			String gender=req.getParameter("gender");
+			String birth=req.getParameter("birth");
 			
-			MemberDTO dto=dao.getReadData(userId);
+			MemberDTO dto=dao.getReadName(userName);
 			
-			if(dto==null||!dto.getUserTel().equals(userTel)){
+			if(dto==null||!dto.getPhone().equals(phone)||!dto.getBirth().equals(birth)
+					||!dto.getGender().equals(gender)){
 				req.setAttribute("message", "회원정보가 존재하지 않습니다.");
 				
-				url="/member/login.jsp";
+				url="/project/member/searchid.jsp";
 				forward(req, resp, url);
 				
 				return;
 			}
 			
-			CustomInfo info=new CustomInfo();
+			MemberDTO info=new MemberDTO();
 			
 			info.setUserId(dto.getUserId());
 			info.setUserName(dto.getUserName());
 			
 			HttpSession session=req.getSession();
-			
 			session.setAttribute("customInfo", info);
 			
-			req.setAttribute("message", "비밀번호는 ["+dto.getUserPwd()+"]입니다.");
+			req.setAttribute("userId", dto.getUserId());
 			
-			req.setAttribute("find", "비밀번호 찾기");
-			url="/member/login.jsp";
+			url="/project/member/searchid_com.jsp";
 			forward(req, resp, url);
-					
-		}else if(uri.indexOf("updated.do")!=-1){
+			
+		}else if(uri.indexOf("searchid.do")!=-1){//아이디 찾기
+			
+			url="/project/member/searchid.jsp";
+			forward(req, resp, url);
+		}else if(uri.indexOf("searchid_ok.do")!=-1){//아이디 찾기_jsp
+			
+			String userName=req.getParameter("userName");
+			String phone=req.getParameter("phone");
+			String gender=req.getParameter("gender");
+			String birth=req.getParameter("birth");
+			
+			MemberDTO dto=dao.getReadName(userName);
+			
+			if(dto==null||!dto.getPhone().equals(phone)||!dto.getBirth().equals(birth)
+					||!dto.getGender().equals(gender)){
+				req.setAttribute("message", "회원정보가 존재하지 않습니다.");
+				
+				url="/project/member/searchid.jsp";
+				forward(req, resp, url);
+				
+				return;
+			}
+			
+			MemberDTO info=new MemberDTO();
+			
+			info.setUserId(dto.getUserId());
+			info.setUserName(dto.getUserName());
+			
+			HttpSession session=req.getSession();
+			session.setAttribute("customInfo", info);
+			
+			req.setAttribute("userId", dto.getUserId());
+			
+			url="/project/member/searchid_com.jsp";
+			forward(req, resp, url);
+			
+		}
+		/*else if(uri.indexOf("updated.do")!=-1){
 			
 			HttpSession session=req.getSession();
 			
