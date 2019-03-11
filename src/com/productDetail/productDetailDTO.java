@@ -1,5 +1,7 @@
 package com.productDetail;
 
+import java.util.List;
+
 public class productDetailDTO {
 	
 	private String productId;
@@ -15,8 +17,22 @@ public class productDetailDTO {
 	private String originalName;
 	private String saveFileName;
 	private String fileCategory;
+	private String state;
+	private List<String> optionList;
 	
 	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public List<String> getOptionList() {
+		return optionList;
+	}
+	public void setOptionList(List<String> optionList) {
+		this.optionList = optionList;
+	}
 	public String getFileCategory() {
 		return fileCategory;
 	}

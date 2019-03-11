@@ -2,16 +2,16 @@ package com.productDetail;
 
 public class productDetailImageDTO {
 
-	private int detailNum;
+	private String detailNum;
 	private String productId;
 	private String productName;
 	private String originalName;
 	private String saveFileName;
 	
-	public int getDetailNum() {
+	public String getDetailNum() {
 		return detailNum;
 	}
-	public void setDetailNum(int detailNum) {
+	public void setDetailNum(String detailNum) {
 		this.detailNum = detailNum;
 	}
 	public String getProductId() {
