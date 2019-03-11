@@ -108,12 +108,6 @@ public class ProductServlet extends HttpServlet{
 			url = "/project/listNew.jsp";
 			forward(req,resp,url);
 			
-		}else if(uri.indexOf("detail.do")!=-1){
-			
-			
-			url = "/boyeon/detail.jsp";
-			forward(req,resp,url);
-			
 		}else if(uri.indexOf("listBest.do")!=-1){
 			
 
