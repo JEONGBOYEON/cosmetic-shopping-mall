@@ -152,7 +152,7 @@ public class productDetailDAO {
 	}
 
 	//상세페이지 제품 조회_리스트용 사진
-	public productDetailDTO getReadData(String productName) {
+	public productDetailDTO getReadData(String productId) {
 
 		productDetailDTO dto = null;
 		PreparedStatement pstmt = null;
@@ -161,10 +161,10 @@ public class productDetailDAO {
 
 		try {
 			sql = "select productId,productCategory,productName,productOption,state,price,to_char(productDate,'yyyy-mm-dd') productDate,amount,color,texture,season,originalName,saveFileName,filecategory ";
-			sql += "from product where productName=? and filecategory='list'";
+			sql += "from product where productId=? and filecategory='list'";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, productName);
+			pstmt.setString(1, productId);
 
 			rs = pstmt.executeQuery();
 

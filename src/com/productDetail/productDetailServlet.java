@@ -65,14 +65,13 @@ public class productDetailServlet extends HttpServlet {
 
 		if (uri.indexOf("detail.do") != -1) {
 
-			//String productName = req.getParameter("productName");
-			String productName = "컬러풀 비비드 틴트";
-			productDetailDTO dto = dao.getReadData(productName);
-
+			String productId = req.getParameter("productId");
+			productDetailDTO dto = dao.getReadData(productId);
 			if (dto == null) {
 				System.out.println("dto없음!!");
 			}
-
+			String productName = dto.getProductName();
+			
 			// 이미지파일경로
 			String imagePath = cp + "/pds/imageFile";
 			req.setAttribute("imagePath", imagePath);
