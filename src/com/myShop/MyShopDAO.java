@@ -15,37 +15,7 @@ public class MyShopDAO {
 	public MyShopDAO(Connection conn){
 		this.conn = conn;
 	}
-	
-	//num의 max값 구하기
-	public int getMaxNum(){
-		
-		int maxNum = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql;
-		
-		try {
-			
-			sql = "select nvl(max(num),0) from myShop";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next())
-				maxNum = rs.getInt(1);
-			
-			rs.close();
-			pstmt.close();
-			
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return maxNum;
-		
-	}
-	
+
 	
 	public void insertData(String userId, String shopName){
 		

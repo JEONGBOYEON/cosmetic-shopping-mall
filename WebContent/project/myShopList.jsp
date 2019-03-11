@@ -2,11 +2,16 @@
 <%@ include file="../project/layout/top.jsp" %>
 <%@ include file="../project/layout/mypage.jsp" %>
 
+<script>
+
+</script>
+
 <table class="page_title_area" style="margin-top: 80px; margin-bottom: 50px;">
 <tr class="page_title">
 	<td colspan="2" align="center">
 		<h2 class="h_title page">단골매장 관리</h2>
 		<p class="text font_lg"></p>
+		<b style="color: red">${message }</b>
 	</td>
 </tr>
 </table>

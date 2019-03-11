@@ -83,14 +83,13 @@ public class ProductDetailServlet extends HttpServlet {
 			req.setAttribute("detailImagelists", detailImagelists);
 			req.setAttribute("optionList", optionList);
 
-			//project폴더변경 detail.jsp 페이지로 포워드
-			url = "/productDetail/detail.jsp?productName="+productName;
+			//detail.jsp 페이지로 포워드
+			url = "/project/detail.jsp?productName="+productName;
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("adminCreate.do") != -1) {
 			
-			//project폴더변경
-			url = "/productDetail/adminCreate.jsp";
+			url = "/project/adminCreate.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("adminCreate_ok.do") != -1) {
@@ -215,8 +214,8 @@ public class ProductDetailServlet extends HttpServlet {
 			req.setAttribute("updateUrl", updateUrl);
 			req.setAttribute("deleteUrl", deleteUrl);
 			
-			// project폴더변경 adminList.jsp 페이지로 포워드
-			url = "/productDetail/adminList.jsp?"+param;
+			//adminList.jsp 페이지로 포워드
+			url = "/project/adminList.jsp?"+param;
 			forward(req, resp, url);
 			
 		}else if(uri.indexOf("adminDeleted_ok.do")!=-1){
@@ -292,7 +291,7 @@ public class ProductDetailServlet extends HttpServlet {
 			req.setAttribute("detailImagelists", detailImagelists);
 		
 			//project폴더변경
-			url = "/productDetail/adminUpdate.jsp";
+			url = "/project/adminUpdate.jsp";
 			forward(req, resp, url);
 			
 			
@@ -338,7 +337,5 @@ public class ProductDetailServlet extends HttpServlet {
 			resp.sendRedirect(url);
 			
 		}
-
 	}
-
 }
