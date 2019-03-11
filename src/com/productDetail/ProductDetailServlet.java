@@ -20,7 +20,7 @@ import com.util.DBCPConn;
 import com.util.FileManager;
 import com.util.MyUtil;
 
-public class productDetailServlet extends HttpServlet {
+public class ProductDetailServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class productDetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Connection conn = DBCPConn.getConnection();
-		productDetailDAO dao = new productDetailDAO(conn);
+		ProductDetailDAO dao = new ProductDetailDAO(conn);
 		
 		//페이징
 		MyUtil myUtil = new MyUtil();
@@ -66,7 +66,7 @@ public class productDetailServlet extends HttpServlet {
 		if (uri.indexOf("detail.do") != -1) {
 
 			String productId = req.getParameter("productId");
-			productDetailDTO dto = dao.getReadData(productId);
+			ProductDetailDTO dto = dao.getReadData(productId);
 			if (dto == null) {
 				System.out.println("dto없음!!");
 			}
@@ -75,7 +75,7 @@ public class productDetailServlet extends HttpServlet {
 			// 이미지파일경로
 			String imagePath = cp + "/pds/imageFile";
 			req.setAttribute("imagePath", imagePath);
-			List<productDetailImageDTO> detailImagelists = dao.getDetailImageList("productName",productName);
+			List<ProductDetailImageDTO> detailImagelists = dao.getDetailImageList("productName",productName);
 			List<String> optionList = dao.getOptionList(productName);
 
 			req.setAttribute("dto", dto);
@@ -102,8 +102,8 @@ public class productDetailServlet extends HttpServlet {
 			MultipartRequest mr = new MultipartRequest(req, path, maxSize,
 					encType, new DefaultFileRenamePolicy());
 
-			productDetailDTO dto = new productDetailDTO();
-			productDetailImageDTO detailDTO = new productDetailImageDTO();
+			ProductDetailDTO dto = new ProductDetailDTO();
+			ProductDetailImageDTO detailDTO = new ProductDetailImageDTO();
 
 			dto.setProductId(mr.getParameter("productId"));
 			dto.setProductCategory(mr.getParameter("productCategory"));
@@ -177,7 +177,7 @@ public class productDetailServlet extends HttpServlet {
 			int start = (currentPage-1)*numPerPage+1;
 			int end = currentPage*numPerPage;
 			
-			List<productDetailDTO> lists = dao.getReadData(start, end, searchKey, searchValue);
+			List<ProductDetailDTO> lists = dao.getReadData(start, end, searchKey, searchValue);
 			
 			String param = "";
 			if(!searchValue.equals("")){
@@ -227,7 +227,7 @@ public class productDetailServlet extends HttpServlet {
 			String searchValue = req.getParameter("searchValue");
 			
 			//삭제할 dto 읽어오기
-			productDetailDTO dto = dao.getUpdateData(productId);
+			ProductDetailDTO dto = dao.getUpdateData(productId);
 			
 			if(searchValue!=null){
 				searchKey = URLDecoder.decode(searchKey, "UTF-8");
@@ -247,10 +247,10 @@ public class productDetailServlet extends HttpServlet {
 			}
 			
 			//물리적 파일 삭제 - 상세사진
-			List<productDetailImageDTO> DeleteDetailImageList = dao.getDetailImageList("productId", productId);
-			Iterator<productDetailImageDTO> it = DeleteDetailImageList.iterator(); 
+			List<ProductDetailImageDTO> DeleteDetailImageList = dao.getDetailImageList("productId", productId);
+			Iterator<ProductDetailImageDTO> it = DeleteDetailImageList.iterator(); 
 			while(it.hasNext()){
-				productDetailImageDTO detaildto = it.next();
+				ProductDetailImageDTO detaildto = it.next();
 				if(detaildto.getSaveFileName()!=null){
 				FileManager.doFileDelete(detaildto.getSaveFileName(), path);
 				}
@@ -271,14 +271,14 @@ public class productDetailServlet extends HttpServlet {
 			String searchValue = req.getParameter("searchValue");
 			
 			//수정할 dto 읽어오기
-			productDetailDTO dto = dao.getUpdateData(productId);
+			ProductDetailDTO dto = dao.getUpdateData(productId);
 			if(dto==null){
 				url = cp+"/pr/adminList.do";
 				resp.sendRedirect(url);
 			}
 
 			//등록된 상세사진 dto 읽어오기
-			List<productDetailImageDTO> detailImagelists = dao.getDetailImageList("productId",dto.getProductId());
+			List<ProductDetailImageDTO> detailImagelists = dao.getDetailImageList("productId",dto.getProductId());
 			
 			String param = "pageNum="+pageNum;
 			
@@ -304,8 +304,8 @@ public class productDetailServlet extends HttpServlet {
 			int maxSize = 10 * 1024 * 1024;
 			
 			MultipartRequest mr = new MultipartRequest(req, path, maxSize, encType, new DefaultFileRenamePolicy());
-			productDetailDTO dto = new productDetailDTO();
-			productDetailImageDTO detailDTO = new productDetailImageDTO();
+			ProductDetailDTO dto = new ProductDetailDTO();
+			ProductDetailImageDTO detailDTO = new ProductDetailImageDTO();
 
 			dto.setProductId(mr.getParameter("productId"));
 			dto.setProductCategory(mr.getParameter("productCategory"));

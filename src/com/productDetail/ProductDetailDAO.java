@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class productDetailDAO {
+public class ProductDetailDAO {
 
 	private Connection conn = null;
 
-	public productDetailDAO(Connection conn) {
+	public ProductDetailDAO(Connection conn) {
 		this.conn = conn;
 	}
 	
@@ -97,7 +97,7 @@ public class productDetailDAO {
 	
 
 	// 상품데이터등록
-	public void insertData(productDetailDTO dto) {
+	public void insertData(ProductDetailDTO dto) {
 
 		PreparedStatement pstmt = null;
 		String sql;
@@ -131,7 +131,7 @@ public class productDetailDAO {
 	}
 	
 	//상품 상세이미지 등록
-	public void insertDetailImage(productDetailImageDTO dto) {
+	public void insertDetailImage(ProductDetailImageDTO dto) {
 		PreparedStatement pstmt = null;
 		String sql;
 		try {
@@ -152,9 +152,9 @@ public class productDetailDAO {
 	}
 
 	//상세페이지 제품 조회_리스트용 사진
-	public productDetailDTO getReadData(String productId) {
+	public ProductDetailDTO getReadData(String productId) {
 
-		productDetailDTO dto = null;
+		ProductDetailDTO dto = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
@@ -169,7 +169,7 @@ public class productDetailDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dto = new productDetailDTO();
+				dto = new ProductDetailDTO();
 				dto.setProductId(rs.getString("productId"));
 				dto.setProductCategory(rs.getString("productCategory"));
 				dto.setProductName(rs.getString("productName"));
@@ -195,9 +195,9 @@ public class productDetailDAO {
 	}
 	
 	//상세페이지 제품 조회_상세 이미지조회
-	public List<productDetailImageDTO> getDetailImageList(String searchKey,String searchValue) {
-		List<productDetailImageDTO> lists = new ArrayList<productDetailImageDTO>();
-		productDetailImageDTO dto = null;
+	public List<ProductDetailImageDTO> getDetailImageList(String searchKey,String searchValue) {
+		List<ProductDetailImageDTO> lists = new ArrayList<ProductDetailImageDTO>();
+		ProductDetailImageDTO dto = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
@@ -210,7 +210,7 @@ public class productDetailDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dto = new productDetailImageDTO();
+				dto = new ProductDetailImageDTO();
 				dto.setDetailNum(rs.getString("detailNum"));
 				dto.setProductId(rs.getString("productId"));
 				dto.setProductName(rs.getString("productName"));
@@ -254,10 +254,10 @@ public class productDetailDAO {
 	}
 	
 	//admin페이지 상품 리스트 조회
-	public List<productDetailDTO> getReadData(int start, int end, String searchKey, String searchValue) {
+	public List<ProductDetailDTO> getReadData(int start, int end, String searchKey, String searchValue) {
 
-		List<productDetailDTO> lists = new LinkedList<productDetailDTO>();
-		productDetailDTO dto = null;
+		List<ProductDetailDTO> lists = new LinkedList<ProductDetailDTO>();
+		ProductDetailDTO dto = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
@@ -277,7 +277,7 @@ public class productDetailDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dto = new productDetailDTO();
+				dto = new ProductDetailDTO();
 				dto.setProductId(rs.getString("productId"));
 				dto.setProductCategory(rs.getString("productCategory"));
 				dto.setProductName(rs.getString("productName"));
@@ -325,9 +325,9 @@ public class productDetailDAO {
 	}
 	
 	//admin페이지 제품 조회_수정삭제
-	public productDetailDTO getUpdateData(String productId) {
+	public ProductDetailDTO getUpdateData(String productId) {
 
-		productDetailDTO dto = null;
+		ProductDetailDTO dto = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
@@ -342,7 +342,7 @@ public class productDetailDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dto = new productDetailDTO();
+				dto = new ProductDetailDTO();
 				dto.setProductId(rs.getString("productId"));
 				dto.setProductCategory(rs.getString("productCategory"));
 				dto.setProductName(rs.getString("productName"));
@@ -369,7 +369,7 @@ public class productDetailDAO {
 	}
 	
 	//상품정보 수정
-	public int updateData(productDetailDTO dto){
+	public int updateData(ProductDetailDTO dto){
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -401,7 +401,7 @@ public class productDetailDAO {
 	}
 	
 	//상품이미지 수정
-	public int updateFileData(productDetailDTO dto){
+	public int updateFileData(ProductDetailDTO dto){
 		
 		int result = 0;
 		PreparedStatement pstmt = null;

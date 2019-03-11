@@ -2,7 +2,7 @@ package com.productDetail;
 
 import java.util.List;
 
-public class productDetailDTO {
+public class ProductDetailDTO {
 	
 	private String productId;
 	private String productCategory;

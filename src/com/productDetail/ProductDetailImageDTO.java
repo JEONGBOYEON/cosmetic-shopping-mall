@@ -1,6 +1,6 @@
 package com.productDetail;
 
-public class productDetailImageDTO {
+public class ProductDetailImageDTO {
 
 	private String detailNum;
 	private String productId;
