@@ -74,29 +74,6 @@
 	<url-pattern>/dest/*</url-pattern>
 </servlet-mapping>
 
-<<<<<<< HEAD
-  <!-- Servlet 회원가입 -->
-  <servlet>
-  	<servlet-name>memberServlet</servlet-name>
-  	<servlet-class>com.member.MemberServlet</servlet-class>
-  </servlet>
- 
-  <servlet-mapping>
-  	<servlet-name>memberServlet</servlet-name>
-  	<url-pattern>/member/*</url-pattern>
-  </servlet-mapping>
-  
-  <!-- 보연 상품리스트 -->
- <servlet>
-	<servlet-name>Product</servlet-name>
- 	<servlet-class>com.product.ProductServlet</servlet-class>
- </servlet>
- <servlet-mapping>
- 	<servlet-name>Product</servlet-name>
- 	<url-pattern>/product/*</url-pattern>
- </servlet-mapping>
- 
-=======
 <!-- 상품리스트 조회 -->
  <servlet>
 	<servlet-name>Product</servlet-name>
@@ -146,6 +123,5 @@
 	<servlet-name>myShopList</servlet-name>
 	<url-pattern>/shop/*</url-pattern>
 </servlet-mapping>
->>>>>>> branch 'master' of https://github.com/jh170904/cosmetic
 
 </web-app>
