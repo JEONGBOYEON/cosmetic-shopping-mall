@@ -72,6 +72,24 @@ public class MyShopServlet extends HttpServlet {
 		}
 		else if(uri.indexOf("insert.do")!=-1){
 			
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			//아이디에 등록된 단골매장 수
+			int dataCount = dao.getDataCount(info.getUserId());
+			if(dataCount == 10){	
+				List<ShopDTO> lists = dao.getLists(info.getUserId());
+				
+				int totalDataCount = dao.getDataCount(info.getUserId());
+				
+				req.setAttribute("lists", lists);
+				req.setAttribute("totalDataCount", totalDataCount);
+				req.setAttribute("message","단골매장은 최대 10개까지만 등록 가능합니다.");
+				url = "/project/myShopList.jsp";
+				forward(req, resp, url);
+				
+			}
+			
 			String searchValue = req.getParameter("searchValue");
 			
 			if(searchValue==null){
@@ -83,6 +101,7 @@ public class MyShopServlet extends HttpServlet {
 			}
 			
 			List<ShopDTO> lists = shopDao.getLists(searchValue);
+			//검색된 단골 매장 수
 			int getDataCount = shopDao.getDataCount(searchValue);
 			
 			String param = "";
@@ -101,7 +120,7 @@ public class MyShopServlet extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
-			
+					
 			String shopName = URLDecoder.decode(req.getParameter("shopName"),"UTF-8");
 			
 			dao.insertData(info.getUserId(), shopName);

@@ -50,6 +50,37 @@ public class DestinationServlet extends HttpServlet {
 		
 		if(uri.indexOf("writed.do")!=-1){
 			
+			String destNickname = "NoDestNickname";
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			if(destNickname!=null){
+				destNickname = URLDecoder.decode(destNickname,"UTF-8");
+			}
+			
+
+			int getDataCount = dao.getDataCount(info.getUserId());
+			if(getDataCount==10){
+				List<DestinationDTO> lists = dao.getList(info.getUserId());
+
+				int totalDataCount = dao.getDataCount(info.getUserId());
+		
+				req.setAttribute("lists", lists);
+				req.setAttribute("totalDataCount", totalDataCount);
+				req.setAttribute("message","배송지는 최대 10개까지만 등록 가능합니다.");
+				
+				url = "/project/destinationList.jsp";
+				forward(req, resp, url);			
+			}
+			
+			int totalDataCount = dao.getDataCount(info.getUserId());
+			DestinationDTO dto = dao.getReadData(info.getUserId(), destNickname);
+			String destNicknameList[] = dao.selectDestNickname(info.getUserId(),totalDataCount,destNickname);
+			
+			req.setAttribute("dto", dto);
+			req.setAttribute("destNicknameList", destNicknameList);
+			req.setAttribute("totalDataCount", totalDataCount);
+			
 			url = "/project/destinationWrited.jsp";
 			forward(req, resp, url);
 		}

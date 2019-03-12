@@ -6,8 +6,6 @@
 	function sendIt() {
 		
 		var f = document.myForm;
-		
-	    f = document.myForm;
 	    
 	    str = f.destNickname.value;
 	    str = str.trim();
@@ -15,6 +13,19 @@
 	        alert("배송지명을 입력하세요");
 	        f.destNickname.focus();
 	        return;
+	    }
+	    
+	    var destNick = new Array();
+	    <c:forEach items="${destNicknameList}" var="dest">
+	    	destNick.push("${dest}");
+	    </c:forEach>
+	    for ( var i = 0; i < ${totalDataCount-1}; i++) {
+	    	if(str==destNick[i]){
+		        alert("같은 배송지명이 존재합니다.");
+		        f.destNickname.focus();
+		        return;
+		    }
+	       
 	    }
 	    
 	    str = f.destName.value;

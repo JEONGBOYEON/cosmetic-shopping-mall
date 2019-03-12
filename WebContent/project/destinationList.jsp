@@ -7,6 +7,7 @@
 	<td colspan="2" align="center">
 		<h2 class="h_title page">배송지 관리</h2>
 		<p class="text font_lg"></p>
+		<b style="color: red">${message }</b>
 	</td>
 </tr>
 </table>
@@ -62,11 +63,11 @@
 		<td class="check_wrap check_only">
 			<c:if test="${dto.addrKey=='no' }">
 				<a href="<%=cp%>/dest/changeAddrkey_ok.do?destNickname=${dto.destNickname }">
-					<img alt="" src="<%=cp%>/project/image/destination_addrkeyNo.jpg" height="20px;">
+					<img alt="" src="<%=cp%>/project/image/destination_addrkeyNo.JPG" height="25px;">
 				</a>
 			</c:if> 
 			<c:if test="${dto.addrKey=='yes' }">
-				<img alt="" src="<%=cp%>/project/image/destination_addrkeyYes.jpg" height="20px;">
+				<img alt="" src="<%=cp%>/project/image/destination_addrkeyYes.jpg" height="25px;">
 			</c:if> 
 		</td>
 		<td>${dto.destNickname }</td>
