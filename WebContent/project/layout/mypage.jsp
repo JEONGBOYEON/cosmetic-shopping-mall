@@ -32,7 +32,7 @@
 		<li><span>나의 활동 관리</span>
 			<ul>
 				<li><a href="/kr/ko/my/page/myEventList">이벤트 참여 현황</a></li>
-				<li><a href="/kr/ko/my/page/myReviewList">나의 구매 후기</a></li>
+				<li><a href="<%=cp1%>/review/list.do">나의 구매 후기</a></li>
 				<li><a href="/kr/ko/my/page/myInquiryList">나의 1:1 문의</a></li>
 			</ul></li>
 		<li><span>나의 정보 관리</span>
@@ -41,7 +41,6 @@
 				<li><a href="/kr/ko/my/page/info/snsLink">SNS 계정 연동 관리</a></li>
 				<li><a href="<%=cp1%>/dest/list.do">배송지 관리</a></li>
 				<li><a href="<%=cp1%>/shop/list.do">단골매장 관리</a></li>
-				<li><a href="/kr/ko/my/page/myShop">MY SHOP 관리</a></li>
 				<li><a href="javascript:;" onclick="leaver()">회원 탈퇴</a></li>
 			</ul></li>
 	</ul>
