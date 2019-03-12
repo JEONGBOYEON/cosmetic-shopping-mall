@@ -6,8 +6,6 @@
 	function sendIt() {
 		
 		var f = document.myForm;
-		
-	    f = document.myForm;
 	    
 	    str = f.destNickname.value;
 	    str = str.trim();
