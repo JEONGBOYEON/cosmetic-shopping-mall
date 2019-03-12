@@ -41,7 +41,9 @@
 				<li><a href="/kr/ko/my/page/info/snsLink">SNS 계정 연동 관리</a></li>
 				<li><a href="<%=cp1%>/dest/list.do">배송지 관리</a></li>
 				<li><a href="<%=cp1%>/shop/list.do">단골매장 관리</a></li>
-				<li><a href="javascript:;" onclick="leaver()">회원 탈퇴</a></li>
+				<li><div><a href="#loginmodal" class="flatbtn" id="modaltrigger">회원 탈퇴</a></div></li>
 			</ul></li>
 	</ul>
 </div>
+
+<%@ include file="../member/delete.jsp"  %>

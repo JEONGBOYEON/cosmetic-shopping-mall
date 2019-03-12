@@ -33,6 +33,10 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/modify-my-info.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/coupon.css">
 
+<link href="<%=cp %>/project/member/css/common.css" rel="stylesheet" type="text/css" />
+<link href="<%=cp %>/project/member/css/layout.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=cp %>/project/member/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=cp %>/project/member/js/jquery.leanModal.min.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +97,7 @@
 			</ul>
 			<h1 class="logo">
 				<a href="../project/main.jsp">
-					<img alt="ETUDEHOUSE" src="../project/image/img_logo.png"/>
+					<img alt="ETUDEHOUSE" src="<%=cp %>/project/image/img_logo.png"/>
 				</a>
 			</h1>
 		</div>
