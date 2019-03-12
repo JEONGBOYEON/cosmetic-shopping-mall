@@ -80,13 +80,11 @@ function sendIt(){
 								</div>
 								<div class="clear">
 									<div class="check_wrap">
-										<input type="checkbodafx" id="save_id"><label
-											for="save_id">아이디 저장</label>
+										<input type="checkbox" id="save_id"><label for="save_id">아이디 저장</label>
 									</div>
 									<div>
-										<a href="<%=cp %>/member/searchid.do">아이디 찾기</a> │ <a
-											href="https://join-on.amorepacific.com/member/findPw.do?chCd=W&siteCd=EDK"
-											target="_blank">비밀번호 찾기</a>
+										<a href="<%=cp %>/member/searchid.do">아이디 찾기</a> │ 
+										<a href="<%=cp %>/member/searchpw.do">비밀번호 찾기</a>
 									</div>
 								</div>
 								<button type="button" id="login" class="btn_primary_login" onclick="sendIt();">로그인</button>

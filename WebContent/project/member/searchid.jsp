@@ -17,9 +17,6 @@ function sendIt(){
 	
 	var f= document.myForm;
 	
-	//비밀번호의 유효성 검사
-	var regExp2= /^[a-zA-Z0-9]{6,16}$/;
-	
 	//생년월일 정규식
 	var regExp3 = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	
@@ -157,7 +154,6 @@ function sendIt(){
 						</div>
 
 						<div class="form_btns">
-						
 								<button type="button" id="login" class="btn_lg_primary"
 									onclick="sendIt();">아이디찾기</button>
 						</div>

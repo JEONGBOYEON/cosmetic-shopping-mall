@@ -60,7 +60,7 @@ public class MemberServlet extends HttpServlet {
 			
 			dao.insertData(dto);
 			
-			url=cp+"/project/main.jsp";
+			url=cp+"/project/member/created_com.jsp";
 			resp.sendRedirect(url);
 		}else if(uri.indexOf("login.do")!=-1){
 			url="/project/member/login.jsp";
@@ -83,19 +83,6 @@ public class MemberServlet extends HttpServlet {
 				
 				return;//로그인이 실패하면 return(뒤에 코드 실행하지 않는다)
 			}
-			
-			//로그인이 성공했을 경우
-			//세션에 현재 아이디,이름을 담는다.
-/*			CustomInfo info=new CustomInfo();
-			
-			info.setUserId(dto.getUserId());
-			info.setUserPwd(dto.getUserPwd());
-			info.setUserName(dto.getUserName());
-			info.setBirth(dto.getBirth());
-			info.setPhone(dto.getPhone());
-			info.setPoint(dto.getPoint());
-			info.setUserGrade(dto.getUserGrade());
-			info.setGender(dto.getGender());*/
 			
 			//session도 out.print처럼 jsp에는 그냥 사용가능한데
 			//java에서는 요청을 한뒤 써야한다.
@@ -122,7 +109,7 @@ public class MemberServlet extends HttpServlet {
 			
 			url="/project/member/searchid.jsp";
 			forward(req, resp, url);
-		}else if(uri.indexOf("searchid_ok.do")!=-1){//아이디 찾기_jsp
+		}else if(uri.indexOf("searchid_ok.do")!=-1){//아이디 찾기_ok
 			
 			String userName=req.getParameter("userName");
 			String phone=req.getParameter("phone");
@@ -141,56 +128,71 @@ public class MemberServlet extends HttpServlet {
 				return;
 			}
 			
-			MemberDTO info=new MemberDTO();
-			
-			info.setUserId(dto.getUserId());
-			info.setUserName(dto.getUserName());
-			
-			HttpSession session=req.getSession();
-			session.setAttribute("customInfo", info);
-			
 			req.setAttribute("userId", dto.getUserId());
 			
 			url="/project/member/searchid_com.jsp";
 			forward(req, resp, url);
 			
-		}else if(uri.indexOf("searchid.do")!=-1){//아이디 찾기
+		}else if(uri.indexOf("searchpw.do")!=-1){//비밀번호 찾기
 			
-			url="/project/member/searchid.jsp";
+			url="/project/member/searchpw.jsp";
 			forward(req, resp, url);
-		}else if(uri.indexOf("searchid_ok.do")!=-1){//아이디 찾기_jsp
+		}else if(uri.indexOf("searchpw_ok.do")!=-1){//비밀번호 찾기_ok
 			
+			String userId=req.getParameter("userId");
 			String userName=req.getParameter("userName");
 			String phone=req.getParameter("phone");
 			String gender=req.getParameter("gender");
 			String birth=req.getParameter("birth");
 			
-			MemberDTO dto=dao.getReadName(userName);
+			MemberDTO dto=dao.getReadData(userId);
 			
-			if(dto==null||!dto.getPhone().equals(phone)||!dto.getBirth().equals(birth)
-					||!dto.getGender().equals(gender)){
+			if(dto==null||!dto.getUserName().equals(userName)||!dto.getPhone().equals(phone)
+					||!dto.getBirth().equals(birth)||!dto.getGender().equals(gender)){
 				req.setAttribute("message", "회원정보가 존재하지 않습니다.");
 				
-				url="/project/member/searchid.jsp";
+				url="/project/member/searchpw.jsp";
 				forward(req, resp, url);
 				
 				return;
 			}
+
+			req.setAttribute("userPwd", dto.getUserPwd());
 			
-			MemberDTO info=new MemberDTO();
+			url="/project/member/searchpw_com.jsp";
+			forward(req, resp, url);
 			
-			info.setUserId(dto.getUserId());
-			info.setUserName(dto.getUserName());
+		}else if(uri.indexOf("delete_ok.do")!=-1){
+
+			//userPwd받아와서 회원탈퇴할때 비교
+			String userPwd=req.getParameter("userPwd");
 			
 			HttpSession session=req.getSession();
-			session.setAttribute("customInfo", info);
 			
-			req.setAttribute("userId", dto.getUserId());
+			MemberDTO info=(MemberDTO)session.getAttribute("customInfo");
 			
-			url="/project/member/searchid_com.jsp";
-			forward(req, resp, url);
+			MemberDTO dto=dao.getReadData(info.getUserId());
+			
+			if(!dto.getUserPwd().equals(userPwd)){
+				req.setAttribute("message", "비밀번호가 다릅니다.");
+				
+				url="/member/mypage.do";
+				forward(req, resp, url);
+				return;
+			}
+			
+			dao.deleteData(dto.getUserId());
+			
+			//세션도 지워줌
+			session.removeAttribute("customInfo");
+			session.invalidate();//변수도 지움
+			
+			//다시 인덱스 화면으로
+			url=cp+"/project/member/delete_com.jsp";
+			resp.sendRedirect(url);
 			
 		}
+		
 		/*else if(uri.indexOf("updated.do")!=-1){
 			
 			HttpSession session=req.getSession();
