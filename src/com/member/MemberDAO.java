@@ -126,7 +126,7 @@ public class MemberDAO {
 	}
 		
 
-	//수정
+	//수정1-비밀번호 수정
 	public int updateData(MemberDTO dto) {
 
 		int result = 0;
@@ -136,15 +136,43 @@ public class MemberDAO {
 
 		try {
 
-			sql = "update member set userPwd=?,birth=?,phone=? ";
+			sql = "update member set userPwd=? ";
 			sql+= "where userId=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, dto.getUserPwd());
-			pstmt.setString(2, dto.getBirth());
-			pstmt.setString(3, dto.getPhone());
-			pstmt.setString(4, dto.getUserId());
+			pstmt.setString(2, dto.getUserId());
+
+			result = pstmt.executeUpdate();
+
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+
+	}
+	
+	//수정2-개인정보 수정
+	public int updateData2(MemberDTO dto) {
+
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		String sql;
+
+		try {
+
+			sql = "update member set birth=?,phone=? ";
+			sql+= "where userId=?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getBirth());
+			pstmt.setString(2, dto.getPhone());
+			pstmt.setString(3, dto.getUserId());
 
 			result = pstmt.executeUpdate();
 

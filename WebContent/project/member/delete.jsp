@@ -14,7 +14,7 @@
 				<dl>
 					<dt>
 						<p style="font-size: 20px; font-family: '맑은 고딕' "><strong>회원탈퇴</strong></p><br>
-						<p style="font-size: 14px; font-family: '맑은 고딕' height: 60px;">
+						<p style="font-size: 14px; font-family: '맑은 고딕' height: 60px; ">
 							아모레 뷰티포인트 서비스 및 에뛰드하우스 사이트를 이용하시며 불편한 사항이 있으셨나요?<br> 뷰티포인트 및
 							에뛰드하우스를 떠나시는 사유를 남겨주시면 보다 나은 뷰티포인트,<br> 에뛰드하우스가 되는 데
 							참고하겠습니다.
@@ -42,8 +42,9 @@
 </div>
 
 <c:if test="${!empty message }">
+
 	<script type="text/javascript">
-				alert("비밀번호가 다릅니다.");
+				alert("${message}");
 							</script>
 </c:if>
 

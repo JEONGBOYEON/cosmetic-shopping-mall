@@ -80,6 +80,7 @@ function sendIt(){
 	}
 	f.userName.value=str;
 	
+	//생일 검사
 	str=f.birth.value;
 	str=str.trim();
 	if(!str){

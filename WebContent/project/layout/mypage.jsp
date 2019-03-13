@@ -37,7 +37,7 @@
 			</ul></li>
 		<li><span>나의 정보 관리</span>
 			<ul>
-				<li><a href="/kr/ko/my/page/info/changeUserInfo">개인정보 수정</a></li>
+				<li><a href="<%=cp1%>/member/update.do">개인정보 수정</a></li>
 				<li><a href="/kr/ko/my/page/info/snsLink">SNS 계정 연동 관리</a></li>
 				<li><a href="<%=cp1%>/dest/list.do">배송지 관리</a></li>
 				<li><a href="<%=cp1%>/shop/list.do">단골매장 관리</a></li>

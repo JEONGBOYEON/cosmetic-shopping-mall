@@ -33,7 +33,6 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/modify-my-info.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/coupon.css">
 
-<link href="<%=cp %>/project/member/css/common.css" rel="stylesheet" type="text/css" />
 <link href="<%=cp %>/project/member/css/layout.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=cp %>/project/member/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="<%=cp %>/project/member/js/jquery.leanModal.min.js"></script>
@@ -90,7 +89,7 @@
 					<span class="num" style="display: none;"></span>
 					</a>
 				</li>
-				<li><a href="/kr/ko/cart/cartList" class="cart">장바구니
+				<li><a href="<%=cp %>/cart/cartList.do" class="cart">장바구니
 					<span class="num" style="display: none;"></span>
 					</a></li>
 				<li><a href="#none" class="history">히스토리</a></li>
