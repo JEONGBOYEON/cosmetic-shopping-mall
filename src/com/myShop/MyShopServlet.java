@@ -66,11 +66,9 @@ public class MyShopServlet extends HttpServlet {
 			
 			Iterator<ShopDTO> it = lists.iterator();
 
-			int i = 0;
 			while(it.hasNext()){
 				ShopDTO dto = it.next();
-				dto.setShopName((URLDecoder.decode(dto.getShopName(),"UTF-8")));
-				i++;
+				dto.setShopName2(URLDecoder.decode(dto.getShopName(),"UTF-8"));
 			}
 			
 			Iterator<ShopDTO> it2 = lists.iterator();
@@ -120,6 +118,20 @@ public class MyShopServlet extends HttpServlet {
 			List<ShopDTO> lists = shopDao.getLists(searchValue);
 			//검색된 단골 매장 수
 			int getDataCount = shopDao.getDataCount(searchValue);
+			
+			Iterator<ShopDTO> it = lists.iterator();
+
+			while(it.hasNext()){
+				ShopDTO dto = it.next();
+				dto.setShopName2(URLDecoder.decode(dto.getShopName(),"UTF-8"));
+			}
+			
+			Iterator<ShopDTO> it2 = lists.iterator();
+			
+			while(it2.hasNext()){
+				ShopDTO dto = it2.next();
+				dto.setShopName(URLEncoder.encode(dto.getShopName(),"UTF-8")); 
+			}
 			
 			String param = "";
 			if(!searchValue.equals("")){

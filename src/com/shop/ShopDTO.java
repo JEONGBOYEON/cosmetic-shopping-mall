@@ -3,11 +3,12 @@ package com.shop;
 public class ShopDTO {
 	
 	private String shopName;
+	private String shopName2;
 	private String shopTel;
 	private String shopAddr1;
 	private String shopAddr2;
 	
-	
+
 	public String getShopName() {
 		return shopName;
 	}
@@ -15,6 +16,12 @@ public class ShopDTO {
 		this.shopName = shopName;
 	}
 	
+	public String getShopName2() {
+		return shopName2;
+	}
+	public void setShopName2(String shopName2) {
+		this.shopName2 = shopName2;
+	}
 	
 	public String getShopTel() {
 		return shopTel;

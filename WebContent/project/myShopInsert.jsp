@@ -77,7 +77,7 @@
 	<c:if test="${getDataCount!=0 }">
 		<c:forEach var="dto" items="${lists }">
 		<tr>
-			<td>${dto.shopName }</td>
+			<td>${dto.shopName2 }</td>
 			<td>${dto.shopTel }</td>
 			<td class="align_left">${dto.shopAddr1 } ${dto.shopAddr2 }</td>
 			<td>
