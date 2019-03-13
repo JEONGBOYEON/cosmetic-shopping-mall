@@ -2,7 +2,9 @@ package com.destination;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Connection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -110,14 +112,10 @@ public class DestinationServlet extends HttpServlet {
 		}
 		if(uri.indexOf("updated.do")!=-1){
 			
-			String destNickname = req.getParameter("destNickname");
+			String destNickname = URLDecoder.decode(req.getParameter("destNickname"),"UTF-8");
 			
 			HttpSession session = req.getSession();
 			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
-			
-			if(destNickname!=null){
-				destNickname = URLDecoder.decode(destNickname,"UTF-8");
-			}
 			
 			int totalDataCount = dao.getDataCount(info.getUserId());
 			DestinationDTO dto = dao.getReadData(info.getUserId(), destNickname);
@@ -180,8 +178,25 @@ public class DestinationServlet extends HttpServlet {
 			
 			List<DestinationDTO> lists = dao.getList(info.getUserId());
 
+			
 			int totalDataCount = dao.getDataCount(info.getUserId());
 	
+			Iterator<DestinationDTO> it = lists.iterator();
+
+			int i = 0;
+			while(it.hasNext()){
+				DestinationDTO dto = it.next();
+				dto.setDestNickname2(URLDecoder.decode(dto.getDestNickname(),"UTF-8"));
+				i++;
+			}
+			
+			Iterator<DestinationDTO> it2 = lists.iterator();
+			
+			while(it2.hasNext()){
+				DestinationDTO dto = it2.next();
+				dto.setDestNickname(URLEncoder.encode(dto.getDestNickname(),"UTF-8")); 
+			}
+			
 			req.setAttribute("lists", lists);
 			req.setAttribute("totalDataCount", totalDataCount);
 			

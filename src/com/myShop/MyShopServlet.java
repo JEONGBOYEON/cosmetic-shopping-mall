@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Connection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -62,6 +63,22 @@ public class MyShopServlet extends HttpServlet {
 
 			int totalDataCount = dao.getDataCount(info.getUserId());
 			//int totalDataCount = dao.getDataCount("rin0724");
+			
+			Iterator<ShopDTO> it = lists.iterator();
+
+			int i = 0;
+			while(it.hasNext()){
+				ShopDTO dto = it.next();
+				dto.setShopName((URLDecoder.decode(dto.getShopName(),"UTF-8")));
+				i++;
+			}
+			
+			Iterator<ShopDTO> it2 = lists.iterator();
+			
+			while(it2.hasNext()){
+				ShopDTO dto = it2.next();
+				dto.setShopName(URLEncoder.encode(dto.getShopName(),"UTF-8")); 
+			}
 			
 			req.setAttribute("lists", lists);
 			req.setAttribute("totalDataCount", totalDataCount);

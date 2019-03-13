@@ -71,7 +71,9 @@
 				<img alt="" src="<%=cp%>/project/image/destination_addrkeyYes.jpg" height="25px;">
 			</c:if> 
 		</td>
-		<td>${dto.destNickname }</td>
+		<%int num = 0; %>
+		<td>${dto.destNickname2 }</td>
+		<%num++;%>
 		<td>${dto.destName }</td>
 		<td class="align_left">[${dto.zip }] ${dto.addr1 } ${dto.addr2 }</td>
 		<td>${dto.destPhone }</td>

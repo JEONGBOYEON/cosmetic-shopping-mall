@@ -4,6 +4,7 @@ public class MyShopDTO {
 	
 	private String userId;
 	private String shopName;
+	private String shopName2;
 	
 	
 	public String getUserId() {
@@ -19,5 +20,13 @@ public class MyShopDTO {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+	
+	public String getShopName2() {
+		return shopName2;
+	}
+	public void setShopName2(String shopName2) {
+		this.shopName2 = shopName2;
+	}
+	
 	
 }

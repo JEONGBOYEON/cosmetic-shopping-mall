@@ -4,6 +4,7 @@ public class DestinationDTO {
 	
 	private String userId;
 	private String destNickname;
+	private String destNickname2;
 	private String destName;
 	private String destPhone;
 	private String destTel;
@@ -32,6 +33,13 @@ public class DestinationDTO {
 	}
 	public void setDestName(String destName) {
 		this.destName = destName;
+	}
+	
+	public String getDestNickname2() {
+		return destNickname2;
+	}
+	public void setDestNickname2(String destNickname2) {
+		this.destNickname2 = destNickname2;
 	}
 	
 	public String getDestPhone() {
