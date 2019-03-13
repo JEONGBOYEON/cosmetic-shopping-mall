@@ -265,6 +265,18 @@
 .review_summary dd .ui_rating>*{width:21px; height:19px; background: url(../images/common/bg_rating_21.png) no-repeat;}
 .review_summary dd .ui_rating>*.on{background-position:0 -21px;}
 .review_summary dd .ui_rating>* + *{margin-left:1px;}
+
+.review_summary>*{display:table-cell; vertical-align: middle;}
+.review_summary tr{width:365px; text-align:center; font-size:28px; color:#000; font-weight:300;}
+.review_summary tr .ui_rating{margin:17px 0 15px;}
+.review_summary tr .ui_rating>*{width:32px; height:28px; background: url(../images/common/bg_rating_32.png) no-repeat;}
+.review_summary tr .ui_rating>*.on{background-position:0 -32px;}
+.review_summary tr .ui_rating>* + *{margin-left:-2px;}
+.review_summary tr small {color:#888; font-size:16px; vertical-align:top;}
+.review_summary tr .ui_rating>*{width:21px; height:19px; background: url(../images/common/bg_rating_21.png) no-repeat;}
+.review_summary tr .ui_rating>*.on{background-position:0 -21px;}
+.review_summary tr .ui_rating>* + *{margin-left:1px;}
+
 .review_summary .rating_list li:after{content:''; display: block; clear: both;}
 .review_summary .rating_list li>*{float:left; line-height:19px;}
 .review_summary .rating_list li + li{margin-top:12px;}

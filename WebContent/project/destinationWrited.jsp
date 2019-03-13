@@ -3,9 +3,9 @@
 <%@ include file="../project/layout/mypage.jsp" %>
 
 <script type="text/javascript">
-	function sendIt() {
+	function writeDest() {
 		
-		var f = document.myForm;
+		var f = document.dest;
 	    
 	    str = f.destNickname.value;
 	    str = str.trim();
@@ -83,7 +83,7 @@
 
 </script>
 
-<form name="myForm" method="post">
+<form name="dest" method="post">
 
 <table class="page_title_area" style="margin-top: 80px; margin-bottom: 50px;">
 <tr class="page_title">
@@ -176,7 +176,7 @@
 <tr align="center">
 	<td colspan="2">
 		<input type="button" class="btn_blg_secondary" value="취소" onclick="javascript:location.href='<%=cp%>/dest/list.do';">
-		<input type="button" class="btn_blg_primary" value="등록" onclick="sendIt();">
+		<input type="button" class="btn_blg_primary" value="등록" onclick="writeDest();">
 	</td>
 </tr>
 

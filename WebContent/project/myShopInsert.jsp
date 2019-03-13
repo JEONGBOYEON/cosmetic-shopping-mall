@@ -3,9 +3,9 @@
 <%@ include file="../project/layout/mypage.jsp" %>
 
 <script>
-	function sendIt() {
+	function shopInsert() {
 		
-		var f = document.myForm;
+		var f = document.shop;
 		
 		f.action = "<%=cp%>/shop/insert.do"
 		f.submit();
@@ -26,7 +26,7 @@
 <div class="address_list">
 
 <hr class="div m20"/>
-<form name="myForm" method="post">
+<form name="shop" method="post">
 <table class="clear" style="width: 600px;" align="center">
 
 <tr style="width: 700px; height: 50px;">
@@ -41,7 +41,7 @@
 			class="input_wrap w100p" style="padding: 10px 0px;">
 	</td>
 	<td>
-		<img alt="검색" src="<%=cp%>/project/image/search.PNG" onclick="sendIt();">
+		<img alt="검색" src="<%=cp%>/project/image/search.PNG" onclick="shopInsert();">
 	</td>
 </tr>
 

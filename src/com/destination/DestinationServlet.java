@@ -195,11 +195,7 @@ public class DestinationServlet extends HttpServlet {
 			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
 			
 			String destNickname = URLDecoder.decode(req.getParameter("destNickname"),"UTF-8");
-			/*
-			if(destNickname!=null){
-				destNickname = URLDecoder.decode(destNickname,"UTF-8");
-			}
-			*/
+			
 			dao.deleteData(info.getUserId(), destNickname);
 			
 			url = cp + "/dest/list.do";

@@ -206,7 +206,5 @@ public class ReviewServlet extends HttpServlet{
 			resp.sendRedirect(url);
 			
 		}
-		
 	}
-	
 }

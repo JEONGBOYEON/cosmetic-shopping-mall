@@ -43,11 +43,12 @@
 				<table class="ui_table_striped data_table thead_colored align_center @table-striped-apply" id="shpiTable">
 
 					<colgroup>
-						<col>
-						<col>
-						<col>
-						<col>
-						<col>
+						<col width="10%">
+						<col width="20%">
+						<col width="40%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
 					</colgroup>
 
 					<thread>
@@ -64,12 +65,12 @@
 					<tbody id="paging">
 						<c:forEach var="dto" items="${lists }">
 							<tr>
-								<td class="check_wrap check_only">${dto.reviewDate }</td>
-								<td><a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a></td>
-								<td align="left">${dto.subject }
+								<td class="check_wrap check_only" style="vertical-align: top;">${dto.reviewDate }</td>
+								<td style="vertical-align: top;"><a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a></td>
+								<td align="left" style="vertical-align: top;">${dto.subject }
 									<p id="${dto.subject }" style="display: none"><br/>${dto.content }</p>
 								</td>
-								<td>
+								<td style="vertical-align: top;">
 									<c:forEach var="i" begin="1" end="${dto.rate }" step="1">
 										<img alt="" src="<%=cp%>/project/image/review_heart_on.PNG" height="10px;">
 									</c:forEach>
@@ -78,10 +79,10 @@
 										<img alt="" src="<%=cp%>/project/image/review_heart_off.PNG" height="10px;">
 									</c:forEach>
 								</td>
-								<td>
+								<td style="vertical-align: top;">
 									<button onclick="showReview('${dto.subject }')" class="btn_sm_bordered">리뷰보기</button>
 								</td>
-								<td>
+								<td style="vertical-align: top;">
 									<button onclick="javascript:location.href='<%=cp%>/review/deleted.do?productId=${dto.productId }';" class="btn_sm_bordered">삭제하기</button>
 								</td>
 							</tr>

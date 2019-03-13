@@ -4,9 +4,9 @@
 
 <script type="text/javascript">
 
-	function sendIt() {
+	function writeReview() {
 		
-		var f = document.myForm;
+		var f = document.review;
 		
 		var str = f.subject.value;
 		if (!str) {
@@ -29,7 +29,7 @@
 	
 </script>
 
-<form name="myForm" method="post" enctype="multipart/form-data">
+<form name="review" method="post" enctype="multipart/form-data">
 
 <table class="page_title_area" style="margin-top: 80px; margin-bottom: 50px;">
 <tr class="page_title">
@@ -65,7 +65,7 @@
 	<td style="padding-left: 20px;" >${dto.productOption }</td>
 </tr>
 <tr>
-	<td height="50">옵&nbsp;&nbsp;&nbsp;&nbsp;션</td>
+	<td height="50">상&nbsp;품&nbsp;아&nbsp;이&nbsp;디</td>
 	<td style="padding-left: 20px;" >${productId}</td>
 </tr>
 
@@ -106,7 +106,7 @@
 	<td colspan="2">
 		<input type="hidden" name="productId" value="${productId }">
 		<input type="button" class="btn_blg_secondary" value="취소" onclick="javascript:location.href='<%=cp%>/review/possibleList.do';">
-		<input type="button" class="btn_blg_primary" value="등록" onclick="sendIt();">
+		<input type="button" class="btn_blg_primary" value="등록" onclick="writeReview()">
 	</td>
 </tr>
 
