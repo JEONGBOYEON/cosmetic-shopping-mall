@@ -35,7 +35,7 @@
 			return;
 		}
 		f.productName.value = str;
-		
+/*		
 		str = f.productOption.value;
 		str = str.trim();
 		if(!str){
@@ -44,7 +44,7 @@
 			return;
 		}
 		f.productOption.value = str;
-		
+*/		
 		str = f.price.value;
 		str = str.trim();
 		if(!str){

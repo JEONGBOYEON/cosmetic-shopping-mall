@@ -55,12 +55,12 @@ public class cartServlet  extends HttpServlet {
 
 		if (uri.indexOf("cartList.do") != -1) {
 			
-			//HttpSession session = req.getSession();
-			//MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
-			//String userId= info.getUserId();
-			//List<cartDTO> lists = dao.getReadData(userId);
-			
-			List<cartDTO> lists = dao.getReadData("asd123");
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			String userId= info.getUserId();
+			List<cartDTO> lists = dao.getReadData(userId);
+			int totalItemCount = dao.getTotalItemCount(userId);
+			int totalItemPrice = dao.getTotalItemPrice(userId);
 
 			// 이미지파일경로
 			String imagePath = cp + "/pds/imageFile";
@@ -71,6 +71,8 @@ public class cartServlet  extends HttpServlet {
 			req.setAttribute("imagePath", imagePath);
 			req.setAttribute("lists", lists);
 			req.setAttribute("deleteUrl", deleteUrl);
+			req.setAttribute("totalItemCount", totalItemCount);
+			req.setAttribute("totalItemPrice", totalItemPrice);
 			
 			//project/cart/cartList.jsp 페이지로 포워드
 			url = "/project/order/cartList.jsp";
@@ -81,14 +83,36 @@ public class cartServlet  extends HttpServlet {
 			cartDTO dto = new cartDTO();
 			HttpSession session = req.getSession();
 			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+
+			String productId = req.getParameter("productId");
+			String productName = req.getParameter("productName");
+			String productOption = req.getParameter("productOption");
+			String userId = info.getUserId();
+			int amount = Integer.parseInt(req.getParameter("amount"));
+			dto.setUserId(userId);
 			
-			dto.setUserId("asd123");
-			//dto.setUserId(info.getUserId());
-			dto.setProductId(req.getParameter("productId"));
-			dto.setAmount(Integer.parseInt(req.getParameter("amount")));
+			if(productOption.equals("single")){
+				//단일상품인 경우 상품아이디 읽어옴
+				dto.setProductId(productId);
+				
+			}else{
+				//상품옵션 변경시 변경된 상품id값을 읽어와야 함
+				productId = dao.searchProductId(productName,productOption);
+				dto.setProductId(productId);
+			}
+			dto.setAmount(amount);
 			dto.setPrice(Integer.parseInt(req.getParameter("price")));
-			dao.insertCartItem(dto);
 			
+			//동일 userId,productId로 장바구니 내용이 있으면 수량증가
+			if(dao.searchBeforeProductId(productId,userId)==1){
+				
+				int addAmount = dao.getCartItemCount(userId, productId);
+				dto.setAmount(amount+addAmount);
+				dao.updateCartItem(dto);
+				
+			}else{
+				dao.insertCartItem(dto);
+			}
 			url = "/cart/cartList.do";
 			forward(req, resp, url);
 			
@@ -97,11 +121,11 @@ public class cartServlet  extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
-			
-			String productId = req.getParameter("productId");
-			String userId = "asd123" ;
-			//String userId = info.getUserId();
 
+			String productId = req.getParameter("productId");
+			String userId = info.getUserId();
+			
+			//장바구니 삭제
 			dao.deleteCartItem(productId, userId);
 			
 			url = cp + "/cart/cartList.do";

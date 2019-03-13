@@ -27,7 +27,7 @@
 		<dl>
 			<dt class="on">
 				<span class="check_wrap">
-					총 장바구니 상품 00개
+					총 장바구니 상품 ${totalItemCount }개
 				</span>
 				<button type="button"><span class="sr_only">닫기</span></button>
 			</dt>
@@ -36,32 +36,45 @@
 				<div align="center">
 				<table border="0">
 				<tr style="widows: 1200px; height: 70px;" align="center">
+				
 					<td width="150px" rowspan="2">
 						<!-- 사진 선택시 하이퍼링크 -->
 						<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 						<img src="${imagePath }/${dto.saveFileName}" width="110">
 						</a>
 					</td>
+					
 					<td width="700px" style="padding-left: 30px;font-size: 20px;color: #000;" align="left" >
 						<!-- 상품 선택시 하이퍼링크 -->
 						<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 						${dto.productName}
 						</a>
 					</td>
+					
 					<td width="50px"></td>
+					
 					<td width="100px">
 						<span style="color: #000;font-size: 20px;font-weight: bold;">
 						<fmt:formatNumber value="${dto.price * dto.amount}" groupingUsed="true"/> 원
 						</span>
 					</td>
+					
 					<td width="200px">
-						<button class="btn_sm_bordered" onclick="<%=cp %>/cart/cartDelete_ok.do?productId=${dto.productId}">
+						<a href="${deleteUrl}${dto.productId}">
+						<button class="btn_sm_bordered" >
 						삭제
 						</button>
+						</a>
 					</td>
 				</tr>
+				
 					<tr align="center" bgcolor="#eeeeee" height="60px">
-						<td align="left" style="padding-left: 30px; color: #000;">#옵션 ${dto.productOption}</td>
+				
+						<td align="left" style="padding-left: 30px; color: #000;">
+							<c:if test="${!empty dto.productOption}">
+							#옵션 ${dto.productOption}
+							</c:if>
+						</td>
 						<td>${dto.amount} 개</td>
 						<td>
 							<b style="color: #333;font-weight: 500;}">
@@ -71,6 +84,7 @@
 						<td>
 						<button class="btn_sm_neutral">옵션변경</button>
 					</tr>
+					
 				</table>
 				</div>
 			</c:forEach>
@@ -80,15 +94,17 @@
 	<!-- 총구매개수, 구매액 -->
 	<dl class="total_money_list" id="calculationResult" >
 		<dt class="on" >
-			총 상품 구매금액({}개) 
-			<span style="float: right;font-style: normal;color: #f54a7e;font-size: 24px;font-weight: 700;"><em>{}원</em></span>
+			총 상품 구매금액(${totalItemCount }개) 
+			<span style="float: right;font-style: normal;color: #f54a7e;font-size: 24px;font-weight: 700;">
+				<em><fmt:formatNumber value="${totalItemPrice}" groupingUsed="true"/>원</em>
+			</span>
 		</dt>
 	</dl>
 	
 	
 	<!-- 버튼 -->
 	<div class="page_btns">
-		<button type="button" class="btn_lg_bordered" id="btnMain" onclick="">계속 쇼핑하기</button>
+		<input value="계속 쇼핑하기" type="button" class="btn_lg_bordered" id="btnMain" onclick="<%=cp %>/project/main.jsp">
 		<button type="button" class="btn_lg_primary" id="btnCheckOrder" onclick="">주문결제하기</button>
 	</div>
 

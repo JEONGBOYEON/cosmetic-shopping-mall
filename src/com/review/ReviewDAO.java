@@ -230,5 +230,143 @@ public class ReviewDAO {
 		}
 		
 	}
+	
+	//특정 상품 리뷰 데이터의 갯수
+	public int getPoductDataCount(String productName) {
+
+		int totalDataCount = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "select nvl(count(*),0)";
+			sql+= "from review where writed='yes' "; 
+			sql+= "and productId in (";
+			sql+= "select product.productId from review,product ";
+			sql+= "where review.productId = product.productId ";
+			sql+= "and product.productName=?)";
+
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, productName);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next())
+				totalDataCount = rs.getInt(1);
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return totalDataCount;
+
+	}
+	
+	//특정 상품의 리뷰 데이터 가져오기
+	public List<ReviewDTO> productGetLists(int start, int end, String productName) {
+
+		List<ReviewDTO> lists = new ArrayList<ReviewDTO>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "select * from (";
+			sql+= "select rownum rnum, data.* from (";
+			sql+= "select userId,review.productId productId,productOption,rate,subject,content,to_char(reviewDate,'yyyy-mm-dd') reviewDate,review.originalName originalName,review.saveFileName saveFileName ";
+			sql+= "from (select * from review where writed='yes' and productId in (";
+			sql+= "select product.productId from review,product where review.productId = product.productId and product.productName=?)) review, product product ";
+			sql+= "where review.productId=product.productId ";
+			sql+= "order by reviewDate) data) ";
+			sql+= "where rnum>=? and rnum<=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, productName);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+
+			rs = pstmt.executeQuery();
+			
+			
+			
+			while(rs.next()){
+
+				ReviewDTO dto = new ReviewDTO();
+				
+				dto.setUserId(rs.getString("userId"));
+				dto.setProductId(rs.getString("productId"));
+				dto.setProductOption(rs.getString("productOption"));
+				dto.setRate(rs.getInt("rate"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setReviewDate(rs.getString("reviewDate"));
+				dto.setOriginalName(rs.getString("originalName"));
+				dto.setSavefileName(rs.getString("saveFileName"));
+				
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
+	
+	
+	//특정 상품 리뷰 상품평별 데이터의 갯수
+	public int getPoductDataCountHeart(String productName, int rate) {
+
+		int totalDataCount = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "select nvl(count(*),0)";
+			sql+= "from review where writed='yes' "; 
+			sql+= "and productId in (";
+			sql+= "select product.productId from review,product ";
+			sql+= "where review.productId = product.productId ";
+			sql+= "and product.productName=? and rate=?)";
+
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, productName);
+			pstmt.setInt(2, rate);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next())
+				totalDataCount = rs.getInt(1);
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return totalDataCount;
+
+	}
 
 }

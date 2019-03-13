@@ -106,12 +106,12 @@
 
 <!-- 주문 및 장바구니 -->
 <servlet>
- 	<servlet-name>orderServlet</servlet-name>
-  	<servlet-class>com.order.OrderServlet</servlet-class>
+ 	<servlet-name>cartServlet</servlet-name>
+  	<servlet-class>com.cart.cartServlet</servlet-class>
 </servlet>
 <servlet-mapping>
- 	<servlet-name>orderServlet</servlet-name>
- 	<url-pattern>/order/*</url-pattern>
+ 	<servlet-name>cartServlet</servlet-name>
+ 	<url-pattern>/cart/*</url-pattern>
 </servlet-mapping>
 
 <!-- 단골매장등록 -->
@@ -122,6 +122,16 @@
 <servlet-mapping>
 	<servlet-name>myShopList</servlet-name>
 	<url-pattern>/shop/*</url-pattern>
+</servlet-mapping>
+
+<!-- 리뷰 -->
+<servlet>
+	<servlet-name>review</servlet-name>
+	<servlet-class>com.review.ReviewServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>review</servlet-name>
+	<url-pattern>/review/*</url-pattern>
 </servlet-mapping>
 
 </web-app>

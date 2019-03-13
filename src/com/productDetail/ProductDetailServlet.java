@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.review.ReviewDAO;
+import com.review.ReviewDTO;
 import com.util.DBCPConn;
 import com.util.FileManager;
 import com.util.MyUtil;
@@ -63,8 +65,9 @@ public class ProductDetailServlet extends HttpServlet {
 			f.mkdirs();
 		}
 
-		if (uri.indexOf("detail.do") != -1) {
-
+if (uri.indexOf("detail.do") != -1) {
+			
+			//상세페이지 / 상세페이지
 			String productId = req.getParameter("productId");
 			ProductDetailDTO dto = dao.getReadData(productId);
 			
@@ -85,6 +88,62 @@ public class ProductDetailServlet extends HttpServlet {
 			req.setAttribute("detailImagelists", detailImagelists);
 			req.setAttribute("optionList", optionList);
 
+			
+			//상세페이지 / 리뷰
+			ReviewDAO reviewDao = new ReviewDAO(conn);
+			String pageNum = req.getParameter("pageNum");
+			
+			int currentPage = 1;
+			
+			if(pageNum!=null)
+				currentPage = Integer.parseInt(pageNum);
+			
+			int dataCount_yes = reviewDao.getPoductDataCount(productName);
+			//int dataCount_yes = reviewDao.getPoductDataCount("컬러풀 비비드 틴트");
+			
+			if(dataCount_yes!=0){
+				int numPerPage = 8;
+				int totalPage = myUtil.getPageCount(numPerPage, dataCount_yes);
+
+				if(currentPage>totalPage)
+					currentPage = totalPage;
+
+				int start = (currentPage-1)*numPerPage+1;
+				int end = currentPage*numPerPage;
+
+				List<ReviewDTO> lists = reviewDao.productGetLists(start, end, productName);
+				//List<ReviewDTO> lists = reviewDao.productGetLists(start, end, "컬러풀 비비드 틴트");
+
+				Iterator<ReviewDTO> it = lists.iterator();
+
+				//평점 합계
+				int totalReviewRate=0;
+
+				while(it.hasNext()){
+					ReviewDTO reviewDto = it.next();
+					totalReviewRate += reviewDto.getRate();
+				}
+
+				//평점 별 리뷰 개수
+				
+			 	int rate[] = {reviewDao.getPoductDataCountHeart(productName, 5),reviewDao.getPoductDataCountHeart(productName, 4),
+			 			reviewDao.getPoductDataCountHeart(productName, 3),reviewDao.getPoductDataCountHeart(productName, 2),reviewDao.getPoductDataCountHeart(productName, 1)}; 
+			 	
+				//평점 평균 
+				int avgReviewRate = totalReviewRate/dataCount_yes;
+				String listUrl = cp + "/review/productList.do";
+				String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+				String imagePath_review = cp +"/pds/reviewImageFile";
+
+				//포워딩 데이터
+				req.setAttribute("lists", lists);
+				req.setAttribute("pageIndexList", pageIndexList);
+				req.setAttribute("imagePath_review", imagePath_review);
+				req.setAttribute("avgReviewRate", avgReviewRate);
+				req.setAttribute("rate", rate);
+			}
+			req.setAttribute("dataCount_yes", dataCount_yes);
+			
 			//detail.jsp 페이지로 포워드
 			url = "/project/detail.jsp?productName="+productName;
 			forward(req, resp, url);

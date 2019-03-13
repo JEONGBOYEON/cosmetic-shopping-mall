@@ -1,6 +1,44 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="./layout/top.jsp"  %>
+
+<script type="text/javascript">
+	function addCartItem(){
+		
+		f = document.detailForm;
+		//장바구니 추가
+		
+		str = f.productOption.value;
+		str = str.trim();
+		//옵션이 없는 단일상품이 아닌 경우
+		if(str=="single"){
+			
+			if(!str){
+				alert("\n productOption을 선택하세요.");//공백제거후 내용이 없으면
+				f.productOption.focus();
+				return;
+			}
+			f.productOption.value = str;
+	
+		}
+		
+		str = f.amount.value;
+		str = str.trim();
+		if(str==0){
+			alert("\n 수량을 선택하세요.");//공백제거후 내용이 없으면
+			f.amount.focus();
+			return;
+		}
+		f.amount.value = str;
+		
+		alert("고객님! 해당 상품이 장바구니에 담겼습니다!");
+	
+		f.action = "<%=cp %>/cart/cartAdd_ok.do";
+		f.submit();
+	}
+
+</script>
 
 <div id="ap_container" class="ap_container">
 	<!-- page title -->
@@ -90,17 +128,25 @@
 							<tr height="20">
 								<td>&nbsp;</td>
 							</tr>
+							<!-- 상품옵션선택 -->
 							<tr height="40">
+							<c:choose>
+								<c:when test="${!empty dto.productOption }">
 								<td>
-								<c:if test="${!empty dto.productOption }">
-										<select style="width: 280px; height: 40px;">
-											<option>옵션선택</option>
-											<c:forEach var="option" items="${dto.optionList}">
-												<option>${option }</option>
-											</c:forEach>
-										</select>
-								</c:if>
+									<select style="width: 280px; height: 40px;" name="productOption">
+										<option>옵션선택</option>
+										<c:forEach var="option" items="${dto.optionList}">
+											<option value="${option }">${option }</option>
+										</c:forEach>
+									</select>
 								</td>
+								</c:when>
+								<c:when test="${empty dto.productOption }">
+								<td>
+									<input type="hidden" name="productOption" value="single">
+								</td>
+								</c:when>
+							</c:choose>								
 							</tr>
 
 							<tr height="1">
@@ -112,13 +158,15 @@
 									<table>
 										<tr>
 											<td width="230">
-												<font style="font-size: 20px; color:#1C1C1C; ">${dto.price }원</font>
+												<font style="font-size: 20px; color:#1C1C1C; ">
+												<fmt:formatNumber value="${dto.price}" groupingUsed="true"/>원</font>
 											</td>
 											<td>
 												<a href="../project/review.jsp">
 													<img alt="review" src="../project/image/review.PNG"/>&nbsp;&nbsp;&nbsp;
 												</a>
-												<a href="../project/basket.jsp">
+												<input type="hidden" name="cart" value="<%=cp %>/cart/cartAdd_ok.do?amount=1&productName=${dto.productName}&price=${dto.price}">
+												<a href="javascript:addCartItemFromItem();">
 													<img alt="basket" src="../project/image/basket.PNG"/>
 												</a>
 											</td>										

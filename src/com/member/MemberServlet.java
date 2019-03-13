@@ -191,53 +191,113 @@ public class MemberServlet extends HttpServlet {
 			url=cp+"/project/member/delete_com.jsp";
 			resp.sendRedirect(url);
 			
-		}
-		
-		/*else if(uri.indexOf("updated.do")!=-1){
+		}else if(uri.indexOf("update.do")!=-1){//비밀번호 찾기
+			
+			url="/project/member/update.jsp";
+			forward(req, resp, url);
+			
+		}else if(uri.indexOf("update_ok.do")!=-1){
+
+			//userPwd받아와서 회원수정들어가는 페이지에서 비교
+			String userPwd=req.getParameter("userPwd");
 			
 			HttpSession session=req.getSession();
 			
-			CustomInfo info=(CustomInfo)session.getAttribute("customInfo");
+			MemberDTO info=(MemberDTO)session.getAttribute("customInfo");
 			
 			MemberDTO dto=dao.getReadData(info.getUserId());
 			
-			req.setAttribute("dto", dto);//updated.jsp에서 정보 띄워주기위해 받아준다.
-			
-			//회원정보가 없을때
-			if(dto==null){
-				url=cp;
-				resp.sendRedirect(url);
+			if(!dto.getUserPwd().equals(userPwd)){
+				req.setAttribute("message", "비밀번호가 다릅니다.");
+				
+				url="/member/update.do";
+				forward(req, resp, url);
+				return;
 			}
 			
-			url="/member/updated.jsp";
-			forward(req, resp, url);
+			//다시 인덱스 화면으로
+			url=cp+"/member/update_detail.do";
+			resp.sendRedirect(url);
 			
-		}else if(uri.indexOf("updated_ok.do")!=-1){
+		}else if(uri.indexOf("update_detail.do")!=-1){
 			
-			MemberDTO dto=new MemberDTO();
-			
-			//다시 세션값을 받아와서
 			HttpSession session=req.getSession();
 			
-			CustomInfo info=new CustomInfo();
+			MemberDTO info=(MemberDTO)session.getAttribute("customInfo");
 			
-			info=(CustomInfo)session.getAttribute("customInfo");
+			MemberDTO dto=dao.getReadData(info.getUserId());
+			
+			req.setAttribute("dto", dto);
+			
+			url="/project/member/update_detail.jsp";
+			forward(req, resp, url);
+			
+		}else if(uri.indexOf("update_detail_ok.do")!=-1){
+
+			//비밀번호 수정
+			
+			//userPwd받아와서 회원수정할때 비교
+			String oriPassword=req.getParameter("oriPassword");
+			String pass1=req.getParameter("pass1");
+			
+			HttpSession session=req.getSession();
+			
+			MemberDTO info=(MemberDTO)session.getAttribute("customInfo");
+			
+			MemberDTO dto=dao.getReadData(info.getUserId());
+			
+			//!!session에 담은 메세지는 msg!!!!
+			if(!dto.getUserPwd().equals(oriPassword)){
+				session.setAttribute("msg", "기존 비밀번호가 다릅니다.");
+				
+				url=cp+"/member/update_detail.do";
+				resp.sendRedirect(url);
+				return;
+			}
 		
 			//새로운 dto에 form으로 넘어온 userPwd등의 값들과
 			//세션에 저장되있는 아이디값을 updateData sql을 통해 실행시켜준다.
-			dto.setUserPwd(req.getParameter("userPwd"));
-			dto.setUserBirth(req.getParameter("userBirth"));
-			dto.setUserTel(req.getParameter("userTel"));
+			dto.setUserPwd(req.getParameter("pass1"));
 			dto.setUserId(info.getUserId());
 			
 			dao.updateData(dto);
+				
+			req.setAttribute("msg", "회원 비밀번호정보가 수정되었습니다.");
 			
 			//다시 인덱스 화면으로
-			url=cp;
-			resp.sendRedirect(url);
+			url="/member/update_detail.do";
+			forward(req, resp, url);
 			
-		}*/
+		}else if(uri.indexOf("update_detail_ok2.do")!=-1){
+			
+			//개인정보 수정
+			
+			//userPwd받아와서 회원수정할때 비교
+			String birth=req.getParameter("birth");
+			String phone=req.getParameter("phone");
+			
+			HttpSession session=req.getSession();
+			
+			MemberDTO info=(MemberDTO)session.getAttribute("customInfo");
+			
+			MemberDTO dto=dao.getReadData(info.getUserId());
 		
+			//새로운 dto에 form으로 넘어온 userPwd등의 값들과
+			//세션에 저장되있는 아이디값을 updateData sql을 통해 실행시켜준다.
+			dto.setBirth(req.getParameter("birth"));
+			dto.setPhone(req.getParameter("phone"));
+			dto.setUserId(info.getUserId());
+			
+			dao.updateData2(dto);
+				
+			req.setAttribute("msg", "회원개인정보가 수정되었습니다.");
+			
+			//다시 인덱스 화면으로
+			url="/member/update_detail.do";
+			forward(req, resp, url);
+			
+		}
+	
 		
 	}
 
