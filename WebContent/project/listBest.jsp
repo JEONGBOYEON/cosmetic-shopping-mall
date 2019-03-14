@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.net.URLEncoder"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="./layout/top.jsp"  %>
@@ -50,7 +51,9 @@
 
 <div id="ap_container" class="ap_container">
 	<!-- page title -->
+<form name="CategoryForm">
 
+</form>
 
 	<div class="page_title_area">
 		<!-- breadcrumb 미노출 페이지는 감춤 -->
@@ -58,7 +61,7 @@
 		<!-- // breadcrumb 미노출 페이지는 감춤 -->
 		<div class="page_title">
 
-			<h2 class="h_title page">아이</h2>
+			<h2 class="h_title page">베스트</h2>
 
 
 			<p class="text font_lg"></p>
@@ -71,13 +74,17 @@
 
 		<div class="prd_category">
 			<ul>
-				<li><a href="/kr/ko/display/category/eye?upperMenuId=eye&amp;categoryType=prod_types" class="on">전체</a></li>
-				<li><a href="/kr/ko/display/category/single_shadow?upperMenuId=eye&amp;categoryType=prod_types">싱글섀도우</a></li>
-				<li><a href="/kr/ko/display/category/eye_pallette?upperMenuId=eye&amp;categoryType=prod_types">아이팔레트</a></li>
-				<li><a href="/kr/ko/display/category/mascara?upperMenuId=eye&amp;categoryType=prod_types">마스카라</a></li>
-				<li><a href="/kr/ko/display/category/eyeliner?upperMenuId=eye&amp;categoryType=prod_types">아이라이너</a></li>
-				<li><a href="/kr/ko/display/category/eyebrow?upperMenuId=eye&amp;categoryType=prod_types">아이브로우</a></li>
-				<li><a href="/kr/ko/display/category/eye_primer?upperMenuId=eye&amp;categoryType=prod_types">아이프라이머</a></li>
+				<li><a href="" class="on">전체</a></li>
+					<% 
+						String arrCategory3[] = {"아이","립","페이스","네일","스킨케어","팩/마스크","클렌징","바디/헤어","향수","화장소품"};
+					
+						for(String s:arrCategory3 ){
+							
+							String category = URLEncoder.encode(s, "UTF-8");
+							out.println("<li><a href="+cp+"/product/listCategory.do?productCategory="+category+">");
+							out.println(s+"</a></li>");
+						}
+					%>
 			</ul>
 		</div>
 

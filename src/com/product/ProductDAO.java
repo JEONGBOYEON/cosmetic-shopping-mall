@@ -183,8 +183,85 @@ public class ProductDAO {
 
 	}
 
+	//전체 데이터의 갯수
+	public int getDataCountCategory(String productCategory) {
+
+		int totalDataCount = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+
+			sql = "select nvl(count(*),0) from product where fileCategory='list' and productCategory=?";
+			//searchKey는 무조건 값이 들어지만, like 뒤의 ?에는 값이 안 들어갈 수도 있다.
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, productCategory);
+			rs = pstmt.executeQuery();
+
+			if(rs.next())
+				totalDataCount = rs.getInt(1);
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return totalDataCount;
+
+	}
 	
-	
+	//페이징 베스트상품 데이터 출력 - 카테고리별
+	public List<ProductDTO> getListsCategory(int start, int end, String productCategory) {
+
+		List<ProductDTO> lists = new ArrayList<ProductDTO>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			sql = "select * from (";
+			sql+= "select rownum rnum, data.* from (";
+			sql+= "select productid,productname,price,savefilename,productoption ";
+			sql+= "from product where fileCategory='list' and productCategory=? )data) ";
+			sql+= "where rnum>=? and rnum<=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, productCategory);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+
+			rs = pstmt.executeQuery();
+
+			while(rs.next()){
+
+				ProductDTO dto = new ProductDTO();
+
+				dto.setProductId(rs.getString("productid"));
+				dto.setSaveFileName(rs.getString("savefilename"));
+				dto.setProductName(rs.getString("productname"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setProductOption(rs.getString("productoption"));
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
 	
 	
 	

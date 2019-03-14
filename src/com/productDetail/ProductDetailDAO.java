@@ -310,7 +310,7 @@ public class ProductDetailDAO {
 			sql = "select * from (";
 			sql += "select rownum rnum, data.* from ( ";
 			sql += "select productId,productCategory,productName,productOption,state,price,to_char(productDate,'yyyy-mm-dd') productDate,amount,color,texture,season,originalName,saveFileName,filecategory ";
-			sql += "from product where " +searchKey+ " like ? order by productName, productId desc) data) ";
+			sql += "from product where " +searchKey+ " like ? order by productId desc) data) ";
 			sql += "where rnum >= ? and rnum <=? ";
 			
 			pstmt = conn.prepareStatement(sql);
