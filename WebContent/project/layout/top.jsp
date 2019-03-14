@@ -57,6 +57,18 @@
 
 </head>
 <body>
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			$('#slide').click(function() {
+				if ($("#bottom_menu:first").is(":hidden")) {
+					$("#bottom_menu").show("slow");
+				} else {
+					$("#bottom_menu").slideUp();
+				}
+			});
+		});
+	</script>
 
 
 	<div class="ap_wrapper">
@@ -104,17 +116,19 @@
 
 		<div class="gnb_area">
 			<div class="inner_wrap">
-				<button type="button" class="btn_category">카테고리</button>
+				<button type="button" class="btn_category" id="slide">카테고리</button>
 				<ul class="gnb">
 					<li><a href="<%=cp %>/product/listNew.do">신상품</a></li>
 					<li><a href="<%=cp %>/product/listBest.do">베스트</a></li>
-					<li><a href="">이벤트</a></li>
+					<li><a href="<%=cp%>/event/list.do">이벤트</a></li>
 					<li><a href="<%=cp %>/coupon/couponAllList.do">쿠폰/혜택</a></li>
 					<li><a href="">채널에뛰드</a></li>
 					<li><a href="">LOOKS</a></li>
 					<li><a href="">브랜드</a></li>
 				</ul>
 			</div>
+			
+						<%@ include file="./category.jsp"  %>
 		</div>
 
 		</header>

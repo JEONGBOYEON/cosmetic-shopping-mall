@@ -235,7 +235,7 @@ function changePrivateInfo(){
 									</div>
 								</dd>
 							</dl>
-							<dl>
+							<!-- <dl>
 								<dt>
 									<label for="user_email">E-mail</label>
 								</dt>
@@ -275,7 +275,7 @@ function changePrivateInfo(){
 											title="상세주소 입력" placeholder="상세주소를 입력해주세요."></span>
 									</div>
 								</dd>
-							</dl>
+							</dl> -->
 						</div>
 						<div class="form_btns">
 							<button class="btn_md_primary" onclick="changePrivateInfo()"
