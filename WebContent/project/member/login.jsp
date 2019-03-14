@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../layout/top.jsp"  %>
 
+<script src="../js/js.cookie.js"></script>
 <script type="text/javascript">
 function sendIt(){
 	
@@ -30,6 +31,7 @@ function sendIt(){
 	f.submit();  
 
 }
+
 </script>
 
 
@@ -59,7 +61,7 @@ function sendIt(){
 					<legend class="sr_only">로그인 정보 입력</legend>
 					<div class="join_info">
 						<span class="txt">2018년 11월 부터 아모레퍼시픽 뷰티포인트 회원으로 통합하여
-							운영됩니다.</span> <a href="/kr/ko/customer/joinInfo" class="btn_join">자세히
+							운영됩니다.</span> <a href="<%=cp %>/project/member/joinInfo.jsp" class="btn_join">자세히
 							보기</a>
 					</div>
 
