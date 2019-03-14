@@ -140,7 +140,7 @@
 		상품명
 		</td>
 		<td width="460" style="padding-left: 10px;">
-		<input value="${dto.productName}" type="text" name="productName" size="51" maxlength="100" class="boxTF">
+		<input value="${dto.productName}" type="text" name="productName"  maxlength="100" class="boxTF">
 		</td>
 	</tr>
 	<tr>
@@ -148,7 +148,7 @@
 		상품옵션
 		</td>
 		<td width="460" style="padding-left: 10px;">
-		<input type="text" name="productOption"  value="${dto.productOption}"size="51" maxlength="100" class="boxTF" >
+		<input type="text" name="productOption"  value="${dto.productOption}" maxlength="100" class="boxTF" >
 		</td>
 	</tr>
 	<tr>
@@ -173,7 +173,7 @@
 		상품가격
 		</td>
 		<td width="460" style="padding-left: 10px;">
-		<input type="text" name="price"  value="${dto.price}" size="51" maxlength="100" class="boxTF">
+		<input type="text" name="price"  value="${dto.price}" maxlength="100" class="boxTF">
 		</td>
 	</tr>
 	<tr>
@@ -262,25 +262,42 @@
 		<tr>
 			<td width="140" height="30" style="padding-left: 20px;">제품리스트사진	</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="file" name="productListImage" maxlength="100" size="36" class="boxTF"/>
+			<input type="file" name="productListImage" maxlength="100" class="boxTF"/>
 			</td>
 		</tr>
 	</c:if>
 	
 	<tr><td colspan="2" height="1" bgcolor="#dbdbdb" align="center"></td></tr>
-	<!-- 등록된 파일이 없을경우 파일등록창 활성화 -->
+	
+	<!-- 등록된 파일이 있을경우 파일이름 조회 -->
 	<c:set var="count" value="1" />
-		<c:forEach var="dto" items="${detailImagelists }">
-			<c:if test="${empty dto.originalName}">
-				<tr>
-					<td width="140" height="30" style="padding-left: 20px;">제품상세사진${count }</td>
-					<td width="460" style="padding-left: 10px;">
-					<input type="file" name="productDetailImage${count }" maxlength="100" size="36" class="boxTF"/>
-					<c:set var="count" value="${count+1 }" />
-					</td>
-				</tr>
-			</c:if>
+	<c:forEach var="dto" items="${detailImagelists }">
+		<c:if test="${empty dto.originalName}">
+			<tr>
+				<td width="140" height="30" style="padding-left: 20px;">제품상세사진${count }</td>
+				<td width="460" style="padding-left: 10px;">
+				<input type="file" name="productDetailImage${count }" maxlength="100" class="boxTF"/>
+				<c:set var="count" value="${count+1 }" />
+				</td>
+			</tr>
+		</c:if>
+	</c:forEach>
+	
+	<!-- 등록된 파일이 없을경우 파일등록창 활성화 -->
+	<c:if test="${!empty detailImagelists }">
+		<c:set var="count" value="1" />
+		<c:forEach begin="1" end="3" step="1">
+			<tr>
+				<td width="140" height="30" style="padding-left: 20px;">제품상세사진${count }</td>
+				<td width="460" style="padding-left: 10px;">
+				<input type="file" name="productDetailImage${count }" maxlength="100" class="boxTF"/>
+				<c:set var="count" value="${count+1 }" />
+				</td>
+			</tr>
 		</c:forEach>
+	</c:if>
+		
+		
 	<tr><td colspan="2" height="1" bgcolor="#dbdbdb" align="center"></td></tr>
 	<tr>
 		<td colspan="2" align="center">

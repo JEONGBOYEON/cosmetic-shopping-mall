@@ -36,7 +36,7 @@
 		}
 		f.productName.value = str;
 		
-		str = f.productOption.value;
+/* 		str = f.productOption.value;
 		str = str.trim();
 		if(!str){
 			alert("\n productOption을 입력하세요.");//공백제거후 내용이 없으면
@@ -44,7 +44,7 @@
 			return;
 		}
 		f.productOption.value = str;
-		
+ */		
 		str = f.price.value;
 		str = str.trim();
 		if(!str){
@@ -110,7 +110,7 @@
 			상품id
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="text" name="productId" size="51" maxlength="20" class="boxTF">
+			<input type="text" name="productId" maxlength="20" class="boxTF">
 			</td>
 		</tr>
 		<tr>
@@ -118,7 +118,7 @@
 			상품카테고리
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<select name="productCategory" style="width: 350px; height: 20px;" >
+			<select name="productCategory" style="width: 300px; height: 20px;" >
 	  			<option value="">카테고리 선택</option>
 	  			<c:forTokens var='item' items="아이,립,페이스,네일,스킨케어,팩/마스크,클렌징,바디/헤어,향수,화장소품" delims="," >
 					<option value="${item}" >${item}</option>
@@ -131,7 +131,7 @@
 			상품명
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="text" name="productName" size="51" maxlength="100" class="boxTF">
+			<input type="text" name="productName" maxlength="100" class="boxTF">
 			</td>
 		</tr>
 		<tr>
@@ -139,7 +139,7 @@
 			상품옵션
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="text" name="productOption" size="51" maxlength="100" class="boxTF" >
+			<input type="text" name="productOption" maxlength="100" class="boxTF" >
 			</td>
 		</tr>
 		<tr>
@@ -160,7 +160,7 @@
 			상품가격
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="text" name="price" size="51" maxlength="100" class="boxTF">
+			<input type="text" name="price" maxlength="100" class="boxTF">
 			</td>
 		</tr>
 		<tr>
@@ -209,7 +209,7 @@
 			리스트사진
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="file" name="productListImage" maxlength="100" size="36" class="boxTF"/>
+			<input type="file" name="productListImage" maxlength="100" class="boxTF"/>
 			메인 이미지
 			<input type="checkbox" name="fileCategory" value="" /> 
 			</td>
@@ -220,7 +220,7 @@
 			상세사진1
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="file" name="productDetailImage1" maxlength="100" size="36" class="boxTF"/>
+			<input type="file" name="productDetailImage1" maxlength="100" class="boxTF"/>
 			</td>
 		</tr>
 		<tr>
@@ -228,7 +228,7 @@
 			상세사진2
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="file" name="productDetailImage2" maxlength="100" size="36" class="boxTF"/>
+			<input type="file" name="productDetailImage2" maxlength="100" class="boxTF"/>
 			</td>
 		</tr>
 		<tr>
@@ -236,7 +236,7 @@
 			상세사진3
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="file" name="productDetailImage3" maxlength="100" size="36" class="boxTF"/>
+			<input type="file" name="productDetailImage3" maxlength="100" class="boxTF"/>
 			</td>
 		</tr>
 		<tr><td colspan="2" height="1" bgcolor="#dbdbdb" align="center"></td></tr>

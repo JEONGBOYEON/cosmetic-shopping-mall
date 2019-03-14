@@ -65,14 +65,14 @@ public class ProductDetailServlet extends HttpServlet {
 			f.mkdirs();
 		}
 
-if (uri.indexOf("detail.do") != -1) {
+		if (uri.indexOf("detail.do") != -1) {
 			
 			//상세페이지 / 상세페이지
 			String productId = req.getParameter("productId");
 			ProductDetailDTO dto = dao.getReadData(productId);
 			
 			if (dto == null) {
-				String productName = req.getParameter("productName");
+				String productName = URLDecoder.decode(req.getParameter("productName"), "UTF-8");
 				dto = dao.getReadData("productName",productName);
 			}
 			String productName = dto.getProductName();
@@ -228,7 +228,7 @@ if (uri.indexOf("detail.do") != -1) {
 			}
 			
 			int dataCount = dao.getDataCount(searchKey, searchValue);
-			int numPerPage = 10;
+			int numPerPage = 20;
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 			
 			if(currentPage>totalPage)
@@ -377,9 +377,13 @@ if (uri.indexOf("detail.do") != -1) {
 			dto.setTexture(mr.getParameter("texture"));
 			dto.setSeason(mr.getParameter("season"));
 			dto.setFileCategory(mr.getParameter("fileCategory"));
-			dao.updateData(dto);
+			if (mr.getFile("productListImage") != null) {
+				dto.setSaveFileName(mr.getFilesystemName("productListImage"));
+				dto.setOriginalName(mr.getOriginalFileName("productListImage"));
+				dto.setFileCategory(mr.getParameter("fileCategory"));
+			}
+			dao.updateData(dto);		
 			
-/*			
  			//첨부파일수정은 다시 작성
  			for (int i=1; i<=3; i++) {
 				String productDetailImage = "productDetailImage"+i;
@@ -393,7 +397,7 @@ if (uri.indexOf("detail.do") != -1) {
 					dao.insertDetailImage(detailDTO);
 				}
 			}
-*/
+
 			url = cp + "/pr/adminList.do?"+params;
 			resp.sendRedirect(url);
 			

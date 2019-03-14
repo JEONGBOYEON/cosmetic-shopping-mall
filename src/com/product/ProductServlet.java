@@ -140,6 +140,7 @@ public class ProductServlet extends HttpServlet{
 			
 			//옵션값 보내주기
 			List<String> options = new ArrayList<String>();
+
 			for (ProductDTO dto : lists){
 				options = dao.getOption(dto.getProductName());
 				dto.setOptionList(options);
@@ -154,6 +155,8 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("dataCount", dataCount);
 			req.setAttribute("totalPage", totalPage);
 			req.setAttribute("pageNum", pageNum);
+			
+			
 			
 			
 			url = "/project/listBest.jsp";

@@ -4,37 +4,45 @@
 <%@include file="./layout/top.jsp"  %>
 
 <script type="text/javascript">
-	function addCartItem(){
+	
+	function setCartItem(productName,productOption,price){
 		
-		f = document.detailForm;
-		//장바구니 추가
+		var cartProductName = productName;
+		var cartProductOption = productOption;
+		var cartPrice = price;
+		
+		document.getElementById("productName").value = cartProductName;
+		document.getElementById("productOption").value = cartProductOption;
+		document.getElementById("price").value = cartPrice;
+	}
+	
+	function sendCartSingleItem(productId,productName,price){
+		
+		var cartProductId = productId;
+		var cartProductName = productName;
+		var cartPrice = price;
+		
+		document.getElementById("productId").value = cartProductId;		
+		document.getElementById("productName").value = cartProductName;
+		document.getElementById("productOption").value = "single";
+		document.getElementById("price").value = cartPrice;
+		
+		sendCartItemFromList();
+	}
+	
+	function sendCartItemFromList(){
+		
+		var f = document.cartForm;
 		
 		str = f.productOption.value;
 		str = str.trim();
-		//옵션이 없는 단일상품이 아닌 경우
-		if(str=="single"){
-			
-			if(!str){
-				alert("\n productOption을 선택하세요.");//공백제거후 내용이 없으면
-				f.productOption.focus();
-				return;
-			}
-			f.productOption.value = str;
-	
-		}
-		
-		str = f.amount.value;
-		str = str.trim();
-		if(str==0){
-			alert("\n 수량을 선택하세요.");//공백제거후 내용이 없으면
-			f.amount.focus();
+		if(!str){
+			alert("\n productOption을 선택하세요.");//공백제거후 내용이 없으면
 			return;
 		}
-		f.amount.value = str;
 		
-		alert("고객님! 해당 상품이 장바구니에 담겼습니다!");
-	
-		f.action = "<%=cp %>/cart/cartAdd_ok.do";
+		f.action = "<%=cp %>/cart/cartAddFromList_ok.do";
+		
 		f.submit();
 	}
 
@@ -86,6 +94,7 @@
 			<div class="pagination"></div>
 
 			<!-- 보연 시작 -->
+			<form name="listForm">
 			<table width="1200">
 				<c:set var="i" value="0" />
 				<c:set var="count" value="1" />
@@ -133,19 +142,14 @@
 							<c:choose>
 								<c:when test="${!empty dto.productOption }">
 								<td>
-									<select style="width: 280px; height: 40px;" name="productOption">
-										<option>옵션선택</option>
+									<select style="width: 280px; height: 40px;" id="selectOption" >
+										<option >옵션선택</option>
 										<c:forEach var="option" items="${dto.optionList}">
-											<option value="${option }">${option }</option>
+											<option value="${option }" onclick="setCartItem('${dto.productName}','${option}',${dto.price});">${option }</option>
 										</c:forEach>
 									</select>
 								</td>
-								</c:when>
-								<c:when test="${empty dto.productOption }">
-								<td>
-									<input type="hidden" name="productOption" value="single">
-								</td>
-								</c:when>
+								</c:when>							
 							</c:choose>								
 							</tr>
 
@@ -157,18 +161,20 @@
 								<td>
 									<table>
 										<tr>
-											<td width="230">
+											<td width="250">
 												<font style="font-size: 20px; color:#1C1C1C; ">
 												<fmt:formatNumber value="${dto.price}" groupingUsed="true"/>원</font>
 											</td>
 											<td>
-												<a href="../project/review.jsp">
-													<img alt="review" src="../project/image/review.PNG"/>&nbsp;&nbsp;&nbsp;
-												</a>
-												<input type="hidden" name="cart" value="<%=cp %>/cart/cartAdd_ok.do?amount=1&productName=${dto.productName}&price=${dto.price}">
-												<a href="javascript:addCartItemFromItem();">
-													<img alt="basket" src="../project/image/basket.PNG"/>
-												</a>
+												<!-- 장바구니 -->
+												<c:choose>
+													<c:when test="${empty dto.productOption }">
+														<img alt="basket" src="../project/image/basket.PNG" onclick="sendCartSingleItem('${dto.productId}','${dto.productName}',${dto.price});"/>
+													</c:when>
+													<c:when test="${!empty dto.productOption }">
+														<img alt="basket" src="../project/image/basket.PNG" onclick="sendCartItemFromList();"/>
+													</c:when>
+												</c:choose>
 											</td>										
 										</tr>
 									</table>
@@ -211,6 +217,7 @@
 				</tr>
 
 			</table>
+			</form>
 			<!-- 보연 끝 -->
 
 		</div>
@@ -218,6 +225,15 @@
 	</div>
 	<!-- // page contents -->
 </div>
+
+<form name="cartForm">
+	<input type="hidden" value="" readonly="readonly" id="productId" name="productId" ><br/>
+	<input type="hidden" value="" readonly="readonly" id="productName" name="productName" ><br/>
+	<input type="hidden" value="" readonly="readonly" id="productOption" name="productOption" ><br/>	
+	<input type="hidden" value="" readonly="readonly" id="price" name="price"><br/>
+	<input type="hidden" value="1" readonly="readonly" id="amount" name="amount"><br/>
+</form>
+
 
 	
 <%@include file="./layout/footer.jsp"  %>

@@ -10,6 +10,7 @@ public class cartDTO {
 	private String saveFileName;
 	private int amount;
 	private int price;
+	private String orderSelect;
 	
 	public String getUserId() {
 		return userId;
@@ -58,6 +59,12 @@ public class cartDTO {
 	}
 	public void setSaveFileName(String saveFileName) {
 		this.saveFileName = saveFileName;
+	}
+	public String getOrderSelect() {
+		return orderSelect;
+	}
+	public void setOrderSelect(String orderSelect) {
+		this.orderSelect = orderSelect;
 	}
 	
 	

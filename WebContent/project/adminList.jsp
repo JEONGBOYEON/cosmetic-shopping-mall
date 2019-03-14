@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="../project/layout/top.jsp"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.net.URLEncoder" %>
 
 <script type="text/javascript">
@@ -59,7 +60,7 @@
 					<td >${dto.productName }</td>
 					<td >${dto.productOption }</td>
 					<td >${dto.state }</td>
-					<td >${dto.price }</td>	
+					<td ><fmt:formatNumber value="${dto.price}" groupingUsed="true"/></td>	
 					<td >${dto.productDate }</td>				
 					<td >${dto.color }</td>
 					<td >${dto.texture }</td>

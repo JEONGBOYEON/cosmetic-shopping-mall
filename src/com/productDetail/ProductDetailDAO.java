@@ -144,6 +144,7 @@ public class ProductDetailDAO {
 	        pstmt.setString(4, dto.getOriginalName());
 	        pstmt.setString(5, dto.getSaveFileName());
 	        pstmt.executeUpdate();
+	        
 			pstmt.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());

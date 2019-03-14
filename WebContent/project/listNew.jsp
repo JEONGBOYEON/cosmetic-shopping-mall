@@ -1,6 +1,52 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="./layout/top.jsp"  %>
+
+<script type="text/javascript">
+	
+	function setCartItem(productName,productOption,price){
+		
+		var cartProductName = productName;
+		var cartProductOption = productOption;
+		var cartPrice = price;
+		
+		document.getElementById("productName").value = cartProductName;
+		document.getElementById("productOption").value = cartProductOption;
+		document.getElementById("price").value = cartPrice;
+	}
+	
+	function sendCartSingleItem(productId,productName,price){
+		
+		var cartProductId = productId;
+		var cartProductName = productName;
+		var cartPrice = price;
+		
+		document.getElementById("productId").value = cartProductId;		
+		document.getElementById("productName").value = cartProductName;
+		document.getElementById("productOption").value = "single";
+		document.getElementById("price").value = cartPrice;
+		
+		sendCartItemFromList();
+	}
+	
+	function sendCartItemFromList(){
+		
+		var f = document.cartForm;
+		
+		str = f.productOption.value;
+		str = str.trim();
+		if(!str){
+			alert("\n productOption을 선택하세요.");//공백제거후 내용이 없으면
+			return;
+		}
+		
+		f.action = "<%=cp %>/cart/cartAddFromList_ok.do";
+		
+		f.submit();
+	}
+
+</script>
 
 <div id="ap_container" class="ap_container">
 	<!-- page title -->
@@ -62,18 +108,22 @@
 							<tr height="20">
 								<td>&nbsp;</td>
 							</tr>
+							<!-- 상품옵션선택 -->
 							<tr height="40">
+							<c:choose>
+								<c:when test="${!empty dto.productOption }">
 								<td>
-								<c:if test="${!empty dto.productOption }">
-										<select style="width: 280px; height: 40px;">
-											<option>옵션선택</option>
-											<c:forEach var="option" items="${dto.optionList}">
-												<option>${option }</option>
-											</c:forEach>
-										</select>
-								</c:if>
+									<select style="width: 280px; height: 40px;" id="selectOption" >
+										<option >옵션선택</option>
+										<c:forEach var="option" items="${dto.optionList}">
+											<option value="${option }" onclick="setCartItem('${dto.productName}','${option}',${dto.price});">${option }</option>
+										</c:forEach>
+									</select>
 								</td>
+								</c:when>							
+							</c:choose>								
 							</tr>
+
 
 							<tr height="1">
 								<td style="border-top: 1px dashed #d6d6d6;"></td>
@@ -83,16 +133,21 @@
 								<td>
 									<table>
 										<tr>
-											<td width="230">
-												<font style="font-size: 20px; color:#1C1C1C; ">${dto.price }원</font>
+											<td width="250">
+												<font style="font-size: 20px; color:#1C1C1C; ">
+												<fmt:formatNumber value="${dto.price}" groupingUsed="true"/>원
+												</font>
 											</td>
 											<td>
-												<a href="../project/review.jsp">
-													<img alt="review" src="../project/image/review.PNG"/>&nbsp;&nbsp;&nbsp;
-												</a>
-												<a href="../project/basket.jsp">
-													<img alt="basket" src="../project/image/basket.PNG"/>
-												</a>
+												<!-- 장바구니 -->
+												<c:choose>
+													<c:when test="${empty dto.productOption }">
+														<img alt="basket" src="../project/image/basket.PNG" onclick="sendCartSingleItem('${dto.productId}','${dto.productName}',${dto.price});"/>
+													</c:when>
+													<c:when test="${!empty dto.productOption }">
+														<img alt="basket" src="../project/image/basket.PNG" onclick="sendCartItemFromList();"/>
+													</c:when>
+												</c:choose>
 											</td>										
 										</tr>
 									</table>
@@ -142,6 +197,14 @@
 	</div>
 	<!-- // page contents -->
 </div>
+
+<form name="cartForm">
+	<input type="hidden" value="" readonly="readonly" id="productId" name="productId" ><br/>
+	<input type="hidden" value="" readonly="readonly" id="productName" name="productName" ><br/>
+	<input type="hidden" value="" readonly="readonly" id="productOption" name="productOption" ><br/>	
+	<input type="hidden" value="" readonly="readonly" id="price" name="price"><br/>
+	<input type="hidden" value="1" readonly="readonly" id="amount" name="amount"><br/>
+</form>
 
 	
 <%@include file="./layout/footer.jsp"  %>

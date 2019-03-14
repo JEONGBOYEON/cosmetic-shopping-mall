@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class cartDAO {
 
 	private Connection conn = null;
@@ -14,7 +15,7 @@ public class cartDAO {
 		this.conn = conn;
 	}
 	
-	//장바구니 총상품개수
+	//장바구니 총상품개수(사용자별)
 	public int getTotalItemCount(String userId){
 		
 		int maxNum = 0;
@@ -40,7 +41,34 @@ public class cartDAO {
 		return maxNum;
 	}
 	
-	//장바구니 총상품개수
+	//장바구니 총상품개수(사용자별)
+	public int getTotalItemCountYes(String userId){
+		
+		int maxNum = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			sql = "select sum(amount) from cart where userId = ? and orderSelect='yes'" ;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				maxNum = rs.getInt(1);
+			}
+			rs.close();
+			pstmt.close();
+		
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return maxNum;
+	}
+	
+	
+	//장바구니 총상품개수(동일상품)
 	public int getCartItemCount(String userId, String productId){
 		
 		int maxNum = 0;
@@ -49,7 +77,7 @@ public class cartDAO {
 		String sql;
 		
 		try {
-			sql = "select amount from cart where userId = ? and productId=? " ;
+			sql = "select amount from cart where userId = ? and productId=? and orderSelect='yes'" ;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, productId);
@@ -76,7 +104,7 @@ public class cartDAO {
 		String sql;
 		
 		try {
-			sql = "select sum(amount*price) from cart where userId = ? " ;
+			sql = "select sum(amount*price) from cart where userId = ? and orderSelect='yes'" ;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
@@ -127,7 +155,7 @@ public class cartDAO {
 		String sql;
 
 		try {
-			sql = "select userId,a.productId productId,productName,productOption,a.amount amount,a.price price,originalName, saveFileName ";
+			sql = "select userId,a.productId productId,productName,productOption,a.amount amount,a.price price,originalName, saveFileName,orderSelect ";
 			sql += "from cart a,product b where a.productId=b.productId ";
 			sql += "and userId=? order by productName";
 
@@ -146,6 +174,7 @@ public class cartDAO {
 				dto.setProductOption(rs.getString("productOption"));
 				dto.setAmount(rs.getInt("amount"));
 				dto.setPrice(rs.getInt("price"));
+				dto.setOrderSelect(rs.getString("orderSelect"));
 				lists.add(dto);
 			}
 			rs.close();
@@ -254,7 +283,7 @@ public class cartDAO {
 		return result;
 	}
 	
-	//
+	//장바구니 동일상품 등록여부검색
 	public int searchBeforeProductId(String productId, String userId) {
 		
 		PreparedStatement pstmt = null;
@@ -285,4 +314,81 @@ public class cartDAO {
 		return result;
 	}
 	
+	public cartDTO setUpdateData(String productId, String userId){
+		
+		cartDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		try {
+			
+			sql = "update cart set amount=?,price=? ";
+			sql += "where productId = ? and userId = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, productId);
+			pstmt.setString(2, userId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto = new cartDTO();
+				dto.setAmount(rs.getInt("amount"));
+				dto.setPrice(rs.getInt("price"));
+				//dto.setProductId(rs.getInt("productId"));
+				//dto.setPrice(rs.getInt("price"));
+			}
+			
+			rs.close();
+			pstmt.close();
+		
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
+	}
+	
+	//주문하지않음 orderSelect = 'no'
+	public void changeOrderSelectNo(String productId, String userId){
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			
+			sql = "update cart set orderSelect='no' where productId=? and userId=?"; 
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, productId);
+			pstmt.setString(2, userId);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	
+	//주문진행 orderSelect = 'yes'
+	public void changeOrderSelectYes(String productId, String userId){
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			
+			sql = "update cart set orderSelect='yes' where productId=? and userId=?"; 
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, productId);
+			pstmt.setString(2, userId);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
 }

@@ -98,7 +98,18 @@ ul.tabs li{
 		  })
 		 
 		})
+	
+	$(function(){  
 		
+		if (location.hash == "#tap-2"){         
+		
+			$('ul.tabs li').find('li').eq(1).addClass('').siblings().removeClass();         
+			$('ul.tabs li').find('#tap-2').addClass('on current').siblings().removeClass('on current');     
+		
+		}
+	
+	})
+	
 </script>
 <div class="ap_contents product detail" >
 	<form method="post" name="detailForm">
@@ -180,17 +191,18 @@ ul.tabs li{
 						<tr height="50">
 							<td style="padding: 5px 10px;border: 1px solid #d9d9d9; margin-top: 2px;">
 							<span style="float: left; padding: 5px 0;">총 합계금액</span>
-							<span style="float: right; padding: 5px 0;" >
-								<input type="text" readonly="readonly" id="totalPrice" value="" style="border: 0;">
-							</span>
+							<div style="position:relative; padding-left:200px; float: right; padding: 5px 0;">
+								<input type="text" readonly="readonly" id="totalPrice" size="10" value="" style="border: 0;">
+							</div>
+								
 							</td>
 						</tr>
 						<tr height="50" >
 							<td style="font-size: 12pt;">색상:${dto.color} 텍스쳐:${dto.texture} 추천계절 ${dto.season}</td>
 						</tr>	
 						<tr><td bgcolor="grey" height="2"></td></tr>
-						</table>
-						
+						<tr>
+							<td>
 							<div class="prd_etc_info">
 								<div class="prd_etc_info_left">
 									<dl>
@@ -209,11 +221,20 @@ ul.tabs li{
 									</dl>
 								</div>
 							</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
 							<!-- 구매버튼,장바구니버튼 -->
 							<div class="purchase_button_set">
 								<span><button class="btn_lg_bordered emp btn_buy_now" type="button" >바로구매</button></span>
 								<span><button class="btn_lg_primary btn_basket" type="button" onclick="addCartItem();">장바구니 담기</button></span>
 							</div>
+							</td>
+						</tr>						
+						<tr><td bgcolor="grey" height="2"></td></tr>
+						</table>
+
 							
 						</div> 
 	

@@ -43,7 +43,7 @@ public class LoginFilter implements Filter{
 				chain.doFilter(request, response);
 			}else{
 				//로그인 하지 않았으므로 로그인페이지로 포워드
-				RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/member/login.do");
 				rd.forward(request, response);
 			}
 		}
