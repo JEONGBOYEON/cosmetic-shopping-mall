@@ -116,34 +116,6 @@
 				</dl>
 			</div>
 		</div>
-
-
-		<div class="my_color_finder">
-			<h3 class="h_title sub">
-				<strong>마이 컬러파인더</strong>
-			</h3>
-			<!-- 측정값이 있는 경우 -->
-
-			<!-- end:  측정값이 있는 경우 -->
-			<!-- 측정값이 없는 경우 -->
-
-			<div class="panel notice">
-				<i class="ico"></i>
-				<p class="text font_lg">
-					<span>피부 측정 데이터가 없습니다.<br>가까운 에뛰드 하우스 매장에서 무료로 피부톤 측정을
-						받으세요~
-					</span>
-				</p>
-				<div class="page_btns">
-					<a
-						href="/kr/ko/display/store_location?displayMenuId=store_location"
-						class="btn_lg_big_neutral">가까운 매장 찾기</a>
-				</div>
-			</div>
-
-
-
-	</div>
 	
 	
 	

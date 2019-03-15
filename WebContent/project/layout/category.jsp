@@ -51,7 +51,7 @@
 							<div class="ix-list-viewport">
 								<ul class="ix-list-items">
 									<li class="ix-list-item"><a
-										href="https://m.etudehouse.com/kr/ko/display/event_detail?planDisplaySn=1524">
+										href="#none">
 										<img alt="배너 내용"
 										src="https://images-kr.etudehouse.com/fileupload/display/EH01/prod_types/ko/2019/02/28/배너카데고리-롤링배너_425_390_1551339488081.jpg"></a></li>
 								</ul>
