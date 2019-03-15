@@ -55,6 +55,46 @@
 	<url-pattern>/cart/*</url-pattern>
 </filter-mapping>
 
+<!-- 로그인 필터(주문) -->
+<filter>
+	<filter-name>orderFilterLogin</filter-name>
+	<filter-class>com.filter.LoginFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>orderFilterLogin</filter-name>
+	<url-pattern>/order/*</url-pattern>
+</filter-mapping>
+
+<!-- 로그인 필터(배송지) -->
+<filter>
+	<filter-name>destFilterLogin</filter-name>
+	<filter-class>com.filter.LoginFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>destFilterLogin</filter-name>
+	<url-pattern>/dest/*</url-pattern>
+</filter-mapping>
+
+<!-- 로그인 필터(배송지) -->
+<filter>
+	<filter-name>shopFilterLogin</filter-name>
+	<filter-class>com.filter.LoginFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>shopFilterLogin</filter-name>
+	<url-pattern>/shop/*</url-pattern>
+</filter-mapping>
+
+<!-- 로그인 필터(리뷰) -->
+<filter>
+	<filter-name>myReviewFilterLogin</filter-name>
+	<filter-class>com.filter.LoginFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>myReviewFilterLogin</filter-name>
+	<url-pattern>/review/*</url-pattern>
+</filter-mapping>
+
 <!-- 
 <filter>
 	<filter-name>loginFilter1</filter-name>
