@@ -5,6 +5,7 @@ public class ReviewDTO {
 	private String userId;
 	private String productId;
 	private String productName;
+	private String productName2;
 	private String productOption;
 	private int rate;
 	private String subject;
@@ -33,6 +34,13 @@ public class ReviewDTO {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+	
+	public String getProductName2() {
+		return productName2;
+	}
+	public void setProductName2(String productName2) {
+		this.productName2 = productName2;
 	}
 	
 	public String getProductOption() {

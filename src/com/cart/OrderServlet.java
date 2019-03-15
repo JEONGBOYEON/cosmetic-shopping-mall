@@ -1,6 +1,8 @@
 package com.cart;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.Iterator;
 import java.util.List;
@@ -162,10 +164,69 @@ public class OrderServlet extends HttpServlet {
 				
 			//사용자 주문리스트 기간별 가져오기
 			List<OrderDTO> userOrder7day = dao.getUserOrder7dayLists(info.getUserId());
+			Iterator<OrderDTO> userOrder7dayit = userOrder7day.iterator();
+			while(userOrder7dayit.hasNext()){
+				OrderDTO dto = userOrder7dayit.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<OrderDTO> userOrder7dayit2 = userOrder7day.iterator();	
+			while(userOrder7dayit2.hasNext()){
+				OrderDTO dto = userOrder7dayit2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
+			
 			List<OrderDTO> userOrder1month = dao.getUserOrder1monthLists(info.getUserId());
+			Iterator<OrderDTO> userOrder1monthit = userOrder1month.iterator();
+			while(userOrder1monthit.hasNext()){
+				OrderDTO dto = userOrder1monthit.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<OrderDTO> userOrder1monthit2 = userOrder1month.iterator();	
+			while(userOrder1monthit2.hasNext()){
+				OrderDTO dto = userOrder1monthit2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
+			
 			List<OrderDTO> userOrder3month = dao.getUserOrder3monthLists(info.getUserId());
+			Iterator<OrderDTO> userOrder3monthit = userOrder3month.iterator();
+			while(userOrder3monthit.hasNext()){
+				OrderDTO dto = userOrder3monthit.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<OrderDTO> userOrder3monthit2 = userOrder3month.iterator();	
+			while(userOrder3monthit2.hasNext()){
+				OrderDTO dto = userOrder3monthit2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
+			
 			List<OrderDTO> userOrder6month = dao.getUserOrder6monthLists(info.getUserId());
+			Iterator<OrderDTO> userOrder6monthit = userOrder6month.iterator();
+			while(userOrder6monthit.hasNext()){
+				OrderDTO dto = userOrder6monthit.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<OrderDTO> userOrder6monthit2 = userOrder6month.iterator();	
+			while(userOrder6monthit2.hasNext()){
+				OrderDTO dto = userOrder6monthit2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
+			
 			List<OrderDTO> userOrder1year = dao.getUserOrder1yearLists(info.getUserId());
+			Iterator<OrderDTO> userOrder1yearit = userOrder1year.iterator();
+			while(userOrder1yearit.hasNext()){
+				OrderDTO dto = userOrder1yearit.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<OrderDTO> userOrder1yearit2 = userOrder1year.iterator();	
+			while(userOrder1yearit2.hasNext()){
+				OrderDTO dto = userOrder1yearit2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
 			
 			req.setAttribute("userOrder7day", userOrder7day);
 			req.setAttribute("userOrder1month", userOrder1month);

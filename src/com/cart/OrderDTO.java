@@ -7,6 +7,7 @@ public class OrderDTO {
 	private String userId;
 	private String productId;
 	private String productName;
+	private String productName2;
 	private int zip;
 	private String addr1;
 	private String addr2;
@@ -51,6 +52,13 @@ public class OrderDTO {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+	
+	public String getProductName2() {
+		return productName2;
+	}
+	public void setProductName2(String productName2) {
+		this.productName2 = productName2;
 	}
 	
 	public int getZip() {

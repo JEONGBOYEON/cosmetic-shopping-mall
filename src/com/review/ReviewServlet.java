@@ -2,7 +2,10 @@ package com.review;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Connection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -86,6 +89,17 @@ public class ReviewServlet extends HttpServlet{
 			int end = currentPage*numPerPage;
 			
 			List<ReviewDTO> lists = dao.getLists(start, end, info.getUserId(),"yes");
+			Iterator<ReviewDTO> it = lists.iterator();
+			while(it.hasNext()){
+				ReviewDTO dto = it.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<ReviewDTO> it2 = lists.iterator();	
+			while(it2.hasNext()){
+				ReviewDTO dto = it2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
 			
 			String listUrl = cp + "/review/list.do";
 			
@@ -114,8 +128,8 @@ public class ReviewServlet extends HttpServlet{
 				currentPage = Integer.parseInt(pageNum);
 			
 			//int dataCount = dao.getDataCount(info.getUserId());
-			int dataCount_yes = dao.getDataCount("rin0724","yes");
-			int dataCount_no = dao.getDataCount("rin0724", "no");
+			int dataCount_yes = dao.getDataCount(info.getUserId(),"yes");
+			int dataCount_no = dao.getDataCount(info.getUserId(), "no");
 			
 			int numPerPage = 5;
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount_no);
@@ -127,6 +141,17 @@ public class ReviewServlet extends HttpServlet{
 			int end = currentPage*numPerPage;
 			
 			List<ReviewDTO> lists = dao.getLists(start, end, info.getUserId(),"no");
+			Iterator<ReviewDTO> it = lists.iterator();
+			while(it.hasNext()){
+				ReviewDTO dto = it.next();
+				dto.setProductName2(URLDecoder.decode(dto.getProductName(),"UTF-8"));
+			}
+			
+			Iterator<ReviewDTO> it2 = lists.iterator();	
+			while(it2.hasNext()){
+				ReviewDTO dto = it2.next();
+				dto.setProductName(URLEncoder.encode(dto.getProductName(),"UTF-8")); 
+			}
 			
 			String listUrl = cp + "/review/posibleList.do";
 			
