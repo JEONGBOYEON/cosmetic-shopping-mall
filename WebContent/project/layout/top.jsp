@@ -107,7 +107,7 @@
 				<li><a href="#none" class="history">히스토리</a></li>
 			</ul>
 			<h1 class="logo">
-				<a href="../project/main.jsp">
+				<a href="../product/main.do">
 					<img alt="ETUDEHOUSE" src="<%=cp %>/project/image/img_logo.png"/>
 				</a>
 			</h1>
@@ -115,16 +115,13 @@
 
 
 		<div class="gnb_area">
-			<div class="inner_wrap">
+			<div class="inner_wrap" style="font-size: 13pt;">
 				<button type="button" class="btn_category" id="slide">카테고리</button>
 				<ul class="gnb">
 					<li><a href="<%=cp %>/product/listNew.do">신상품</a></li>
 					<li><a href="<%=cp %>/product/listBest.do">베스트</a></li>
 					<li><a href="<%=cp%>/event/list.do">이벤트</a></li>
 					<li><a href="<%=cp %>/coupon/couponAllList.do">쿠폰/혜택</a></li>
-					<li><a href="">채널에뛰드</a></li>
-					<li><a href="">LOOKS</a></li>
-					<li><a href="">브랜드</a></li>
 				</ul>
 			</div>
 			

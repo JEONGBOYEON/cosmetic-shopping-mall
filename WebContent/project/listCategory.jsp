@@ -205,9 +205,9 @@
 
 				</c:forEach>
 
-				<c:if test="${j!=1 }">
+				<c:if test="${j!=2 }">
 					<c:forEach begin="${j }" end="1" step="1">
-						<td width="220"></td>
+						<td width="620"></td>
 						<c:set var="j" value="${j+1 }" />
 					</c:forEach>
 					</tr>

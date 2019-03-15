@@ -72,7 +72,7 @@ public class ProductServlet extends HttpServlet{
 
 			int dataCount = dao.getDataCount();
 			
-			int numPerPage = 4;
+			int numPerPage = 6;
 			int totalPage = myutil.getPageCount(numPerPage, dataCount);
 			
 			if(currentPage>totalPage)
@@ -123,7 +123,7 @@ public class ProductServlet extends HttpServlet{
 
 			int dataCount = dao.getDataCount();
 			
-			int numPerPage = 20;
+			int numPerPage = 10;
 			int totalPage = myutil.getPageCount(numPerPage, dataCount);
 			
 			if(currentPage>totalPage)
@@ -221,6 +221,19 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("pageNum", pageNum);
 			
 			url = "/project/listCategory.jsp";
+			forward(req,resp,url);
+			
+		}else if(uri.indexOf("main.do")!=-1){
+			
+			List<ProductDTO> lists = dao.getList();
+			req.setAttribute("lists", lists);
+
+			String imagePath = cp + "/pds/imageFile";
+			req.setAttribute("imagePath", imagePath);
+			
+			
+			
+			url = "/project/main.jsp";
 			forward(req,resp,url);
 			
 		}

@@ -267,7 +267,6 @@ public class ProductDAO {
 	
 	
 	
-/*
 
 	//전체 출력
 	public List<ProductDTO> getList(){
@@ -281,7 +280,7 @@ public class ProductDAO {
 		try {
 
 			//product테이블에서 정보 가져오기
-			sql = "select productid,productname,price,savefilename,productoption from product where fileCategory='list'";
+			sql = "select productid,productname,price,savefilename,productoption from product where fileCategory='list' order by productdate";
 
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -309,6 +308,5 @@ public class ProductDAO {
 		return lists;
 	}
 
-*/
 	
 }

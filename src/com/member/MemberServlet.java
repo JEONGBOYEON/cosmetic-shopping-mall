@@ -98,7 +98,7 @@ public class MemberServlet extends HttpServlet {
 			//CustomInfo안쓰고 MemberDTO 사용!
 			session.setAttribute("customInfo", dto);
 			
-			url=cp+"/project/main.jsp";
+			url=cp+"/product/main.do";
 			resp.sendRedirect(url);				
 		}else if(uri.indexOf("mypage.do")!=-1){
 
@@ -118,7 +118,7 @@ public class MemberServlet extends HttpServlet {
 			session.removeAttribute("customInfo");
 			session.invalidate();//변수도 지움
 			
-			url=cp+"/project/main.jsp";
+			url=cp+"/product/main.do";
 			resp.sendRedirect(url);
 		}else if(uri.indexOf("searchid.do")!=-1){//아이디 찾기
 			
