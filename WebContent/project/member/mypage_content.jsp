@@ -79,7 +79,7 @@
 
 				<dl class="pinkmoney">
 					<dt>
-						<span>전가영</span> 님의 핑크머니입니다.
+						<span>${sessionScope.customInfo.userName }</span> 님의 핑크머니입니다.
 					</dt>
 					<dd>
 						<a href="/kr/ko/my/page/myPinkMoney" class="link_pinkmoney">내역보기</a>
