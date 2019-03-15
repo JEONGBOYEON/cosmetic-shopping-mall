@@ -204,8 +204,6 @@ public class CouponServlet extends HttpServlet{
 			
 			List<MyCouponDTO> lists = dao.couponGetLists(info.getUserId());
 			
-
-
 			//날짜비교
 			SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
 			long now = System.currentTimeMillis();

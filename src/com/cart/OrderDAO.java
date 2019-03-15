@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coupon.CouponDTO;
 import com.destination.DestinationDTO;
 
 public class OrderDAO {
@@ -180,6 +181,52 @@ public class OrderDAO {
 		
 	}
 	
+	//사용가능한 쿠폰 정보 가져오기
+	public List<CouponDTO> getUserCoupon(String userId,int totalPrice){
+		
+		List<CouponDTO> lists = new ArrayList<CouponDTO>();
+		
+		CouponDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			
+			sql = "select userId,issueDate,coupon.couponKey couponKey,couponName,couponScore,discount,couponStartDay,couponEndDay,couponGrade,used ";
+			sql+= "from coupon,issue ";
+			sql+= "where issue.couponKey = coupon.couponKey ";
+			sql+= "and userId=? and used='N' and ?>=couponScore";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, totalPrice);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				dto = new CouponDTO();
+				
+				dto.setCouponKey(rs.getInt("couponKey"));
+				dto.setCouponName(rs.getString("couponName"));
+				dto.setDiscount(rs.getInt("discount"));
+				
+				lists.add(dto);
+			}
+			
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return lists;
+		
+	} 
+	
 	//num의 max값 구하기
 	public int getMaxNum(){
 		
@@ -264,6 +311,34 @@ public class OrderDAO {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+	}
+	
+	//주문 성공시 issue테이블에 update
+	public int useCouponUpdate(int couponKey,String userId){
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			
+			sql = "update issue set used='Y' where userId=? and couponKey=? ";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1,userId);
+			pstmt.setInt(2,couponKey);
+			
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 		
 	}
 	

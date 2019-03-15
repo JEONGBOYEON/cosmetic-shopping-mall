@@ -32,6 +32,16 @@
 		
 	}
 	
+	function sendMain() {
+		
+		var f = document.sendListForm;
+		
+		f.action = "<%=cp %>/product/main.do";
+		
+		f.submit();
+		
+	}
+	
 </script>
 
 
@@ -157,7 +167,7 @@
 	<!-- 버튼 -->
 	<form name="sendListForm">
 	<div class="page_btns">
-		<input value="계속 쇼핑하기" type="button" class="btn_lg_bordered" id="btnMain" onclick="<%=cp %>/project/main.jsp">
+		<input value="계속 쇼핑하기" type="button" class="btn_lg_bordered" id="btnMain" onclick="sendMain();">
 		<input type="button" class="btn_lg_primary" id="btnCheckOrder" onclick="sendList();" value="주문결제하기"> 
 	</div>
 	</form>

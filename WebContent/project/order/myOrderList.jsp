@@ -29,6 +29,10 @@ ul.tabs li button{
 	border-right: gray solid 1px;
 }
 
+.current {
+	background-color: #FFFFFF;
+} 
+
 
 </style>
 

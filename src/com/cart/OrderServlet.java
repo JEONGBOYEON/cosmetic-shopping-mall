@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.coupon.CouponDAO;
+import com.coupon.CouponDTO;
+import com.coupon.MyCouponDTO;
 import com.destination.DestinationDTO;
 import com.member.MemberDTO;
 import com.util.DBCPConn;
@@ -40,6 +46,7 @@ public class OrderServlet extends HttpServlet {
 		
 		Connection conn = DBCPConn.getConnection();
 		OrderDAO dao = new OrderDAO(conn);
+		CouponDAO dao2 = new CouponDAO(conn);
 
 		String cp = req.getContextPath();
 		String uri = req.getRequestURI();
@@ -71,6 +78,53 @@ public class OrderServlet extends HttpServlet {
 				totalAmount += dto.getAmount();
 			}
 			
+			//만표쿠폰 변경하기---------------------------------------------------------------------------
+			List<MyCouponDTO> lists = dao2.couponGetLists(info.getUserId());
+			
+
+
+			//날짜비교
+			SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+			long now = System.currentTimeMillis();
+			Date date = new Date(now);
+			//현재날짜
+		    String strDate = dateFormat.format(date);
+		    Date date1 = null;
+		    
+		    //날짜확인해서 만기인지 아닌지 넣어주기(만기이면 used에 'M'넣기)
+		    //date1이 만기날짜
+		    //date2가 현재날짜
+		    //만기날짜가 현재날짜보다 이후이면 true = 아직 만기가 안됨
+			Iterator<MyCouponDTO> it = lists.iterator();
+			
+	        while (it.hasNext()){
+
+	        	MyCouponDTO dto = it.next();
+
+		        try {
+					date1 = dateFormat.parse(dto.getCouponEndDate());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        
+		        Date date2 = null;
+				try {
+					date2 = dateFormat.parse(strDate);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        boolean re = date1.after(date2);
+		        
+		        if(re!=true){
+		        	dao2.couponInsertM(dto.getCouponKey(),info.getUserId());
+		        }
+	        }
+
+			//사용 가능한 쿠폰 정보 가져오기
+			List<CouponDTO> couponList = dao.getUserCoupon(info.getUserId(), totalPrice);
+			
 			req.setAttribute("destDto", destDto);
 			req.setAttribute("orderList", orderList);
 			req.setAttribute("totalOrderCount", totalOrderCount);
@@ -78,6 +132,7 @@ public class OrderServlet extends HttpServlet {
 			req.setAttribute("totalPrice", totalPrice);
 			req.setAttribute("totalAmount", totalAmount);
 			req.setAttribute("memberPoint", memberPoint);
+			req.setAttribute("couponList", couponList);
 			
 			url = "/project/order/reception.jsp";
 			forward(req, resp, url);
@@ -90,6 +145,11 @@ public class OrderServlet extends HttpServlet {
 			
 			String imagePath = cp + "/pds/imageFile";
 			String purchaserEmailAddress = req.getParameter("purchaserEmailAddress");
+			String totalOrderPrice = req.getParameter("totalOrderPrice");
+			String totalOrderPoint = req.getParameter("totalOrderPoint");
+			
+			int useCouponKey = Integer.parseInt(req.getParameter("useCouponKey"));
+
 			
 			//배송지 정보
 			DestinationDTO destDto = dao.getOrderDest(info.getUserId());
@@ -144,9 +204,12 @@ public class OrderServlet extends HttpServlet {
 				orderDate = dto.getOrderDate();
 			}
 			
+			//사용한 쿠폰 변경 : N->Y
+			dao.useCouponUpdate(useCouponKey, info.getUserId());
+
 			req.setAttribute("userName", info.getUserName());
 			req.setAttribute("orderDto", orderDto);
-			req.setAttribute("totalPrice", totalPrice);
+			req.setAttribute("totalOrderPrice", totalOrderPrice);
 			req.setAttribute("totalAmount", totalAmount);
 			req.setAttribute("orderCompleteList", orderCompleteList);
 			req.setAttribute("orderDate", orderDate);

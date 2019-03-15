@@ -5,6 +5,20 @@
 
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 
+<script>
+
+function sendMain() {
+	
+	var f = document.orderCompleteFoem;
+	
+	f.action = "<%=cp %>/product/main.do";
+	
+	f.submit();
+	
+}
+
+</script>
+
 <!-- page title -->
 <div class="page_title">
 	<h2 class="h_title page">주문완료</h2>
@@ -59,7 +73,7 @@
 					</c:forEach>
 					<tr style="height: 50px;">
 						<td></td>
-						<td style="text-align: right;">${totalAmount }개 (총 ${totalPrice }원 ) </td>
+						<td style="text-align: right;">${totalAmount }개 (총 ${totalOrderPrice }원 ) </td>
 					</tr>
 				</table>
 			</div>
@@ -67,11 +81,14 @@
 			<div style="border-bottom: 1px solid #cacaca; margin-top: 50px;"></div>
 		</div>
 	</div>
-	</form>
+	
 	<!-- 버튼 -->
 	<div class="page_btns">
-		<button type="button" class="btn_lg_primary" id="orderPayment" onclick="<%=cp%>/project/main.jsp">쇼핑계속하기</button>
+		<button type="button" class="btn_lg_primary" id="orderPayment" onclick="sendMain();">쇼핑계속하기</button>
 	</div>
+	</form>
+	
+	
 
 </div>
 	
