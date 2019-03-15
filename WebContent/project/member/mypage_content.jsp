@@ -32,7 +32,7 @@
 						<p class="text font_xl">
 							고객님의 회원등급은 <em>${sessionScope.customInfo.userGrade }</em> 입니다.
 						</p>
-						<a href="/kr/ko/my/page/info/changeUserInfo" class="link">개인정보
+						<a href="<%=cp %>/member/update.do" class="link">개인정보
 							수정</a> <a href="/kr/ko/my/page/myLevelList" class="link">내 예상등급
 							확인</a>
 					</dd>
