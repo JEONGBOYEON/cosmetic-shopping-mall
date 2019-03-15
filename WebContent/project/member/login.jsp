@@ -149,21 +149,7 @@ function enterkey() {
 			</dl>
 		</div>
 	</div>
-	<div class="panel gray">
-		<div class="panel_cont">
-			<p class="text font_lg">SNS계정으로 간편하게 로그인 하세요.</p>
-			0
-			<ul class="ui_sns_share sns">
-				<li><a href="javascript:;" onclick="naverLogin()"
-					class="share_btn facebook" data-sns-type="facebook">facebook</a></li>
-				<li><a href="javascript:;" onclick="facebookLogin()"
-					class="share_btn naver_blog" data-sns-type="naver_blog">naver
-						blog</a></li>
-				<li><a href="javascript:;" onclick="kakaoLogin()"
-					class="share_btn url" data-sns-type="url">copy url</a></li>
-			</ul>
-		</div>
-	</div>
+
 </div>
 
 <%@ include file="../layout/footer.jsp"%>

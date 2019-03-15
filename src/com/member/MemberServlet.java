@@ -279,8 +279,8 @@ public class MemberServlet extends HttpServlet {
 			if(!dto.getUserPwd().equals(oriPassword)){
 				session.setAttribute("msg", "기존 비밀번호가 다릅니다.");
 				
-				url=cp+"/member/update_detail.do";
-				resp.sendRedirect(url);
+				url="/member/update_detail.do";
+				forward(req, resp, url);
 				return;
 			}
 		
