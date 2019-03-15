@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,34 +74,47 @@ public class MemberServlet extends HttpServlet {
 			url="/project/member/login.jsp";
 			forward(req, resp, url);
 		}else if(uri.indexOf("login_ok.do")!=-1){
-			
-			String userId=req.getParameter("userId");
-			String userPwd=req.getParameter("userPwd");
-			
-			MemberDTO dto=dao.getReadData(userId);
-			
-			//dto가 null이면 아이디가 틀린것(id가없어서 오라클에서 return값이 null)
-			//패스워드 비교해서 틀리면 패스워드가 틀린것
-			if(dto==null||!dto.getUserPwd().equals(userPwd)){
+	         
+	         String userId=req.getParameter("userId");
+	         String userPwd=req.getParameter("userPwd");
+	         Cookie cookie=null;
+	         String id_rem=req.getParameter("id_ck");
+	         
+	         
+	         MemberDTO dto=dao.getReadData(userId);
+	         
+	         //dto가 null이면 아이디가 틀린것(id가없어서 오라클에서 return값이 null)
+	         //패스워드 비교해서 틀리면 패스워드가 틀린것
+	         if(dto==null||!dto.getUserPwd().equals(userPwd)){
 
-				req.setAttribute("message", "false");
-				
-				url="/project/member/login.jsp";
-				forward(req, resp, url);
-				
-				return;//로그인이 실패하면 return(뒤에 코드 실행하지 않는다)
-			}
-			
-			//session도 out.print처럼 jsp에는 그냥 사용가능한데
-			//java에서는 요청을 한뒤 써야한다.
-			HttpSession session=req.getSession();
-			
-			//CustomInfo안쓰고 MemberDTO 사용!
-			session.setAttribute("customInfo", dto);
-			
-			url=cp+"/product/main.do";
-			resp.sendRedirect(url);				
-		}else if(uri.indexOf("mypage.do")!=-1){
+	            req.setAttribute("message", "false");
+	            
+	            url="/project/member/login.jsp";
+	            forward(req, resp, url);
+	            
+	            return;//로그인이 실패하면 return(뒤에 코드 실행하지 않는다)
+	         }
+	         
+	         //session도 out.print처럼 jsp에는 그냥 사용가능한데
+	         //java에서는 요청을 한뒤 써야한다.
+	         HttpSession session=req.getSession();
+	         
+	         //CustomInfo안쓰고 MemberDTO 사용!
+	         session.setAttribute("customInfo", dto);
+	         
+	         if(id_rem!=null&&id_rem.trim().equals("on")){
+	            cookie=new Cookie("userId", URLEncoder.encode(userId,"UTF-8"));
+	        	 cookie.setMaxAge(60*60);//1시간
+	            resp.addCookie(cookie);
+	         }else{
+	            cookie=new Cookie("userId",null);
+	            cookie.setMaxAge(0);
+	            resp.addCookie(cookie);
+	         }
+	         
+	         url=cp+"/product/main.do";
+	         resp.sendRedirect(url);            
+	      }else if(uri.indexOf("mypage.do")!=-1){
 
 			HttpSession session = req.getSession();
 			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");

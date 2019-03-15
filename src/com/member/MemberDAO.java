@@ -123,8 +123,7 @@ public class MemberDAO {
 		}
 
 		return dto;
-	}
-		
+	}	
 
 	//수정1-비밀번호 수정
 	public int updateData(MemberDTO dto) {

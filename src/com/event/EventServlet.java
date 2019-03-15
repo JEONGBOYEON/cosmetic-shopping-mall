@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.productDetail.ProductDetailDTO;
-import com.productDetail.ProductDetailImageDTO;
 import com.util.DBCPConn;
 import com.util.FileManager;
 import com.util.MyUtil;
@@ -70,7 +68,7 @@ public class EventServlet extends HttpServlet{
 
 		else if (uri.indexOf("create.do") != -1) {
 
-			url = "/project/ad/adminEventCreate.jsp";
+			url = "/project/adminEventCreate.jsp";
 			forward(req, resp, url);
 
 		} else if (uri.indexOf("create_ok.do") != -1) {
@@ -119,9 +117,8 @@ public class EventServlet extends HttpServlet{
 			
 			if(pageNum!=null)
 				currentPage = Integer.parseInt(pageNum);
-
-
-			int dataCount = dao.getDataCount();
+			
+			int dataCount = dao.getDataCountAdmin();
 			
 			int numPerPage = 10;
 			int totalPage = myutil.getPageCount(numPerPage, dataCount);
@@ -132,8 +129,8 @@ public class EventServlet extends HttpServlet{
 			int start = (currentPage-1)*numPerPage + 1;
 			int end = currentPage*numPerPage;
 			
-			String deleteUrl = cp + "/pr/adminDeleted_ok.do?pageNum=" + currentPage;
-			String updateUrl = cp + "/pr/adminUpdate.do?pageNum=" + currentPage ;
+			//String deleteUrl = cp + "/pr/adminDeleted_ok.do?pageNum=" + currentPage;
+			//String updateUrl = cp + "/pr/adminUpdate.do?pageNum=" + currentPage ;
 
 
 			//이미지저장 경로 보내주기
@@ -150,38 +147,12 @@ public class EventServlet extends HttpServlet{
 			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("productId", productId);
 			req.setAttribute("pageIndexList", pageIndexList);
-			req.setAttribute("updateUrl", updateUrl);
-			req.setAttribute("deleteUrl", deleteUrl);
+			//req.setAttribute("updateUrl", updateUrl);
+			//req.setAttribute("deleteUrl", deleteUrl);
 			
 			//adminList.jsp 페이지로 포워드
-			url = "/project/ad/adminEventList.jsp?";
+			url = "/project/adminEventList.jsp?";
 			forward(req, resp, url);
-			
-		}else if(uri.indexOf("adminDeleted_ok.do")!=-1){
-			
-			String eventKey = req.getParameter("eventKey");
-			String fileCategory = req.getParameter("fileCategory");
-			String pageNum = req.getParameter("pageNum");
-	
-			//삭제할 dto 읽어오기
-			EventDTO dto = dao.getUpdateData(eventKey,fileCategory);	
-			
-			//물리적 파일 삭제 - 리스트사진
-			if(dto.getSaveFileName()!=null){
-				FileManager.doFileDelete(dto.getSaveFileName(), path);
-			}
-			//물리적 파일 삭제 - 리스트사진
-			if(dto.getSaveFileName()!=null){
-				FileManager.doFileDelete(dto.getSaveFileName(), path);
-			}
-
-			
-			//테이블 정보 삭제(on delete cascade 조건으로 참조테이블의 데이터도 함께 삭제)
-			dao.deleteData(eventKey,fileCategory);
-
-			//삭제 진행 후 리스트 페이지로 리다이렉트
-			url = cp + "/pr/adminList.do?";
-			resp.sendRedirect(url);
 			
 		}else if(uri.indexOf("list.do")!=-1){
 			

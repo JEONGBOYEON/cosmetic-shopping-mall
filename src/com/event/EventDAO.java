@@ -94,14 +94,14 @@ public class EventDAO {
 		return lists;
 
 	}
-	
+
 	//admin페이지 상품 삭제
 	public int deleteData(String eventKey,String fileCategory){
-		
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql;
-		
+
 		try {
 			sql= "delete product where eventKey=? and fileCategory=?";
 			pstmt = conn.prepareStatement(sql);
@@ -109,13 +109,13 @@ public class EventDAO {
 			pstmt.setString(2, fileCategory);
 			result = pstmt.executeUpdate();
 			pstmt.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		return result;
 	}
-	
+
 	//admin페이지 제품 조회_수정삭제
 	public EventDTO getUpdateData(String eventKey,String fileCategory) {
 
@@ -136,7 +136,7 @@ public class EventDAO {
 
 			if (rs.next()) {
 				dto = new EventDTO();
-				
+
 				dto.setEventKey(rs.getInt("eventKey"));
 				dto.setEventName(rs.getString("eventName"));
 				dto.setSaveFileName(rs.getString("originalName"));
@@ -154,6 +154,37 @@ public class EventDAO {
 		}
 
 		return dto;
+	}
+
+	//전체 데이터의 갯수(진행중인) 
+	public int getDataCountAdmin() {
+
+		int totalDataCount = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			sql = "select nvl(count(*),0) from event";
+			//searchKey는 무조건 값이 들어지만, like 뒤의 ?에는 값이 안 들어갈 수도 있다.
+
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next())
+				totalDataCount = rs.getInt(1);
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return totalDataCount;
+
 	}
 
 	//진행중인 이벤트 배열로 받기(페이징-O)
@@ -283,7 +314,7 @@ public class EventDAO {
 		return totalDataCount;
 
 	}
-	
+
 	//전체 데이터의 갯수(종료된) 
 	public int getDataCount2() {
 
@@ -294,7 +325,7 @@ public class EventDAO {
 		String sql;
 
 		try {
-			sql = "select nvl(count(*),0) from event where fileCategory='detail' and endday<sysdate";
+			sql = "select nvl(count(*),0) from event where fileCategory='list' and endday<sysdate";
 			//searchKey는 무조건 값이 들어지만, like 뒤의 ?에는 값이 안 들어갈 수도 있다.
 
 			pstmt = conn.prepareStatement(sql);
