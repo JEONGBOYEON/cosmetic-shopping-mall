@@ -121,6 +121,13 @@
 					<li><a href="<%=cp %>/product/listBest.do">베스트</a></li>
 					<li><a href="<%=cp%>/event/list.do">이벤트</a></li>
 					<li><a href="<%=cp %>/coupon/couponAllList.do">쿠폰/혜택</a></li>
+					
+					<!-- 어드민페이지 -->
+					<c:if test="${sessionScope.customInfo.userId eq 'admin' }">
+						<li><a href="<%=cp %>/pr/adminList.do">상품관리</a></li>
+						<li><a href="<%=cp %>/event/adminlist.do">이벤트관리</a></li>
+						<li><a href="<%=cp %>/coupon/created.do">쿠폰관리</a></li>
+					</c:if>
 				</ul>
 			</div>
 			
