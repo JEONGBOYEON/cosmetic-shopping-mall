@@ -45,7 +45,7 @@
 						<c:forEach var="dto" items="${lists }">
 							<tr>
 								<td class="check_wrap check_only">${dto.productId }</td>
-								<td><a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a></td>
+								<td><a href="<%=cp%>/pr/detail.do?productName=${dto.productName1}">${dto.productName2 }</a></td>
 								<td>
 									<button onclick="javascript:location.href='<%=cp%>/review/writed.do?productId=${dto.productId }';" class="btn_sm_bordered">작성하기</button>
 								</td>

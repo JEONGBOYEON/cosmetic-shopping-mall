@@ -75,15 +75,21 @@
 
 		<div class="prd_category">
 			<ul>
-				<li><a href="" >전체</a></li>
+				<li><a href="<%=cp %>/product/listBest.do" >전체</a></li>
 					<% 
 						String arrCategory2[] = {"아이","립","페이스","네일","스킨케어","팩/마스크","클렌징","바디/헤어","향수","화장소품"};
 					
 						for(String s:arrCategory2 ){
 							
-							String category = URLEncoder.encode(s, "UTF-8");
-							out.println("<li><a href="+cp+"/product/listCategory.do?productCategory="+category+">");
-							out.println(s+"</a></li>");
+							if(s.equals(hangul)){
+								String category = URLEncoder.encode(s, "UTF-8");
+								out.println("<li><a class='on' href="+cp+"/product/listCategory.do?productCategory="+category+">");
+								out.println(s+"</a></li>");
+							}else{
+								String category = URLEncoder.encode(s, "UTF-8");
+								out.println("<li><a href="+cp+"/product/listCategory.do?productCategory="+category+">");
+								out.println(s+"</a></li>");
+							}
 						}
 					%>
 			</ul>

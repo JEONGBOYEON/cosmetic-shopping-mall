@@ -66,7 +66,7 @@
 						<c:forEach var="dto" items="${lists }">
 							<tr>
 								<td class="check_wrap check_only" style="vertical-align: top;">${dto.reviewDate }</td>
-								<td style="vertical-align: top;"><a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a></td>
+								<td style="vertical-align: top;"><a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">${dto.productName2 }</a></td>
 								<td align="left" style="vertical-align: top;">${dto.subject }
 									<p id="${dto.subject }" style="display: none"><br/>${dto.content }</p>
 								</td>

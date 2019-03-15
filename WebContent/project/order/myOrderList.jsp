@@ -89,8 +89,8 @@ ul.tabs li button{
 					<colgroup>
 						<col width="15%">
 						<col width="5%">
-						<col width="40%">
-						<col width="40%">
+						<col width="30%">
+						<col width="50%">
 					</colgroup>
 
 					<thread>
@@ -106,12 +106,12 @@ ul.tabs li button{
 							<tr>
 								<td class="check_wrap check_only">${dto.orderDate }</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 										<img alt="없어요" src="${imagePath }/${dto.saveFileName }" height="50px;">
 									</a>
 								</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a>
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">${dto.productName2 }</a>
 									${dto.amount }&nbsp;개 &nbsp;&nbsp;${dto.price }&nbsp;원 
 									<br/>(총합&nbsp;&nbsp;:&nbsp;&nbsp;${dto.amount * dto.price }) &nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
@@ -140,8 +140,8 @@ ul.tabs li button{
 					<colgroup>
 						<col width="15%">
 						<col width="5%">
-						<col width="40%">
-						<col width="40%">
+						<col width="30%">
+						<col width="50%">
 					</colgroup>
 
 					<thread>
@@ -157,12 +157,12 @@ ul.tabs li button{
 							<tr>
 								<td class="check_wrap check_only">${dto.orderDate }</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 										<img alt="없어요" src="${imagePath }/${dto.saveFileName }" height="50px;">
 									</a>
 								</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a>
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">${dto.productName2 }</a>
 									${dto.amount }&nbsp;개 &nbsp;&nbsp;${dto.price }&nbsp;원 
 									<br/>(총합&nbsp;&nbsp;:&nbsp;&nbsp;${dto.amount * dto.price }) &nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
@@ -191,8 +191,8 @@ ul.tabs li button{
 					<colgroup>
 						<col width="15%">
 						<col width="5%">
-						<col width="40%">
-						<col width="40%">
+						<col width="30%">
+						<col width="50%">
 					</colgroup>
 
 					<thread>
@@ -208,12 +208,12 @@ ul.tabs li button{
 							<tr>
 								<td class="check_wrap check_only">${dto.orderDate }</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 										<img alt="없어요" src="${imagePath }/${dto.saveFileName }" height="50px;">
 									</a>
 								</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a>
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">${dto.productName2 }</a>
 									${dto.amount }&nbsp;개 &nbsp;&nbsp;${dto.price }&nbsp;원 
 									<br/>(총합&nbsp;&nbsp;:&nbsp;&nbsp;${dto.amount * dto.price }) &nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
@@ -242,8 +242,8 @@ ul.tabs li button{
 					<colgroup>
 						<col width="15%">
 						<col width="5%">
-						<col width="40%">
-						<col width="40%">
+						<col width="30%">
+						<col width="50%">
 					</colgroup>
 
 					<thread>
@@ -259,12 +259,12 @@ ul.tabs li button{
 							<tr>
 								<td class="check_wrap check_only">${dto.orderDate }</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 										<img alt="없어요" src="${imagePath }/${dto.saveFileName }" height="50px;">
 									</a>
 								</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a>
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">${dto.productName2 }</a>
 									${dto.amount }&nbsp;개 &nbsp;&nbsp;${dto.price }&nbsp;원 
 									<br/>(총합&nbsp;&nbsp;:&nbsp;&nbsp;${dto.amount * dto.price }) &nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
@@ -293,8 +293,8 @@ ul.tabs li button{
 					<colgroup>
 						<col width="15%">
 						<col width="5%">
-						<col width="40%">
-						<col width="40%">
+						<col width="30%">
+						<col width="50%">
 					</colgroup>
 
 					<thread>
@@ -310,12 +310,12 @@ ul.tabs li button{
 							<tr>
 								<td class="check_wrap check_only">${dto.orderDate }</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">
 										<img alt="없어요" src="${imagePath }/${dto.saveFileName }" height="50px;">
 									</a>
 								</td>
 								<td style="vertical-align: top; text-align: left;">
-									<a href="<%=cp%>/pr/detail.do?productId=${dto.productId}">${dto.productName }</a>
+									<a href="<%=cp%>/pr/detail.do?productName=${dto.productName}">${dto.productName2 }</a>
 									${dto.amount }&nbsp;개 &nbsp;&nbsp;${dto.price }&nbsp;원 
 									<br/>(총합&nbsp;&nbsp;:&nbsp;&nbsp;${dto.amount * dto.price }) &nbsp;&nbsp;&nbsp;&nbsp;
 								</td>

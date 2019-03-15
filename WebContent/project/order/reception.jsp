@@ -34,6 +34,21 @@
 		
 	}
 	
+	function addPoind() {
+		
+		var point = document.orderForm.beauty_point.value;
+		var memberPoint = ${memberPoint};
+		if(point>memberPoint){
+			alert("보유하신 포인트보다 많은 포인트는 사용할 수 없습니다.");
+			f.beauty_point.focus();
+			return;
+		}
+
+		//var totalPrice = document.orderForm.totalPricePoint.value = ${totalPrice} - point;
+		
+	}
+		
+	
 </script>
 
 
@@ -192,7 +207,7 @@
 								<td style="padding: 40px 0px 0px 40px;"><b>뷰티포인트</b></td>
 								<td style="padding: 40px 40px 0px 40px;" class="point" align="right">
 									<span class="input_wrap bpoint">
-										<input type="number" id="beauty_point" name="beauty_point" size="1">
+										<input type="number" id="beauty_point" name="beauty_point" size="5">
 									</span>
 									<b>P</b>
 									<span>/보유 ${memberPoint }P</span>
