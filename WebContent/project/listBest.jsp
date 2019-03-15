@@ -104,7 +104,16 @@
 			<form name="listForm">
 			<table width="1200">
 				<c:set var="i" value="0" />
-				<c:set var="count" value="1" />
+				
+				<c:choose>
+					<c:when test="${empty pageNum}">
+						<c:set var="count" value="1" />
+					</c:when>
+					<c:otherwise>
+						<c:set var="count" value="${(pageNum-1)*10+1}" />
+					</c:otherwise>
+				</c:choose>
+				
 				<c:forEach var="dto" items="${lists }">
 
 					<c:if test="${i==0 }">
