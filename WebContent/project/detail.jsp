@@ -86,6 +86,40 @@ ul.tabs li{
 				
 	}
 	
+	function addDirectOrder(){
+		
+		f = document.detailForm;
+		//장바구니 추가
+		
+		str = f.productOption.value;
+		str = str.trim();
+		//옵션이 없는 단일상품이 아닌 경우
+		if(str=="single"){
+			
+			if(!str){
+				alert("\n productOption을 선택하세요.");//공백제거후 내용이 없으면
+				f.productOption.focus();
+				return;
+			}
+			f.productOption.value = str;
+
+		}
+		
+		str = f.amount.value;
+		str = str.trim();
+		if(str==0){
+			alert("\n 수량을 선택하세요.");//공백제거후 내용이 없으면
+			f.amount.focus();
+			return;
+		}
+		f.amount.value = str;
+
+		f.action = "<%=cp %>/cart/cartAdd_directOrder.do";
+		f.submit();
+				
+	}
+	
+	
 	$(document).ready(function(){
 		   
 		  $('ul.tabs li').click(function(){
@@ -218,7 +252,7 @@ ul.tabs li{
 							<td>
 							<!-- 구매버튼,장바구니버튼 -->
 							<div class="purchase_button_set">
-								<span><button class="btn_lg_bordered emp btn_buy_now" type="button" >바로구매</button></span>
+								<span><button class="btn_lg_bordered emp btn_buy_now" type="button" onclick="addDirectOrder();">바로구매</button></span>
 								<span><button class="btn_lg_primary btn_basket" type="button" onclick="addCartItem();">장바구니 담기</button></span>
 							</div>
 							</td>

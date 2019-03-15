@@ -278,9 +278,72 @@ public class cartServlet  extends HttpServlet {
 			
 			url = cp + "/cart/cartList.do";
 			resp.sendRedirect(url);
+			
+		}else if (uri.indexOf("cartAdd_directOrder.do") != -1){
+			
+			//장바구니추가
+			cartDTO dto = new cartDTO();
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			String userId ;
+			String productId = req.getParameter("productId");
+			String productName = req.getParameter("productName");
+			String productOption = req.getParameter("productOption");
+			
+			if(info.getUserId()!=null){
+				userId = info.getUserId();
+			}else{
+				userId = req.getParameter("userId");
+			}
+			
+			String param = "";
+			
+			//상품명 상품옵션 한글디코딩
+			if(productName!=null && !productName.equals(null)){
+				productName = URLDecoder.decode(productName, "UTF-8");				
+			}
+			if(productOption!=null && !productOption.equals(null)){
+				productOption = URLDecoder.decode(productOption, "UTF-8");				
+			}
+			
+			//장바구니에 담을 상품id의 주문갯수
+			int amount = Integer.parseInt(req.getParameter("amount"));
+			
+			//사용자id
+			dto.setUserId(userId);
+			
+			//상품옵션이 단일값/다중값인 경우
+			if(productOption.equals("single")){
+				//단일상품인 경우 상품아이디 읽어옴
+				dto.setProductId(productId);
+				
+			}else{
+				//상품옵션 변경시 변경된 상품id값을 읽어와야 함
+				productId = dao.searchProductId(productName,productOption);
+				dto.setProductId(productId);
+			}
+			dto.setAmount(amount);
+			dto.setPrice(Integer.parseInt(req.getParameter("price")));
+			
+			//동일 userId,productId로 장바구니 내용이 있으면 수량증가
+			if(dao.searchBeforeProductId(productId,userId)==1){
+				int addAmount = dao.getCartItemCount(userId, productId);
+				dto.setAmount(amount+addAmount);
+				dao.updateCartItem(dto);
+			}else{
+				dao.insertCartItem(dto);
+			}
+			
+			if(productName!=null){
+				param += "?productName=" + URLEncoder.encode(productName,"UTF-8");
+				param += "&productOption=" + URLEncoder.encode(productOption,"UTF-8");
+			}
+			
+			url = "/order/orderList.do";
+			forward(req, resp, url);
+			
 		}
-		
-		
+
 	}
 	
 
