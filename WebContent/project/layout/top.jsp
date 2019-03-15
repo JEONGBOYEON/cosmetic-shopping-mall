@@ -97,7 +97,7 @@
 						</c:otherwise>
 				</c:choose>
 				</li>
-				<li><a href="<%=cp%>/order/myOrderLists.do" class="order">주문/배송조회
+				<li><a href="<%=cp%>/order/myOrderLists.do" class="order">주문조회
 					<span class="num" style="display: none;"></span>
 					</a>
 				</li>
