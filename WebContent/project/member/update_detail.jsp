@@ -202,16 +202,9 @@ function changePrivateInfo(){
 							<dl>
 								<dt>생년월일</dt>
 								<dd class="ui_table">
-										<div class="input_wrap w60p">
+										<div class="input_wrap w100p">
 											<input type="text" value="${dto.birth}" title=생일" name="birth" maxlength="8">
 										</div>
-									<div class="input_wrap w30p">
-										<span class="check_wrap" ><input type="radio"
-											name="birthType" value="S" id="solar" checked="checked"><label
-											for="solar">양력</label></span> <span class="check_wrap"><input
-											type="radio" name="birthType" value="L" id="lunar"><label
-											for="lunar">음력</label></span>
-									</div>
 								</dd>
 							</dl>
 							<dl>
