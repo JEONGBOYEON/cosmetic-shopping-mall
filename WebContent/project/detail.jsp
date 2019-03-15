@@ -98,17 +98,7 @@ ul.tabs li{
 		  })
 		 
 		})
-	
-	$(function(){  
-		
-		if (location.hash == "#tap-2"){         
-		
-			$('ul.tabs li').find('li').eq(1).addClass('').siblings().removeClass();         
-			$('ul.tabs li').find('#tap-2').addClass('on current').siblings().removeClass('on current');     
-		
-		}
-	
-	})
+
 	
 </script>
 <div class="ap_contents product detail" >
@@ -232,7 +222,6 @@ ul.tabs li{
 							</div>
 							</td>
 						</tr>						
-						<tr><td bgcolor="grey" height="2"></td></tr>
 						</table>
 
 							
@@ -373,12 +362,26 @@ ul.tabs li{
 						</div>
 					</div>
 				</div>
-
 				<div align="center">
 					<font style="font-size: 20px">${pageIndexList}</font>
 				</div>
 			</c:if>
 		</div>
+		
+						
+		<br /> <br /> <br />
+		<div id="tab-3" class="tab-content">
+			<div class="prd_detail_wrap">
+				<div class="contenteditor-root">
+					<div class="contenteditor-image">
+						<img src="<%=cp%>/project/image/deliveryImage1.PNG" /><br>
+						<img src="<%=cp%>/project/image/deliveryImage2.PNG" />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 	</div>
 </form>
 </div>
