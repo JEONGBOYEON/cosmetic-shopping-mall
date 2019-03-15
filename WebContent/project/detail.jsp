@@ -1,3 +1,5 @@
+
+<%@page import="com.member.MemberDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -78,11 +80,10 @@ ul.tabs li{
 			return;
 		}
 		f.amount.value = str;
-		
-		alert("고객님! 해당 상품이 장바구니에 담겼습니다!");
-	
+
 		f.action = "<%=cp %>/cart/cartAdd_ok.do";
 		f.submit();
+				
 	}
 	
 	$(document).ready(function(){

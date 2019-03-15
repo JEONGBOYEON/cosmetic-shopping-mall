@@ -126,7 +126,7 @@
 					<c:if test="${sessionScope.customInfo.userId eq 'admin' }">
 						<li><a href="<%=cp %>/pr/adminList.do">상품관리</a></li>
 						<li><a href="<%=cp %>/event/adminlist.do">이벤트관리</a></li>
-						<li><a href="<%=cp %>/coupon/created.do">쿠폰관리</a></li>
+						<li><a href="<%=cp %>/coupon/adminList.do">쿠폰관리</a></li>
 					</c:if>
 				</ul>
 			</div>
