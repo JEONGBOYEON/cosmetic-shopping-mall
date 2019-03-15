@@ -15,6 +15,8 @@ public class OrderDTO {
 	private int price;
 	private int deliveryFee;
 	private String eMail;
+	private String originalName;
+	private String saveFileName;
 	
 	public int getOrderNum() {
 		return orderNum;
@@ -106,5 +108,20 @@ public class OrderDTO {
 	public void seteMail(String eMail) {
 		this.eMail = eMail;
 	}
+	
+	public String getOriginalName() {
+		return originalName;
+	}
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
+	}
+	
+	public String getSaveFileName() {
+		return saveFileName;
+	}
+	public void setSaveFileName(String saveFileName) {
+		this.saveFileName = saveFileName;
+	}
+	
 
 }

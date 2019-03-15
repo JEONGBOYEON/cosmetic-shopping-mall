@@ -61,6 +61,41 @@ public class OrderDAO {
 		
 	}
 	
+	//사용자 기본 배송지 가져오기
+	public int getMemberPoint(String userId){
+
+		int memberPoint = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "select point from member where userId=?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){
+
+				memberPoint = rs.getInt("point");
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return memberPoint;
+
+	}
+	
 	//사용자 주문 목록 가져오기
 	public List<OrderListDTO> getOrderList(String userId){
 		
@@ -365,5 +400,295 @@ public class OrderDAO {
 		}
 	}
 	
+	//사용자 기간별 주문조회
+	//7일전
+	public List<OrderDTO> getUserOrder7dayLists(String userId){
+
+		List<OrderDTO> lists = new ArrayList<OrderDTO>();
+		OrderDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+
+			sql = "select orderNum,to_char(orderDate,'yyyy-mm-dd') orderDate,userId,ordertable.productId productId,productName,zip,addr1,addr2,addrKey,ordertable.amount amount,";
+			sql+= "ordertable.price price,deliveryFee,eMail,originalName,saveFileName ";
+			sql+= "from ordertable,product where ordertable.productId = product.productId ";
+			sql+= "and userId=? and to_char(orderDate,'yyyy-mm-dd')>=(select to_char(sysdate-(interval '7' day),'yyyy-mm-dd') from dual) ";
+
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+
+				dto = new OrderDTO();
+				
+				dto.setOrderNum(rs.getInt("orderNum"));
+				dto.setOrderDate(rs.getString("orderDate"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setProductId(rs.getString("productId"));
+				dto.setProductName(rs.getString("productName"));
+				dto.setZip(rs.getInt("zip"));
+				dto.setAddr1(rs.getString("addr1"));
+				dto.setAddr2(rs.getString("addr2"));
+				dto.setAddrKey(rs.getString("addrKey"));
+				dto.setAmount(rs.getInt("amount"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setDeliveryFee(rs.getInt("deliveryFee"));
+				dto.seteMail(rs.getString("eMail"));
+				dto.setOriginalName(rs.getString("originalName"));
+				dto.setSaveFileName(rs.getString("saveFileName"));
+
+				lists.add(dto);
+
+			}
+
+			rs.close();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return lists;
+
+	}
 	
+	//1달전
+		public List<OrderDTO> getUserOrder1monthLists(String userId){
+
+			List<OrderDTO> lists = new ArrayList<OrderDTO>();
+			OrderDTO dto = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql;
+
+			try {
+
+				sql = "select orderNum,to_char(orderDate,'yyyy-mm-dd') orderDate,userId,ordertable.productId productId,productName,zip,addr1,addr2,addrKey,ordertable.amount amount,";
+				sql+= "ordertable.price price,deliveryFee,eMail,originalName,saveFileName ";
+				sql+= "from ordertable,product where ordertable.productId = product.productId ";
+				sql+= "and userId=? and to_char(orderDate,'yyyy-mm-dd')>=(select to_char(sysdate-(interval '1' month),'yyyy-mm-dd') from dual) ";
+
+
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+
+					dto = new OrderDTO();
+					
+					dto.setOrderNum(rs.getInt("orderNum"));
+					dto.setOrderDate(rs.getString("orderDate"));
+					dto.setUserId(rs.getString("userId"));
+					dto.setProductId(rs.getString("productId"));
+					dto.setProductName(rs.getString("productName"));
+					dto.setZip(rs.getInt("zip"));
+					dto.setAddr1(rs.getString("addr1"));
+					dto.setAddr2(rs.getString("addr2"));
+					dto.setAddrKey(rs.getString("addrKey"));
+					dto.setAmount(rs.getInt("amount"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setDeliveryFee(rs.getInt("deliveryFee"));
+					dto.seteMail(rs.getString("eMail"));
+					dto.setOriginalName(rs.getString("originalName"));
+					dto.setSaveFileName(rs.getString("saveFileName"));
+
+					lists.add(dto);
+
+				}
+
+				rs.close();
+				pstmt.close();
+
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			return lists;
+
+		}
+		
+		//3개월전
+		public List<OrderDTO> getUserOrder3monthLists(String userId){
+
+			List<OrderDTO> lists = new ArrayList<OrderDTO>();
+			OrderDTO dto = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql;
+
+			try {
+
+				sql = "select orderNum,to_char(orderDate,'yyyy-mm-dd') orderDate,userId,ordertable.productId productId,productName,zip,addr1,addr2,addrKey,ordertable.amount amount,";
+				sql+= "ordertable.price price,deliveryFee,eMail,originalName,saveFileName ";
+				sql+= "from ordertable,product where ordertable.productId = product.productId ";
+				sql+= "and userId=? and to_char(orderDate,'yyyy-mm-dd')>=(select to_char(sysdate-(interval '3' month),'yyyy-mm-dd') from dual) ";
+
+
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+
+					dto = new OrderDTO();
+					
+					dto.setOrderNum(rs.getInt("orderNum"));
+					dto.setOrderDate(rs.getString("orderDate"));
+					dto.setUserId(rs.getString("userId"));
+					dto.setProductId(rs.getString("productId"));
+					dto.setProductName(rs.getString("productName"));
+					dto.setZip(rs.getInt("zip"));
+					dto.setAddr1(rs.getString("addr1"));
+					dto.setAddr2(rs.getString("addr2"));
+					dto.setAddrKey(rs.getString("addrKey"));
+					dto.setAmount(rs.getInt("amount"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setDeliveryFee(rs.getInt("deliveryFee"));
+					dto.seteMail(rs.getString("eMail"));
+					dto.setOriginalName(rs.getString("originalName"));
+					dto.setSaveFileName(rs.getString("saveFileName"));
+
+					lists.add(dto);
+
+				}
+
+				rs.close();
+				pstmt.close();
+
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			return lists;
+
+		}
+		
+		//6개월 전
+		public List<OrderDTO> getUserOrder6monthLists(String userId){
+
+			List<OrderDTO> lists = new ArrayList<OrderDTO>();
+			OrderDTO dto = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql;
+
+			try {
+
+				sql = "select orderNum,to_char(orderDate,'yyyy-mm-dd') orderDate,userId,ordertable.productId productId,productName,zip,addr1,addr2,addrKey,ordertable.amount amount,";
+				sql+= "ordertable.price price,deliveryFee,eMail,originalName,saveFileName ";
+				sql+= "from ordertable,product where ordertable.productId = product.productId ";
+				sql+= "and userId=? and to_char(orderDate,'yyyy-mm-dd')>=(select to_char(sysdate-(interval '6' month),'yyyy-mm-dd') from dual) ";
+
+
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+
+					dto = new OrderDTO();
+					
+					dto.setOrderNum(rs.getInt("orderNum"));
+					dto.setOrderDate(rs.getString("orderDate"));
+					dto.setUserId(rs.getString("userId"));
+					dto.setProductId(rs.getString("productId"));
+					dto.setProductName(rs.getString("productName"));
+					dto.setZip(rs.getInt("zip"));
+					dto.setAddr1(rs.getString("addr1"));
+					dto.setAddr2(rs.getString("addr2"));
+					dto.setAddrKey(rs.getString("addrKey"));
+					dto.setAmount(rs.getInt("amount"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setDeliveryFee(rs.getInt("deliveryFee"));
+					dto.seteMail(rs.getString("eMail"));
+					dto.setOriginalName(rs.getString("originalName"));
+					dto.setSaveFileName(rs.getString("saveFileName"));
+
+					lists.add(dto);
+
+				}
+
+				rs.close();
+				pstmt.close();
+
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			return lists;
+
+		}
+		
+		//1년전 
+		public List<OrderDTO> getUserOrder1yearLists(String userId){
+
+			List<OrderDTO> lists = new ArrayList<OrderDTO>();
+			OrderDTO dto = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql;
+
+			try {
+
+				sql = "select orderNum,to_char(orderDate,'yyyy-mm-dd') orderDate,userId,ordertable.productId productId,productName,zip,addr1,addr2,addrKey,ordertable.amount amount,";
+				sql+= "ordertable.price price,deliveryFee,eMail,originalName,saveFileName ";
+				sql+= "from ordertable,product where ordertable.productId = product.productId ";
+				sql+= "and userId=? and to_char(orderDate,'yyyy-mm-dd')>=(select to_char(sysdate-(interval '1' year),'yyyy-mm-dd') from dual) ";
+
+
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+
+					dto = new OrderDTO();
+					
+					dto.setOrderNum(rs.getInt("orderNum"));
+					dto.setOrderDate(rs.getString("orderDate"));
+					dto.setUserId(rs.getString("userId"));
+					dto.setProductId(rs.getString("productId"));
+					dto.setProductName(rs.getString("productName"));
+					dto.setZip(rs.getInt("zip"));
+					dto.setAddr1(rs.getString("addr1"));
+					dto.setAddr2(rs.getString("addr2"));
+					dto.setAddrKey(rs.getString("addrKey"));
+					dto.setAmount(rs.getInt("amount"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setDeliveryFee(rs.getInt("deliveryFee"));
+					dto.seteMail(rs.getString("eMail"));
+					dto.setOriginalName(rs.getString("originalName"));
+					dto.setSaveFileName(rs.getString("saveFileName"));
+
+					lists.add(dto);
+
+				}
+
+				rs.close();
+				pstmt.close();
+
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			return lists;
+
+		}
+
 }

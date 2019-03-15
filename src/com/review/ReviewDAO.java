@@ -26,8 +26,8 @@ public class ReviewDAO {
 
 			sql = "select * from (";
 			sql+= "select rownum rnum, data.* from (";
-			sql+= "select productdetail.productId productId,productName,rate,subject,content,to_char(reviewDate,'yyyy-mm-dd') reviewDate ";
-			sql+= "from review,productdetail where review.PRODUCTID=productdetail.PRODUCTID and userId=? and writed=?";
+			sql+= "select product.productId productId,productName,rate,subject,content,to_char(reviewDate,'yyyy-mm-dd') reviewDate ";
+			sql+= "from review,product where review.PRODUCTID=product.PRODUCTID and userId=? and writed=?";
 			sql+= "order by reviewDate) data) ";
 			sql+= "where rnum>=? and rnum<=?";
 

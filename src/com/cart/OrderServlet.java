@@ -56,7 +56,8 @@ public class OrderServlet extends HttpServlet {
 			List<OrderListDTO> orderList = dao.getOrderList(info.getUserId());
 			//주문 개수
 			int totalOrderCount = dao.getOrderCount(info.getUserId());
-			//
+			//멤버 포인트 정보 가져오기
+			int memberPoint = dao.getMemberPoint(info.getUserId());
 			
 			//총 주문 합계 / 총 주문 개수
 			int totalPrice=0;
@@ -74,6 +75,7 @@ public class OrderServlet extends HttpServlet {
 			req.setAttribute("imagePath", imagePath);
 			req.setAttribute("totalPrice", totalPrice);
 			req.setAttribute("totalAmount", totalAmount);
+			req.setAttribute("memberPoint", memberPoint);
 			
 			url = "/project/order/reception.jsp";
 			forward(req, resp, url);
@@ -152,6 +154,28 @@ public class OrderServlet extends HttpServlet {
 			
 		}
 		else if(uri.indexOf("myOrderLists.do") != -1){
+			
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			String imagePath = cp + "/pds/imageFile";
+				
+			//사용자 주문리스트 기간별 가져오기
+			List<OrderDTO> userOrder7day = dao.getUserOrder7dayLists(info.getUserId());
+			List<OrderDTO> userOrder1month = dao.getUserOrder1monthLists(info.getUserId());
+			List<OrderDTO> userOrder3month = dao.getUserOrder3monthLists(info.getUserId());
+			List<OrderDTO> userOrder6month = dao.getUserOrder6monthLists(info.getUserId());
+			List<OrderDTO> userOrder1year = dao.getUserOrder1yearLists(info.getUserId());
+			
+			req.setAttribute("userOrder7day", userOrder7day);
+			req.setAttribute("userOrder1month", userOrder1month);
+			req.setAttribute("userOrder3month", userOrder3month);
+			req.setAttribute("userOrder6month", userOrder6month);
+			req.setAttribute("userOrder1year", userOrder1year);
+			req.setAttribute("imagePath", imagePath);
+			
+			url = "/project/order/myOrderList.jsp";
+			forward(req, resp, url);
 			
 		}
 	

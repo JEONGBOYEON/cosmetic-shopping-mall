@@ -45,16 +45,17 @@
 	<url-pattern>/*</url-pattern>
 </filter-mapping>
 
-<!-- 로그인 필터 -->
-<!-- <filter>
+<!-- 로그인 필터(장바구니) -->
+<filter>
 	<filter-name>loginFilter</filter-name>
 	<filter-class>com.filter.LoginFilter</filter-class>
 </filter>
 <filter-mapping>
 	<filter-name>loginFilter</filter-name>
-	<url-pattern>/bbs/*</url-pattern>
+	<url-pattern>/cart/*</url-pattern>
 </filter-mapping>
 
+<!-- 
 <filter>
 	<filter-name>loginFilter1</filter-name>
 	<filter-class>com.filter.LoginFilter</filter-class>
@@ -143,5 +144,26 @@
 	<servlet-name>review</servlet-name>
 	<url-pattern>/review/*</url-pattern>
 </servlet-mapping>
+
+<!-- 주문/배송 -->
+<servlet>
+ 	<servlet-name>orderServlet</servlet-name>
+  	<servlet-class>com.cart.OrderServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+ 	<servlet-name>orderServlet</servlet-name>
+ 	<url-pattern>/order/*</url-pattern>
+</servlet-mapping>
+
+<!-- 이벤트 -->
+<servlet>
+	<servlet-name>eventServlet</servlet-name>
+	<servlet-class>com.event.EventServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>eventServlet</servlet-name>
+	<url-pattern>/event/*</url-pattern>
+</servlet-mapping>
+
 
 </web-app>

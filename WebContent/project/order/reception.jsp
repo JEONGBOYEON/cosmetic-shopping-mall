@@ -33,6 +33,7 @@
 		f.submit();
 		
 	}
+	
 </script>
 
 
@@ -194,7 +195,8 @@
 										<input type="number" id="beauty_point" name="beauty_point" size="1">
 									</span>
 									<b>P</b>
-									<span>/보유P</span>
+									<span>/보유 ${memberPoint }P</span>
+									<button type="button" class="btn_sm_neutral" id="b_mobileVoucher" onclick="addPoind();">적용하기</button>
 								</td>
 							</tr>
 							<tr>

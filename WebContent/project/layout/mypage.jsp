@@ -7,10 +7,10 @@
 	<ul style="height: 222px;">
 		<li><span>나의 주문 관리</span> <!-- 메뉴 선택시 selected 클래스 -->
 			<ul>
-				<li><a href="/kr/ko/my/page/onlineOrderShipping">주문/배송조회</a></li>
+				<li><a href="<%=cp1%>/order/myOrderLists.do">주문/배송조회</a></li>
 				<!-- 메뉴 선택시 selected 클래스 -->
-				<li><a href="/kr/ko/my/page/returnExchange">반품/교환</a></li>
-				<li><a href="/kr/ko/my/page/cashReceipts">증빙서류발급</a></li>
+				<li><a href="#">반품/교환</a></li>
+				<li><a href="#">증빙서류발급</a></li>
 			</ul></li>
 		<li><span>나의 혜택 관리</span>
 			<ul>
@@ -24,21 +24,21 @@
 			</ul></li>
 		<li><span>나의 지갑 관리</span>
 			<ul>
-				<li><a href="/kr/ko/my/page/myDepositList">예치금 관리</a></li>
-				<li><a href="#non" onclick="wpayClickEvent();">원터치 간편결제
+				<li><a href="#">예치금 관리</a></li>
+				<li><a href="#" onclick="wpayClickEvent();">원터치 간편결제
 						카드관리</a></li>
 				<li><a href="/kr/ko/my/page/myPinkMoney">PINK MONEY 관리</a></li>
 			</ul></li>
 		<li><span>나의 활동 관리</span>
 			<ul>
-				<li><a href="/kr/ko/my/page/myEventList">이벤트 참여 현황</a></li>
+				<li><a href="#">이벤트 참여 현황</a></li>
 				<li><a href="<%=cp1%>/review/list.do">나의 구매 후기</a></li>
-				<li><a href="/kr/ko/my/page/myInquiryList">나의 1:1 문의</a></li>
+				<li><a href="#">나의 1:1 문의</a></li>
 			</ul></li>
 		<li><span>나의 정보 관리</span>
 			<ul>
 				<li><a href="<%=cp1%>/member/update.do">개인정보 수정</a></li>
-				<li><a href="/kr/ko/my/page/info/snsLink">SNS 계정 연동 관리</a></li>
+				<li><a href="#">SNS 계정 연동 관리</a></li>
 				<li><a href="<%=cp1%>/dest/list.do">배송지 관리</a></li>
 				<li><a href="<%=cp1%>/shop/list.do">단골매장 관리</a></li>
 				<li><div><a href="#loginmodal" class="flatbtn" id="modaltrigger">회원 탈퇴</a></div></li>
