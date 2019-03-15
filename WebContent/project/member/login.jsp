@@ -5,17 +5,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-   Cookie[] cookies=request.getCookies();
-   String id="";
-if(cookies!=null){
-	for (Cookie c : cookies) {
-      
-      if(c.getName().indexOf("userId")!=-1){
-         //out.print("cookie name : " + c.getName() + "<br>");
-         id=URLDecoder.decode(c.getValue(), "UTF-8");
-         //System.out.println(c.getValue());
-      }
-   }
+   	Cookie[] cookies=request.getCookies();
+   	String id="";
+   
+	if(cookies!=null){
+		for (Cookie c : cookies) {
+	      
+	      if(c.getName().indexOf("userId")!=-1){
+	         //out.print("cookie name : " + c.getName() + "<br>");
+	         id=URLDecoder.decode(c.getValue(), "UTF-8");
+	         //System.out.println(c.getValue());
+	      }
+	   }
 }
 %>
 
@@ -48,6 +49,15 @@ function sendIt(){
   	f.action="<%=cp%>/member/login_ok.do"; 
 	f.submit();  
 
+}
+
+//비밀번호 input창에서 엔터눌렀을 경우 로그인 버튼 눌리게
+function enterkey() {
+    if (window.event.keyCode == 13) {
+
+         // 엔터키가 눌렸을 때 실행할 내용
+         sendIt();
+    }
 }
 
 </script>
@@ -95,13 +105,13 @@ function sendIt(){
 							</div>
 							<div class="input_wrap">
 								<input type="password" title="비밀번호 입력" name="userPwd"
-									placeholder="비밀번호" required="required"
+									placeholder="비밀번호" required="required" onkeyup="enterkey();"
 									data-msg-required="비밀번호를 입력해 주세요. 비밀번호 입력란으로 이동합니다.">
 							</div>
 							<div class="clear">
 								<div class="check_wrap">
-									<input type="checkbox" id="save_id" name="id_ck" checked="checked"><label
-										for="save_id" >아이디 저장</label>
+									<input type="checkbox" id="save_id" name="id_ck"
+										checked="checked"><label for="save_id">아이디 저장</label>
 									<%-- <% if(id.length()>1)out.println("checked"); %> --%>
 
 								</div>
