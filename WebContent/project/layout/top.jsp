@@ -97,14 +97,13 @@
 						</c:otherwise>
 				</c:choose>
 				</li>
-				<li><a href="/kr/ko/my/page/onlineOrderShipping" class="order">주문/배송조회
+				<li><a href="<%=cp%>/order/myOrderLists.do" class="order">주문/배송조회
 					<span class="num" style="display: none;"></span>
 					</a>
 				</li>
 				<li><a href="<%=cp %>/cart/cartList.do" class="cart">장바구니
 					<span class="num" style="display: none;"></span>
 					</a></li>
-				<li><a href="#none" class="history">히스토리</a></li>
 			</ul>
 			<h1 class="logo">
 				<a href="../product/main.do">
