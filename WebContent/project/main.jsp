@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="./layout/top.jsp"%>
 
 
@@ -38,7 +39,9 @@
 							<br/><br/><br/>
 							<font style="font-size: 15pt; color:#1C1C1C;">${dto.productName }</font>
 							<br/><br/><br/>
-							<font style="font-size: 20px; color:#1C1C1C; ">${dto.price}&nbsp;&nbsp;원</font>
+							<font style="font-size: 20px; color:#1C1C1C; ">
+								<fmt:formatNumber value="${dto.price}" groupingUsed="true"/>&nbsp;&nbsp;원
+							</font>
 							<br/><br/><br/>
 							<c:set var="i" value="${i+1 }" />
 						</td>
