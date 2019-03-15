@@ -28,7 +28,7 @@
                         <br>
                         <p class="text">그 동안 이용해 주셔서 감사합니다.<br>더욱더 좋은 서비스와 혜택으로 보답하겠습니다</p>
                         <div class="page_btns">
-                            <button type="button" onclick="location.href='<%=cp%>/project/main.jsp'" class="btn_lg_primary">홈으로</button>
+                            <button type="button" onclick="location.href='<%=cp%>/product/main.do'" class="btn_lg_primary">홈으로</button>
                         </div>
                     </div>
                 </div>
