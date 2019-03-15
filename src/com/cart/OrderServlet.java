@@ -200,10 +200,14 @@ public class OrderServlet extends HttpServlet {
 			Iterator<OrderDTO> orderCompleteLists = orderCompleteList.iterator();
 			if(orderCompleteLists.hasNext()){
 				OrderDTO dto = orderCompleteLists.next();
-				dao.insertReview(dto);
 				orderDate = dto.getOrderDate();
 			}
 			
+			Iterator<OrderDTO> orderCompleteLists2 = orderCompleteList.iterator();
+			while(orderCompleteLists2.hasNext()){
+				OrderDTO dto = orderCompleteLists2.next();
+				dao.insertReview(dto);
+			}
 			//사용한 쿠폰 변경 : N->Y
 			dao.useCouponUpdate(useCouponKey, info.getUserId());
 
