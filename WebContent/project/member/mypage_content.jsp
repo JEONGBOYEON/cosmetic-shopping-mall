@@ -143,19 +143,6 @@
 
 
 
-
-		</div>
-		<div class="my_banner">
-			<!-- /* 20180803:App설치배너 수정*/ -->
-			<a
-				href="https://play.google.com/store/apps/details?id=com.etudehouse"
-				target="_blank" class="android"><img
-				alt="에뛰드 하우스 앱으로 더 많은 정보를 확인해 보세요~. 앱 설치하기"
-				src="/kr/ko/pc/ko/images/my/ico_android.png" /></a> <a
-				href="https://itunes.apple.com/kr/app/id538275329" target="_blank"
-				class="ios"><img alt="에뛰드 하우스 앱으로 더 많은 정보를 확인해 보세요~. 앱 설치하기"
-				src="/kr/ko/pc/ko/images/my/ico_ios.png" /></a>
-		</div>
 	</div>
 	
 	

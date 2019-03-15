@@ -27,18 +27,6 @@
 			<button type="button" onclick="location.replace('<%=cp %>/member/login.do')" class="btn_lg_primary w100p"
 			style="background-color: #f54a7e;"><span>로그인 하러가기</span><i class="ico_arr_w"></i></button>
 		</div>
-		<dl class="dl_cont mgt30">
-			<dt class="h_title d4"><b>비밀번호 발송</b></dt>
-			<dd>
-				<p class="text color_light_gray font_sm">고객님이 가입하실 때 입력하신 휴대번호로 비밀번호를 발송해
-					드립니다.<br>
-					아래 발송 요청 버튼을 선택해 주세요.</p>
-			</dd>
-		</dl>
-		<div class="page_btns mgt30">
-			<button type="button" onclick="send()" class="btn_lg_primary w100p"
-			style="background-color: #f54a7e;" ><span>비밀번호 발송 요청</span><i class="ico_arr_w"></i></button>
-		</div>
 	</div>
 
 </div>
