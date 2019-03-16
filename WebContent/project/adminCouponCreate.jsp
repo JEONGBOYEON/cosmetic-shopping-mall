@@ -127,7 +127,7 @@
 			적용되는 등급
 			</td>
 			<td width="460" style="padding-left: 10px;">
-			<input type="text" name="couponGrade" size="30" maxlength="20" class="boxTF">&nbsp;&nbsp;[핑크러브/프렌즈/헬로]
+			<input type="text" name="couponGrade" size="30" maxlength="20" class="boxTF">&nbsp;&nbsp;[HELLO/FRIENDS/PINKLOVE]
 			</td>
 		</tr>
 		
