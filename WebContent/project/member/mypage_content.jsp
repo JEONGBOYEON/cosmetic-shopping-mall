@@ -40,12 +40,13 @@
 
 				<div class="my_wallet_info">
 					<div class="clear">
-						<dl class="coupon" style="cursor: pointer;"
-							onclick="location.href=contextPath +'/my/page/myCouponList'">
-							<dt>쿠폰</dt>
-							<dd>
-								<b class="num">1</b> 장
-							</dd>
+						<dl class="coupon" >
+							<a href="<%=cp %>/coupon/myCouponList.do">
+								<dt>쿠폰</dt>
+								<dd>
+									<b class="num">${totalCouponCount}</b> 장
+								</dd>
+							</a>
 						</dl>
 						<dl class="pearl" style="cursor: pointer;"
 							onclick="location.href=contextPath + '/my/page/pearl/present'">

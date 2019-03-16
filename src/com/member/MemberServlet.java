@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.coupon.CouponDAO;
+import com.coupon.MyCouponDTO;
 import com.util.DBCPConn;
 
 public class MemberServlet extends HttpServlet {
@@ -43,6 +46,10 @@ public class MemberServlet extends HttpServlet {
 		String uri=req.getRequestURI();
 		
 		String url;
+		
+
+		CouponDAO cdao = new CouponDAO(conn);
+		
 		
 		if(uri.indexOf("created.do")!=-1){
 			url="/project/member/created.jsp";
@@ -94,6 +101,14 @@ public class MemberServlet extends HttpServlet {
 			url=cp+"/project/main.jsp";
 			resp.sendRedirect(url);				
 		}else if(uri.indexOf("mypage.do")!=-1){
+
+			HttpSession session = req.getSession();
+			MemberDTO info = (MemberDTO) session.getAttribute("customInfo");
+			
+			int totalCouponCount = cdao.couponGetCount(info.getUserId());
+			
+			req.setAttribute("totalCouponCount", totalCouponCount);
+			
 			url="/project/member/mypage_content.jsp";
 			forward(req,resp,url);
 		}else if(uri.indexOf("logout.do")!=-1){

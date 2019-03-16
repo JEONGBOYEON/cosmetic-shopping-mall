@@ -83,6 +83,16 @@
  	<servlet-name>Product</servlet-name>
  	<url-pattern>/product/*</url-pattern>
  </servlet-mapping>
+ 
+ <!-- 쿠폰 -->
+ <servlet>
+	<servlet-name>Coupon</servlet-name>
+ 	<servlet-class>com.coupon.CouponServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>Coupon</servlet-name>
+ 	<url-pattern>/coupon/*</url-pattern>
+ </servlet-mapping>
 
 <!-- 상품상세조회 -->
 <servlet>

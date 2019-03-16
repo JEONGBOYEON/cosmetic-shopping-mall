@@ -109,7 +109,7 @@
 					<li><a href="<%=cp %>/product/listNew.do">신상품</a></li>
 					<li><a href="<%=cp %>/product/listBest.do">베스트</a></li>
 					<li><a href="">이벤트</a></li>
-					<li><a href="">쿠폰/혜택</a></li>
+					<li><a href="<%=cp %>/coupon/couponAllList.do">쿠폰/혜택</a></li>
 					<li><a href="">채널에뛰드</a></li>
 					<li><a href="">LOOKS</a></li>
 					<li><a href="">브랜드</a></li>
