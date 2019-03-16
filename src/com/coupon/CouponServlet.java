@@ -204,7 +204,6 @@ public class CouponServlet extends HttpServlet{
 			
 			List<MyCouponDTO> lists = dao.couponGetLists(info.getUserId());
 			
-			req.setAttribute("lists", lists);
 
 
 			//날짜비교
@@ -242,11 +241,14 @@ public class CouponServlet extends HttpServlet{
 		        boolean re = date1.after(date2);
 		        
 		        if(re!=true){
-		        	dto.setUsed("M");
+		        	dao.couponInsertM(dto.getCouponKey(),info.getUserId());
 		        }
 	        }
+
+			List<MyCouponDTO> lists2 = dao.couponGetLists(info.getUserId());
 			
-			
+			req.setAttribute("lists", lists2);
+	        
 			url = "/project/myCouponList.jsp";	
 			forward(req, resp, url);
 	        
@@ -259,6 +261,8 @@ public class CouponServlet extends HttpServlet{
 			
 			List<MyCouponDTO> lists = dao.couponGetLists(info.getUserId());
 			
+
+
 			//날짜비교
 			SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
 			long now = System.currentTimeMillis();
@@ -294,12 +298,13 @@ public class CouponServlet extends HttpServlet{
 		        boolean re = date1.after(date2);
 		        
 		        if(re!=true){
-		        	dto.setUsed("M");
+		        	dao.couponInsertM(dto.getCouponKey(),info.getUserId());
 		        }
 	        }
-	        
-	        
-			req.setAttribute("lists", lists);
+
+			List<MyCouponDTO> lists2 = dao.couponGetLists(info.getUserId());
+			
+			req.setAttribute("lists", lists2);
 			
 			url = "/project/myUsedCouponList.jsp";	
 			forward(req, resp, url);

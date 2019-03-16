@@ -20,7 +20,7 @@ public class CouponDAO {
 	}
 	
 	
-	//나의 쿠폰발급 전체 리스트의 갯수 반환
+	//나의 쿠폰발급(issue) 전체 리스트의 갯수 반환
 	public int couponGetCount(String userId){
 		
 		int totalDataCount=0;
@@ -56,7 +56,7 @@ public class CouponDAO {
 		
 	}
 	
-	//나의 쿠폰발급 전체 리스트  
+	//나의 쿠폰발급(issue) 전체 리스트  
 	public List<MyCouponDTO> couponGetLists(String userId){
 
 		List<MyCouponDTO> lists = new ArrayList<MyCouponDTO>();
@@ -67,7 +67,7 @@ public class CouponDAO {
 		try {
 
 
-			sql= "select to_char(a.ISSUEDATE,'YYYY-MM-DD') ISSUEDATE,b.DISCOUNT DISCOUNT,b.COUPONNAME COUPONNAME,to_char(b.COUPONENDDAY,'YYYY-MM-DD') COUPONENDDAY,a.used used from issue a, coupon b where a.couponKey = b.couponKey and a.userid=? ";
+			sql= "select b.couponKey couponKey,to_char(a.ISSUEDATE,'YYYY-MM-DD') ISSUEDATE,b.DISCOUNT DISCOUNT,b.COUPONNAME COUPONNAME,to_char(b.COUPONENDDAY,'YYYY-MM-DD') COUPONENDDAY,a.used used from issue a, coupon b where a.couponKey = b.couponKey and a.userid=? ";
 	
 			
 			pstmt = conn.prepareStatement(sql);
@@ -85,6 +85,7 @@ public class CouponDAO {
 				dto.setCouponName(rs.getString("COUPONNAME"));
 				dto.setCouponEndDate(rs.getString("COUPONENDDAY"));
 				dto.setUsed(rs.getString("used"));
+				dto.setCouponKey(rs.getInt("couponKey"));
 
 				lists.add(dto);
 
@@ -103,7 +104,7 @@ public class CouponDAO {
 
 
 
-	//쿠폰발급 전체 리스트  
+	//쿠폰발급(issue) 전체 리스트  
 	public List<IssueDTO> couponGetLists() {
 		
 		List<IssueDTO> lists = new ArrayList<IssueDTO>();
@@ -145,7 +146,37 @@ public class CouponDAO {
 		
 	}
 	
-	//쿠폰발급 리스트 insert
+
+	
+	//issue테이블에 만료되었을때 insert
+	public int couponInsertM(int couponKey,String userId){
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			
+			sql = "update issue set used='M' where userId=? and couponKey=? and used='N'";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1,userId);
+			pstmt.setInt(2,couponKey);
+			
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+		
+	}
+	
+	//issue테이블에 insert
 	public int couponInsertData(IssueDTO dto){
 		
 		int result = 0;
@@ -176,7 +207,7 @@ public class CouponDAO {
 	
 	
 
-	//전체 데이터 
+	//쿠폰테이블의 전체 데이터 
 	public List<CouponDTO> getLists() {
 		
 		List<CouponDTO> lists = new ArrayList<CouponDTO>();
@@ -222,6 +253,7 @@ public class CouponDAO {
 		
 	}
 
+	//쿠폰 삭제
 	public int deleteData(int num) {
 		
 		int result = 0;
@@ -248,7 +280,7 @@ public class CouponDAO {
 		
 	}
 
-	//num의 max값 구하기
+	//쿠폰의 couponKey의 max값 구하기
 	public int getMaxNum(){
 		
 		int maxNum = 0;
@@ -278,7 +310,7 @@ public class CouponDAO {
 		
 	}
 	
-	//입력
+	//쿠폰테이블에 입력
 	public int insertData(CouponDTO dto){
 		
 		int result = 0;
