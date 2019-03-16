@@ -30,7 +30,7 @@ public class ProductDAO {
 			sql = "select * from (";
 			sql+= "select rownum rnum, data.* from (";
 			sql+= "select productid,productname,price,savefilename,productoption ";
-			sql+= "from product where fileCategory='list' order by productdate )data) ";
+			sql+= "from product where fileCategory='list' order by productdate desc)data) ";
 			sql+= "where rnum>=? and rnum<=?";
 
 			pstmt = conn.prepareStatement(sql);
@@ -280,7 +280,7 @@ public class ProductDAO {
 		try {
 
 			//product테이블에서 정보 가져오기
-			sql = "select productid,productname,price,savefilename,productoption from product where fileCategory='list' order by productdate";
+			sql = "select productid,productname,price,savefilename,productoption from product where fileCategory='list' order by productdate desc";
 
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
